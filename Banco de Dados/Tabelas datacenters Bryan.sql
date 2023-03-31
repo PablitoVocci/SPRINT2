@@ -1,61 +1,60 @@
-create database dataCenters;
+CREATE DATABASE dataCenters;
 
-use dataCenters;
+USE dataCenters;
 
 
-create table usuario (
+CREATE TABLE usuario (
 idUsuario int primary key auto_increment,
 nome varchar(80) not null,
 email varchar(80) not null constraint chkemail check (email like '%@%'),
 senha varchar(50) not null,
 cpf char(11),
-telefone varchar(15),
+telefoneFixo varchar(15),
+telefoneMovel varchar(15),
 dtNasc date
 );
 
-insert into usuario values
-(null, 'Pedro', 'pedropedreiro@hotmail.com', '22cff22', '12345678901', '123456789', '2001-12-11'),
-(null, 'Ana', 'anazinhavidaloka111@Gmail.com', '400028922y', '12345678901', '123456789', '1992-02-21'),
-(null, 'Rogerio', 'Rogerioceni123@outlook.com', '100gols', '11111111111', '250053339', '1980-10-25');
+INSERT INTO usuario VALUES
+(null, 'Pedro', 'pedropedreiro@hotmail.com', '22cff22', '12345678901', '11 4002 8922', '11 933313333', '2001-12-11'),
+(null, 'Ana', 'anazinhavidaloka111@Gmail.com', '400028922y', '12345678901', '11 3333 33333', '11 911113111', '1992-02-21'),
+(null, 'Rogerio', 'Rogerioceni123@outlook.com', '100gols', '11111111111', '11 9999 9999', '11 9332213322', '1980-10-25');
 
-select * from usuario;
+SELECT * FROM usuario;
 
 
-create table empresaCliente (
+CREATE TABLE empresaCliente (
 idEmpresa int primary key auto_increment,
 nomeEmpresa varchar(80) not null,
-emailEmpresa varchar(80) not null constraint chkEmailEmpresa check (emailEmpresa like '%@%'), 
-qntServer int not null,
-cep char(8) not null,
+emailEmpresa varchar(80) not null constraint chkEmailEmpresa check (emailEmpresa like '%@%'),
+cep char(9) not null,
+numEnd varchar(10),
 cnpj char(14),
-telefone varchar(15)
+telefoneFixo varchar(15),
+telefoneMovel varchar(15)
 );
 
-insert into empresaCliente values
-(null, 'SGMaga', 'sgmagainterpress@outlook.com', 3, '09220460', '01020304050607', '999999999'),
-(null, 'Mararara', 'mararamalala@outlook.com', 2, '02333050', '55555555555555', '888888888');
+INSERT INTO empresaCliente VALUES
+(null, 'SGMaga', 'sgmagainterpress@outlook.com', '09330-330', '33D', '01020304050607', '11 4033 2033', '11 994059999'),
+(null, 'Mararara', 'mararamalala@outlook.com', '01000-100', '433','55555555555555', '11 9330 3334', '11 993324499');
 
-select * from empresaCliente;
+SELECT * FROM empresaCliente;
 
-create table sensor (
+CREATE TABLE sensor (
 idSensor int primary key auto_increment,
 nomeSensor varchar(30) not null,
-setor varchar(30) not null,
 estadoSensor tinyint constraint chkestadosensor check (estadosensor in(0, 1)),
 captura double,
 dtAtual datetime default current_timestamp
 );
 
-insert into sensor (nomeSensor, setor, estadoSensor, captura) values 
-('Temperatura', 'setor 3',  1, 24.5),
-( 'Umidade', 'setor 3', 0, 0),
-( 'Temperatura', 'setor 2', 0, 0),
-( 'Umidade', 'setor 2', 1, 40),
-( 'Temperatura', 'setor 5', 1, 30),
-( 'Umidade', 'setor 5', 1, 20.3);
+INSERT INTO sensor (nomeSensor, estadoSensor, captura) VALUES
+('Temperatura', 1, 24.5),
+( 'Umidade', 0, 0),
+( 'Temperatura', 0, 0),
+( 'Umidade', 1, 40),
+( 'Temperatura', 1, 30),
+( 'Umidade', 1, 20.3);
 
-select * from sensor;
-
-
+SELECT * FROM sensor;
 
 
