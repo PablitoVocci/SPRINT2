@@ -15,7 +15,7 @@ body{
 
 .index-primaria{
 
-    background: rgba(17, 17, 17, 0.8) url(/servidor.jpg);
+    background: rgba(17, 17, 17, 0.8) url(../assets/servidor.jpg);
     background-blend-mode: darken;
     background-repeat: no-repeat;
     background-position: center;
@@ -170,5 +170,11 @@ footer{
 footer h3{
     height: 5vh;
     padding-top: 30px;
+    color: white;
+}
+.sobre{
+    border-top: 5px solid #FFFFFF;
+}
+.sobre .title{
     color: white;
 }
