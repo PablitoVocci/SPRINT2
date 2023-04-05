@@ -178,17 +178,6 @@ footer h3{
     flex-direction: column;
     
 }
-.img-teste{
-    justify-content:right;
-    display: flex;
-    flex-direction: column;  
-    text-align:left;
-}
-.img-teste img{
-    width: 500px;
-    height: 500px;
-}
-
 .cultura {
     background-color: white;
     color: #144FC4;
@@ -225,11 +214,20 @@ footer h3{
 .sobre{
     display: flex;
     justify-content: space-between;
+    padding: 50px;
 }
 .sobre .mensagem{
-    flex-direction: column;
     width: 50%;
+    text-align: start;
 }
-.img-teste{
-    width: 50%;
+.sobre .div-img{
+    width:fit-content;
+
+}
+.img-sobre{
+    width: 800px;
+    height: 500px;
+}
+.title-sobre{
+
 }
