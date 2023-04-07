@@ -264,13 +264,12 @@ footer h3{
 }
 
 .container-index-login img {
-
     text-align: center;
     align-items: flex-end;
 }
 
 .titulo-login {
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     color: white;
     justify-content: center;
@@ -281,11 +280,11 @@ footer h3{
     color: white;
     text-align: left;
     font-size: 22px;
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .msg_login input {
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     width: 400px;
     height: 37px;
     border-radius: 9px;
@@ -298,7 +297,7 @@ footer h3{
     color:#144FC4;
     padding: 10px 120px;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid #144FC4;
     font-size: 26px;
     background-color: white;
 }
@@ -308,7 +307,7 @@ footer h3{
     color:#FFFFFF;
     padding: 10px 120px;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid #144FC4;
     font-size: 26px;
     background-color: #144FC4;
     transition: 0.3s;
