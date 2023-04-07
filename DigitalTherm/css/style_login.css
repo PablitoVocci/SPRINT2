@@ -105,26 +105,6 @@ a:hover{
     margin: 40px;
 }
 
-.botao-banner{
-    color:#144FC4;
-    padding: 10px 120px;
-    border-radius: 30px;
-    border: 1px solid black;
-    font-size: 26px;
-    background-color: white;
-}
-
-.botao-banner:hover{
-
-    color:#FFFFFF;
-    padding: 10px 120px;
-    border-radius: 30px;
-    border: 1px solid black;
-    font-size: 26px;
-    background-color: #144FC4;
-    transition: 0.3s;
-    cursor: pointer;
-}
 
 .index-secundaria{
     background-color:#3E68FF;
@@ -273,3 +253,65 @@ footer h3{
     display: flex;
     justify-content: space-evenly;
 }
+
+
+/* Section Login */
+
+.container-index-login {
+    background-color: #3E68FF;
+    padding: 60px 40px;
+    border-radius: 15px;
+}
+
+.container-index-login img {
+
+    text-align: center;
+    align-items: flex-end;
+}
+
+.titulo-login {
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    color: white;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.msg_login {
+    color: white;
+    text-align: left;
+    font-size: 22px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.msg_login input {
+    font-family: 'Raleway', sans-serif;
+    width: 400px;
+    height: 37px;
+    border-radius: 9px;
+    text-align: center;
+    border: 2px solid #144fc4de;
+    font-size: 17px;
+}
+
+.botao-banner{
+    color:#144FC4;
+    padding: 10px 120px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 26px;
+    background-color: white;
+}
+
+.botao-banner:hover{
+
+    color:#FFFFFF;
+    padding: 10px 120px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 26px;
+    background-color: #144FC4;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
