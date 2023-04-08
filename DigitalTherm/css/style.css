@@ -273,3 +273,9 @@ footer h3{
     display: flex;
     justify-content: space-evenly;
 }
+
+.img-name{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}

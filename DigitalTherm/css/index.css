@@ -8,6 +8,7 @@
     border: 3px solid white;
     margin: 30px;
     padding: 0px 0px;
+    object-fit: cover;/* Redimensão de imagem perante a div que ela está, cover: a imagem será cortada para caber na div  */
 }
 
 .index-secundaria .img-redonda{
@@ -16,3 +17,4 @@
     align-items: center;
     text-align: center;
 }
+
