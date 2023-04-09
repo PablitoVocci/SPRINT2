@@ -183,7 +183,7 @@ footer h3{
 /* section padrão ********************************* */
 .sections{
     width: 100%;
-    height: 130vh;
+    height: 100vh;
     overflow: hidden;/*  explicar pro grupo */
     max-width: 150%;
     margin: 0;
@@ -199,7 +199,7 @@ footer h3{
 .sobre{
     display: flex;
     justify-content: space-between;
-    padding: 30px;
+    padding: 10px;
 }
 .sobre .mensagem{
     width: 50%;
@@ -219,10 +219,9 @@ footer h3{
     height: 700px;
 }
 .title-sobre{
-    padding-top: 30px;
     text-align: center;
     color: #FFFFFF;
-    font-size: 43px;
+    font-size: 40px;
 }
 
 
@@ -244,10 +243,10 @@ footer h3{
     position: absolute;
 }
 .msg-cultura{
-    padding: 30px;
+    padding: 40px;
     text-align: start;
     color: #144fc4;
-    font-size: 45px;
+    font-size: 38px;
 }
 .div-img{
     display: flex;
@@ -259,10 +258,15 @@ footer h3{
     background-color:#3E68FF;
 }
 .integrantes .title{
-    padding-top: 40px;
+    padding-top: 4px;
     text-align: center;
     color: #FFFFFF;
-    font-size: 43px;
+    font-size: 40px;
+}
+.div-time{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .div-integrantes1{
     padding: 30px;
