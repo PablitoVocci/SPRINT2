@@ -256,6 +256,7 @@ footer h3{
 /* section Integrantes *********************/
 .integrantes{
     background-color:#3E68FF;
+    height: fit-content;
 }
 .integrantes .title{
     padding-top: 4px;
@@ -267,6 +268,7 @@ footer h3{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 .div-integrantes1{
     padding: 30px;
