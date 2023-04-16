@@ -47,8 +47,45 @@
             </div>
         </header>
         <div class="container-simulador">
-            <div class="logo-simulador">
-                <img class="logo-img" src="../assets/digitalTherm.png" alt="">
+            <div class="logo">
+                <img src="../assets/digitalTherm.png" alt="">
+            </div>
+            <div class="div_inputs">
+                <div class="inputs_column">
+                    <div>
+                        <p class="txt_inputs">Insira seu nome</p>
+                        <input type="text" class="inputs" placeholder="Seu nome...">
+                    </div>
+                    <div>
+                        <p class="txt_inputs">informe a quantidade de ares-condicionados</p>
+                        <input type="text" placeholder="5" class="inputs">
+                    </div>
+                </div>
+                <div class="inputs_column">
+                    <div>
+                        <p class="txt_inputs">Qual a media de BTUS dos ares-condicionados</p>
+                        <input type="text" class="inputs">
+                    </div>
+                    <div>
+                        <p class="txt_inputs">Quantas horas diariamente eles ficam ligados?(h)</p>
+                        <input type="text" placeholder="3 (horas)" class="inputs">
+                    </div>
+                </div>
+                <div class="inputs_column">
+                    <div>
+                        <p class="txt_inputs">Você já teve problema de super-aquecimento?</p>
+                        <select class="inputs opt_disabled ">
+                            <option disabled selected value="">Insira sua opção</option>
+                            <option value="">Sim</option>
+                            <option value="">Não</option>
+                        </select>
+                    </div>
+                    <div>
+                        <br>
+                        <button class="btn_simular">Simular</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </body>
