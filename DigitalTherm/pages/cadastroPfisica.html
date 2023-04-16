@@ -5,13 +5,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/novo_acesso.css" />
+    <link rel="stylesheet" href="../css/cadastroPfisica.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <title>DigitalTherm - Cadastro</title>
 </head>
 
@@ -21,7 +18,7 @@
             <img src="../assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo" />
 
             <nav class="container-1">
-                <ul>
+                <ul> 
                     <li>
                         <b>
                             <a href="./index.html">Inicio</a>
@@ -40,7 +37,7 @@
 
         <div class="container-2">
             <a href="./login.html">Login</a>
-            <a href="#">
+            <a href="./novo_acesso.html">
                 <button class="cadastro">Cadastre-se</button>
             </a>
         </div>
@@ -51,27 +48,41 @@
         <div class="card-box">
 
             <img src="../assets/digitalTherm.png" alt="" srcset="">
-            <br>
-            <div class="container-12">
+            
+            <div class="inputs-div-card-box">
+                
+                <input type="text" placeholder="Nome" class="inputNome">
 
-                <button onclick="window.location.href='cadastroPfisica.html'">
-                    <img src="../assets/PessoaFisica.png" alt="">
-                    <div class="msg">
-                        PESSOA <br> FÍSICA
-                    </div>
-                </button>
+                <input type="text"placeholder="Sobrenome" class="inputSobrenome">
+            </div>
 
-                <div class="mini-container2">
-                    <button onclick="window.location.href='cadastro.html'">
-                        <img src="../assets/PessoaJuridica.png" alt="">
-                        <div class="msg">
-                            PESSOA <br> JURÍDICA
-                        </div>
+            <div class="inputs-div-card-box">
+                
+              <input type="text" placeholder="Data de Nascimento" class="inputNascimento">
 
-                    </button>
+              <input type="text"placeholder="CPF" class="inputCpf">
+          </div>
 
-                </div>
+            <input type="text" placeholder="E-mail" class="inputEmail inputGrande">
 
+            <div class="inputs-div-card-box">
+                
+              <input type="text" placeholder="Celular" class="inputCelular">
+
+              <input type="text"placeholder="Telefone Fixo" class="inputTelefoneFixo">
+          </div>
+
+          <div class="inputs-div-card-box">
+                
+            <input type="text" placeholder="CEP" class="inputCep">
+
+            <input type="text"placeholder="Num" class="inputNumero">
+        </div>
+        
+            <input type="text" class="inputGrande1" placeholder="Insira sua senha">
+            <input type="text" class="inputGrande2" placeholder="Confirme sua Senha">
+            <button class="button">Continuar!</button>
+        </div>
 
     </section>
 
@@ -79,9 +90,3 @@
 </body>
 
 </html>
-
-<script>
-    function cadastroFisico() {
-        alert('teste')
-    }
-</script>
