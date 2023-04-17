@@ -12,8 +12,6 @@ emailEmpresarial VARCHAR(80) NOT NULL CONSTRAINT chkEmailEmp CHECK (emailEmpresa
 senha VARCHAR(45) NOT NULL
 );
 
-DROP TABLE EMPRESA;
-
 INSERT INTO empresa VALUES
 (NULL, 'Amazon.com, Inc.', 'Amazon', '11111111111111', '(11) 95001-0011', 'AmazonEnt@outlook.com', 'qwerrtyuuio12345'),
 (NULL, 'Epic Games, Inc.', 'Epic', '22222222222222', '(11) 9922-0011', 'EpicGames1111@outlook.com', 'poyiyrfgrtgf344tbf');
