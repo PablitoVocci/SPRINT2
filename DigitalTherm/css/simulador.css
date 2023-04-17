@@ -47,16 +47,16 @@ body{
 }
 .btn_simular{
     width: 455px;
-    background-color: white;
+    background-color: #474682;
     height: 55px;
     border-radius: 10px;
-    border: 3px solid #474682;
-    color: #474682;
+    color: white;
     font-size: 18px;
 }
 .btn_simular:hover{
-    background-color: #474682;
-    color: white;
+    border: 3px solid #474682;
+    color: #474682;
+    background-color: white;
     transition: 1s;
     cursor: pointer;
 }
