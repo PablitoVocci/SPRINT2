@@ -5,16 +5,17 @@ USE digitalTherm;
 CREATE TABLE empresa (
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(60) NOT NULL,
-nomeFantasia VARCHAR(60) NOT NULL,
+nomeFantasia VARCHAR(60),
 CNPJ CHAR(14) NOT NULL,
-telefoneComercial CHAR(15) NOT NULL,
+telefoneComercial CHAR(15),
 emailEmpresarial VARCHAR(80) NOT NULL CONSTRAINT chkEmailEmp CHECK (emailEmpresarial LIKE '%@%'),
 senha VARCHAR(45) NOT NULL
 );
 
 INSERT INTO empresa VALUES
 (NULL, 'Amazon.com, Inc.', 'Amazon', '11111111111111', '(11) 95001-0011', 'AmazonEnt@outlook.com', 'qwerrtyuuio12345'),
-(NULL, 'Epic Games, Inc.', 'Epic', '22222222222222', '(11) 9922-0011', 'EpicGames1111@outlook.com', 'poyiyrfgrtgf344tbf');
+(NULL, 'Epic Games, Inc.', 'Epic', '22222222222222', '(11) 9922-0011', 'EpicGames1111@outlook.com', 'poyiyrfgrtgf344tbf'),
+(NULL, 'Apple Inc.', 'Apple', '33333333333333', NULL, 'AppleIncent@outlook.com', 'fjhkshgklshglskhgkbg123');
 
 CREATE TABLE usuario (
 idUsuario INT AUTO_INCREMENT,
@@ -36,10 +37,15 @@ INSERT INTO usuario VALUES
 (NULL, 'Carlos', 'Silva', 'Carlossilvadosantos111@Gmail.com', 'Carlos123', '1999-02-22', 'Masculino', '(11) 99224-3333', NULL, '22222222222', 1),
 (NULL, 'Ana', 'Maria', 'AnaMariaRIa@outlook.com', 'aninha111', '2000-02-22', 'Feminino', '(11) 99224-4444', '(44) 4002-89223', '44444444444', 1),
 (NULL, 'Paulo', 'Rodri', 'PabloRodri@Amazon.inc', '', '1998-11-22', 'Outro', '(11) 96655-3333', NULL, '12121212121', 2),
-(NULL, 'Bernado', 'Matos', 'Bematos@Gmail.com', 'be2222', '1994-02-22', 'Masculino', '(11) 98765-2222', NULL, '66666666666', 2);
+(NULL, 'Bernado', 'Matos', 'Bematos@Gmail.com', 'be2222', '1994-02-22', 'Masculino', '(11) 98765-2222', NULL, '66666666666', 3);
 
 
 SELECT * FROM empresa JOIN usuario ON idEmpresa = fkEmpresa;
+
+SELECT empresa.nome AS NomeEmpresa, nomeFantasia, CNPJ, TelefoneComercial, emailEmpresarial, empresa.senha AS SenhaEmpresa,
+	idUsuario, usuario.nome as NomeUsuario, sobrenome, email, usuario.senha 
+		AS SenhaUsuario, dtNasc, Genero, telefoneCelular, telefoneFixo, CPF 
+			FROM empresa JOIN usuario ON idEmpresa = fkEmpresa;
 
 
 CREATE TABLE endereco (
@@ -65,7 +71,14 @@ INSERT INTO endereco VALUES
 (NULL, 'Brasil', '555557777', 'São Paulo', 'jjjj', 'uyy', 'R.bfgb Ovi', '222', NULL, 502, NULL);
 
 SELECT * FROM usuario JOIN endereco ON idUsuario = fkUsuario;
+
+ SELECT idUsuario, nome, email, telefoneCelular, CPF, pais, CEP, numero 
+	FROM usuario JOIN endereco ON idUsuario = fkUsuario;
+ 
 SELECT * FROM empresa JOIN endereco ON idEmpresa = fkEmpresa;
+
+SELECT idEmpresa, nome, nomeFantasia, CNPJ, emailEmpresarial, pais, CEP, numero
+	FROM empresa JOIN endereco ON idEmpresa = fkEmpresa;
 
 CREATE TABLE setorEmpresa (
 idSetorEmp INT PRIMARY KEY AUTO_INCREMENT,
@@ -83,6 +96,11 @@ INSERT INTO setorEmpresa VALUES
 (NULL, 'Setor Dados', 1, 'Carlos', 2);
 
 SELECT * FROM empresa JOIN setorEmpresa ON idEmpresa = fkEmpresa;
+
+SELECT idEmpresa, NomeFantasia, idSetorEmp AS SetoresEmpresa, setorEmpresa.nome AS NomeSetor, andar, representante
+	FROM empresa JOIN setorEmpresa ON idEmpresa = fkEmpresa;
+    
+    
 
 CREATE TABLE servidores  (
 idServidores INT AUTO_INCREMENT,
@@ -102,6 +120,9 @@ INSERT INTO servidores VALUES
 
 SELECT * FROM setorEmpresa JOIN servidores ON idSetorEmp = fkSetor;
 
+SELECT idSetorEmp AS SetorEmpresa, setorEmpresa.nome AS nomeSetor, andar, representante, idServidores AS ServidoresEmpresa,
+	servidores.nome AS NomeServidor FROM setorEmpresa JOIN servidores ON idSetorEmp = fkSetor;
+
 CREATE TABLE leituraIdeal (
 idLeituraIdeal INT PRIMARY KEY AUTO_INCREMENT,
 minimo VARCHAR(40),
@@ -112,11 +133,18 @@ CONSTRAINT fkLeituraIDS FOREIGN KEY (fkServidores) REFERENCES servidores(idServi
 
 INSERT INTO leituraIdeal VALUES 
 (NULL, '18C°', '32C°', 1),
+(NULL, '40%', '55%', 1),
 (NULL, '17C°', '35C°', 2),
+(NULL, '41%', '56%', 2),
 (NULL, '18°', '32C°', 3),
-(NULL, '18C°', '32C°', 4);
+(NULL, '44%', '59%', 3),
+(NULL, '18C°', '32C°', 4),
+(NULL, '50%', '67%', 4);
 
 SELECT * FROM servidores JOIN leituraIdeal ON idServidores = fkServidores;
+
+SELECT idServidores AS ServidorEmpresa, nome, idLeituraIdeal AS LeituraIdeal, minimo, maximo 
+	FROM servidores JOIN leituraIdeal ON idServidores = fkServidores;
 
 CREATE TABLE tipoSensor (
 idTipoSensor INT PRIMARY KEY AUTO_INCREMENT,
@@ -124,9 +152,8 @@ nome VARCHAR(45) NOT NULL
 );
 
 INSERT INTO tipoSensor VALUES 
-(NULL, 'Temperatura C°'),
-(NULL, 'Temperatura °F'),
-(NULL, 'Umidade %');
+(NULL, 'temperatura C° umidade %'),
+(NULL, 'Temperatura °F umdidade %');
 
 CREATE TABLE sensor (
 idSensor INT AUTO_INCREMENT,
@@ -138,14 +165,21 @@ CONSTRAINT pkSensorT PRIMARY KEY (idSensor, fkTipoSensor),
 CONSTRAINT fkSensorServ FOREIGN KEY (fkServidores) REFERENCES servidores(idServidores)
 );
 
+
 INSERT INTO sensor VALUES 
 (NULL, 1, 1, 2),
-(NULL, 1, 3, 2),
 (NULL, 0, 1, 3),
-(NULL, 0, 3, 3),
+(NULL, 1, 1, 4),
 (NULL, 1, 2, 1);
 
-SELECT * FROM tipoSensor JOIN sensor ON idTipoSensor = fkTipoSensor JOIN SERVIDORES ON idServidores = fkServidores;
+
+SELECT * FROM tipoSensor JOIN sensor ON idTipoSensor = fkTipoSensor 
+	JOIN servidores ON idServidores = fkServidores;
+
+SELECT idTipoSensor AS TipoSensor, tipoSensor.nome AS NomeSensor, estado, IdServidores,
+	servidores.nome AS NomeServidor FROM tipoSensor JOIN sensor ON idTipoSensor = fkTipoSensor 
+		JOIN servidores ON idServidores = fkServidores;
+
 
 CREATE TABLE leitura (
 idLeitura INT AUTO_INCREMENT,
@@ -158,12 +192,18 @@ CONSTRAINT pkleituraS PRIMARY KEY (idLeitura, fkSensor)
 );
 
 INSERT INTO leitura (temperatura, umidade, fkSensor) VALUES
-(31.3, NULL, 1), 
-(22.3, NULL, 3), 
-(NULL, 55, 2),
-(NULL, 70, 4);
 
-SELECT * FROM sensor JOIN leitura ON idSensor = fkSensor JOIN servidores ON idServidores = fkServidores;
+(44.5, NULL, 1),
+(NULL, 50.2, 1),
+(43.5, NULL, 2),
+(NULL, 44, 2);
+
+
+SELECT * FROM sensor JOIN leitura ON idSensor = fkSensor;
+
+SELECT idLeitura as Leitura, temperatura, umidade, dtCaptura as DataHoraCaptura, 
+	nome as nomeServidor, fkSetor as SetorServidor FROM sensor JOIN leitura ON idSensor = fkSensor
+		 JOIN servidores ON idServidores = fkServidores;
 
 
 
