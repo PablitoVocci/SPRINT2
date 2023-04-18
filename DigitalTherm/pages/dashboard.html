@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalTherm</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-empresa">
+            <span class="foto">
+                <img src="../assets/logo-empresa.png" alt="Logo empresa" class="imagem-logo">
+                <p>Epic Games</p>
+            </span>
+
+        </div>
+        <div class="alertas">
+            <span class="span-alertas perigo">Perigo</span>
+            <span class="span-alertas estavel">Estável</span>
+            <span class="span-alertas tranquilo">Tranquilo</span>
+        </div>
+    </header>
+    <div class="div-logo">
+        <img src="../assets/digitalTherm.png" alt="">
+    </div>
+    
+    <div class="div-setores">
+        <button class="card-setor">Setor 1</button>
+        <button class="card-setor">Setor 2</button>
+        <button class="card-setor">Setor 3</button>
+        <button class="card-setor">Setor 4</button>
+        <button class="card-setor">Setor 5</button>
+        <button class="card-setor">Setor 6</button>
+       
+        
+    </div>
+
+    <div class="container-charts">
+        <div class="charts-row1">
+            <div class="chart1">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="chart2">
+                <canvas id="myChart2"></canvas>
+            </div>
+        </div>
+        <div class="charts-row1">
+            <div class="chart1">
+                <canvas id="myChart3"></canvas>
+            </div>
+            <div class="chart2">
+                <canvas id="myChart4"></canvas>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+
+</html>
+<script>
+
+    //Linha-1
+    const labels = [
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+    ]
+
+    // DADOS
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Temperatura',
+            backgroundColor: '#f76686',
+            borderColor: '#f76686',
+            data: [30, 29, 28, 25, 22, 23],
+        },
+        {
+            label: 'Umidade',
+            backgroundColor: '#34a4eb',
+            borderColor: '#34a4eb',
+            data: [80, 82, 80, 85, 80, 83]
+        }]
+    }
+
+    // CONFIG
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+
+
+    // CONFIG
+    const config2 = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+
+    //GRÁFICO - 2
+    const labels2 = [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+    ]
+    const labels3 = [
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+    ]
+
+    // DADOS
+    const data3 = {
+        labels: labels3,
+        datasets: [{
+            label: 'Temperatura',
+            backgroundColor: '#f76686',
+            borderColor: '#f76686',
+            data: [30, 29, 28, 25, 22, 23],
+        },
+        {
+            label: 'Umidade',
+            backgroundColor: '#34a4eb',
+            borderColor: '#34a4eb',
+            data: [80, 82, 80, 85, 80, 83]
+        }]
+    }
+
+    // CONFIG
+    const config3 = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+
+    const labels4 = [
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+    ]
+
+    // DADOS
+    const data4 = {
+        labels: labels4,
+        datasets: [{
+            label: 'Temperatura',
+            backgroundColor: '#f76686',
+            borderColor: '#f76686',
+            data: [30, 29, 28, 25, 22, 23],
+        },
+        {
+            label: 'Umidade',
+            backgroundColor: '#34a4eb',
+            borderColor: '#34a4eb',
+            data: [80, 82, 80, 85, 80, 83]
+        }]
+    }
+
+    // CONFIG
+    const config4 = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+
+</script>
+<script>
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+    const myChart2 = new Chart(
+        document.getElementById('myChart2'),
+        config2
+    );
+    const myChart3 = new Chart(
+        document.getElementById('myChart3'),
+        config2
+    );
+    const myChart4 = new Chart(
+        document.getElementById('myChart4'),
+        config2
+    );
+</script>
