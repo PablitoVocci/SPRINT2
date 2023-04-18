@@ -171,13 +171,12 @@ input {
     color: #ffffff;
     font-weight: bolder;
     font-size: 18px;
+    margin-bottom: 25px;
 
 }
 
 .esqueceu{
-
-    
-    margin-top: 15px;
+    padding: 15px 0;
     border-radius: 10px;
     color: #7070708A;
     font-weight: bolder;
@@ -233,4 +232,14 @@ input {
 input::placeholder{
 
     font-size: 16px;
+}
+
+.error{
+
+    border: 2px solid red;
+}
+
+.valid{
+
+    border: 2px solid rgb(0, 255, 0);
 }

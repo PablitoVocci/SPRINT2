@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/teste.css"/>
+    <link rel="stylesheet" href="../css/teste.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
@@ -18,11 +18,9 @@
             <img src="../assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo" />
 
             <nav class="container-1">
-                <ul> 
+                <ul>
                     <li>
-                        <b>
                             <a href="./index.html">Inicio</a>
-                        </b>
                     </li>
                     <li>
                         <a href="#">Sobre Nós</a>
@@ -36,9 +34,10 @@
         </div>
 
         <div class="container-2">
-            <a href="./login.html">Login</a>
-            <a href="./novo_acesso.html">
-                <button class="cadastro">Cadastre-se</button>
+            <a href="./loginn.html">Login</a>
+            <a href="./cadastro.html">
+                <b>
+                <button class="cadastro"><b>Cadastre-se</b></button>
             </a>
         </div>
     </header>
@@ -48,24 +47,24 @@
         <div class="card-box">
 
             <img src="../assets/digitalTherm.png" alt="" srcset="">
-            
-            <div class="inputs-div-card-box">
-                
-                <input type="text" placeholder="Nome" class="inputNome">
-
-                <input type="text"placeholder="Sobrenome" class="inputSobrenome">
-            </div>
-
-            <input type="text" placeholder="CNPJ" class="inputCNPJ inputGrande">
-            <input type="text" placeholder="E-mail" class="inputEmail inputGrande">
 
             <div class="inputs-div-card-box">
-                <input type="text" placeholder="Senha" class="inputSenha">
-                <input type="text" placeholder="Telefone*" class="inputTelefone">
+
+                <input type="text" placeholder="Nome*" class="inputNome input" id="inputNome">
+
+                <input type="text" placeholder="Nome Fantasia" class="inputSobrenome input" id="inputNomeFantasia">
             </div>
 
-            <input type="text" class="inputGrande" placeholder="Confirme sua Senha">
-            <button class="button">Continuar!</button>
+            <input type="text" placeholder="CNPJ*" class="inputCNPJ inputGrande input" id="inputCNPJ">
+            <input type="text" placeholder="E-mail*" class="inputEmail inputGrande input" id="inputEmail">
+
+            <div class="inputs-div-card-box">
+                <input type="text" placeholder="Senha*" class="inputSenha input" id="inputSenha">
+                <input type="text" placeholder="Telefone" class="inputTelefone input">
+            </div>
+
+            <input type="text" class="inputGrande input" placeholder="Confirme sua Senha*" id="inputConfSenha">
+            <button class="button" onclick="Validacao()">Continuar!</button>
         </div>
 
     </section>
@@ -74,3 +73,126 @@
 </body>
 
 </html>
+
+<script>
+
+    function Validacao() {
+
+        const nome = document.getElementById("inputNome");
+        const CNPJ = document.getElementById("inputCNPJ");
+        const email = document.getElementById("inputEmail");
+        const senha = document.getElementById("inputSenha");
+        const ConfSenha = document.getElementById("inputConfSenha");
+
+        var nomeValue = nome.value
+        var CNPJValue = CNPJ.value;
+        var emailValue = email.value;
+        var senhaValue = senha.value;
+        var ConfSenhaValue = ConfSenha.value;
+
+        var check = false;
+
+        if (nomeValue == "") {
+
+            nome.className = "error " + nome.className
+            nome.className = nome.className.replaceAll("valid ", " ")
+            check = false;
+
+        } else {
+            nome.className = nome.className.replaceAll("error ", " ")
+            nome.className = "valid " + nome.className
+            check = true;
+        }
+
+        if (CNPJValue == "") {
+
+            CNPJ.className = "error " + CNPJ.className
+            CNPJ.className = CNPJ.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else if (CNPJValue.length != 14) {
+
+            alert("O campo de CNPJ deve conter 14 caracteres.")
+            
+            check = false;
+
+        } else {
+            CNPJ.className = CNPJ.className.replaceAll("error ", " ")
+            CNPJ.className = "valid " + CNPJ.className
+
+            check = true;
+        }
+
+        if (emailValue == "") {
+
+            email.className = "error " + email.className
+            email.className = email.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else {
+
+            email.className = email.className.replaceAll("error ", " ")
+            email.className = "valid " + email.className
+
+            check = true;
+
+        }
+
+        if (senhaValue == "") {
+
+            senha.className = "error " + senha.className
+            senha.className = senha.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else {
+
+            senha.className = senha.className.replaceAll("error ", " ")
+            senha.className = "valid " + senha.className
+
+            check = true;
+        }
+
+        if (ConfSenhaValue == "") {
+
+            ConfSenha.className = "error " + ConfSenha.className
+            ConfSenha.className = ConfSenha.className.replaceAll("valid ", " ")
+            check = false;
+
+        } else if (ConfSenhaValue != senhaValue) {
+
+            ConfSenha.className = ConfSenha.className.replaceAll("valid ", " ")
+            ConfSenha.className = "error " + ConfSenha.className
+            alert("As senhas devem ser identicas")
+
+            check = false;
+
+        } else {
+
+            ConfSenha.className = ConfSenha.className.replaceAll("error ", " ")
+            ConfSenha.className = "valid " + ConfSenha.className
+
+            check = true;
+
+        }
+
+        function toLogin(){
+
+            window.location.href='loginn.html'
+
+        }
+
+        if(check == false){
+
+            alert("Confira os campos!")
+
+        } else {
+
+            setInterval(toLogin, 3000)
+        }
+
+
+    }
+</script>

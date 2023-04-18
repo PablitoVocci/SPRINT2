@@ -20,9 +20,7 @@
             <nav class="container-1">
                 <ul>
                     <li>
-                        <b>
-                            <a href="./index.html">Inicio</a>
-                        </b>
+                        <a href="./index.html">Inicio</a>       
                     </li>
                     <li>
                         <a href="#">Sobre Nos</a>
@@ -36,7 +34,7 @@
         </div>
 
         <div class="container-2">
-            <a href="./login.html">Login</a>
+            <a href="./loginn.html"><b>Login</b></a>
             <a href="./cadastro.html">
                 <button class="cadastro">Cadastre-se</button>
             </a>
@@ -48,17 +46,16 @@
         <div class="card-box">
 
             <img src="../assets/digitalTherm.png" alt="" srcset="">
-           
-            <input type="text" placeholder="Login" class="inputCNPJ inputGrande">
-            <input type="text" placeholder="Senha" class="inputEmail inputGrande">
 
-            <button class="button">Continuar</button>
+            <input type="text" placeholder="Login" class="inputCNPJ inputGrande" id="inputEmail">
+            <input type="text" placeholder="Senha" class="inputEmail inputGrande" id="inputSenha">
 
-            <button class="button2">Criar nova conta</button>
+            <button class="button" onclick="ValidarLogin()">Continuar</button>
+
+            <button class="button2" onclick="window.location.href='cadastro.html'">Criar nova conta</button>
 
             <p class="esqueceu">Esqueceu sua senha?</p>
 
-            <p class="cadastre">Não tem uma conta? Cadastre-se</p>
         </div>
 
     </section>
@@ -67,3 +64,49 @@
 </body>
 
 </html>
+
+<script>
+
+    function ValidarLogin() {
+
+        const email = document.getElementById("inputEmail")
+        const senha = document.getElementById("inputSenha")
+
+        var emailValue = email.value
+        var senhaValue = senha.value
+        var check = false;
+
+        if (emailValue == "") {
+
+            email.className = "error " + email.className
+            email.className = email.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else {
+
+            email.className = email.className.replaceAll("error ", " ")
+            email.className = "valid " + email.className
+
+            check = true;
+
+        }
+
+        if (senhaValue == "") {
+
+            senha.className = "error " + senha.className
+            senha.className = senha.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else {
+
+            senha.className = senha.className.replaceAll("error ", " ")
+            senha.className = "valid " + senha.className
+
+            check = true;
+        }
+
+
+    }
+</script>
