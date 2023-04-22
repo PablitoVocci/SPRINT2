@@ -2,9 +2,9 @@ body{
     padding: 0;
     margin: 0;
     overflow: hidden;
-    background-color: rgb(238, 231, 231);
+    background-color: #eee7e7;
     background-size: cover;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 .header{
     background-color: #3E68FF;
@@ -50,73 +50,119 @@ body{
 .chart1{
     padding: 20px;
     border-radius: 5%;
-    width: 70vh;
+    width: 60vh;
     background-color: white;
+    flex-direction: row;
+    display: flex;
 }
-.chart2{
-    padding: 20px;
-    border-radius: 5%;
-    width: 70vh;
-    background-color: white;
+.bom{
+    box-shadow:rgb(77, 129, 77) 0px 10px 60px -15px inset;
+}
+.atencao{
+    box-shadow:rgb(221, 221, 27) 0px 10px 60px -15px inset;
+}
+.cuidado{
+    box-shadow:orange 0px 10px 60px -15px inset;
+}
+.urgente{
+    box-shadow:red 0px 10px 60px -15px inset;
 }
 .div-logo{
     width: 100%;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.div-setores{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-left: 15%;
-    padding: 20px;
-}
-.card-setor{
+
+.div-termometro{
+    height: 150px;
     width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: none;
+}
+.img-termometro{
+    height: 100px;
+    width: 100px;
+    margin-left: 90px;
+    position: absolute;
+    z-index: -2;
+}
+.termometro-bom{
+    width: 90px;
+    height: 30px;
+    margin-top: 60px;
+    background-color: darkgreen;
+    margin-left: 90px;
+    position: absolute;
+    z-index: -2;
+}
+.termometro-atencao{
+    width: 90px;
     height: 50px;
-    background-color: #3E68FF;
-    border-radius: 5%;
-    box-shadow: 3px 3px 3px #d3d3d3;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0;
+    margin-top: 40px;
+    margin-left: 90px;
+    position: absolute;
+    z-index: -2;
+    background-color: rgb(221, 221, 27);
 }
-.card-setor:hover{
-    background-color: white;
-    border: 1px solid #3E68FF;
-    transition: 1s;
-    color: #3E68FF;
+.termometro-cuidado{
+    width: 90px;
+    height: 75px;
+    margin-top: 20px;
+    margin-left: 90px;
+    position: absolute;
+    z-index: -2;
+    background-color: orange;
 }
-.alertas{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-}
-.span-alertas{
-    margin: 10px;
-    width: 80px;
-    height: 50px;
-    border-radius: 5%;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.perigo{
+.termometro-urgente{
+    width: 90px;
+    height: 100px;
+    margin-left: 90px;
+    position: absolute;
+    z-index: -2;
     background-color: red;
 }
-.estavel{
-    background-color: rgb(211, 211, 2);
+.div-setores{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-.tranquilo{
-    background-color: green;
+.div-setores select{
+    width: 100%;
+    border: 1px solid #eee7e7;
+    padding: 20px;
+    font-size: 20px;
+    color: white;
+    background-color: #3E68FF;
+}
+.sair a{
+    width: 99%;
+    height: 35px;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    padding: 8px 0px 8px 0px;
+    text-decoration: none;
+}
+.sair h3{
+    margin-top: 5px;
+    padding-left: 8px;
+    font-size: 25px;
+    color: #ffffff;
+}
+.sair img{
+    width: 40px;
+}
+.sair a:hover{
+    cursor: pointer;
+    box-shadow: 0px 10px 60px -15px #2352ff inset;
+    transition: 1s;
 }
