@@ -54,10 +54,10 @@
                 <div class="inputs_column">
                     <div>
                         <p class="txt_inputs">Nome da Empresa</p>
-                        <input type="text" id="input_empresa" class="inputs" placeholder="nome da empresa...">
+                        <input type="text" id="input_empresa" class="inputs" placeholder="Nome da empresa...">
                     </div>
                     <div>
-                        <p class="txt_inputs">Horas de uso por dia do DataCenter</p>
+                        <p class="txt_inputs">Horas de uso por dia do DataCenter (h)</p>
                         <input type="text" id="input_hrsData" placeholder="6 (horas por dia)" class="inputs">
                     </div>
                 </div>
@@ -67,18 +67,18 @@
                         <input type="text" id="input_qtdServ" placeholder="7 (Servidores no DataCenter)" class="inputs">
                     </div>
                     <div>
-                        <p class="txt_inputs">Potência dos Servidores</p>
-                        <input type="text" id="input_potenServ" placeholder="" class="inputs">
+                        <p class="txt_inputs">Potência dos Servidores (W)</p>
+                        <input type="text" id="input_potenServ" placeholder="Insira a potencia em Watts(W)" class="inputs">
                     </div>
                 </div>
                 <div class="inputs_column">
                     <div>
                         <p class="txt_inputs">Informe a quantidade de Ares-Condicionados </p>
-                        <input type="text" id="input_qtdAr" placeholder="7 (Servidores no Ares-Condicionados)" class="inputs">
+                        <input type="text" id="input_qtdAr" placeholder="(Servidores no Ares-Condicionados)" class="inputs">
                     </div>
                     <div>
-                        <p class="txt_inputs">Potência dos Ares-Condicionados</p>
-                        <input type="text" id="input_potenAr" placeholder="" class="inputs">
+                        <p class="txt_inputs">Potência dos Ares-Condicionados (W)</p>
+                        <input type="text" id="input_potenAr" placeholder="Insira a potencia em Watts(W)" class="inputs">
                     </div>
                 </div>
                 <div class="inputs_column">
@@ -108,51 +108,63 @@
 
 function gastos() {
 
-var empresa = input_empresa.value
-var qtd_serv = Number(input_qtdServ.value)
-var poten_Serv = Number(input_potenServ.value)
-var qtd_ar = Number(input_qtdAr.value)
-var poten_Ar = Number(input_potenAr.value)
-var preco_ener_estado = 0.39
-var hrs_porDia_datacenter = Number(input_hrsData.value)
+    // Variaveis ditas pelo usuario!
+    var empresa = input_empresa.value
+    var qtd_serv = Number(input_qtdServ.value)
+    var poten_Serv = Number(input_potenServ.value)
+    var qtd_ar = Number(input_qtdAr.value)
+    var poten_Ar = Number(input_potenAr.value)
+    var hrs_porDia_datacenter = Number(input_hrsData.value)
 
-var consumo_ener_kWh = (qtd_serv * poten_Serv + qtd_ar * poten_Ar) * hrs_porDia_datacenter * 30 / 1000
-var custo_ener_mes = consumo_ener_kWh * preco_ener_estado
-var custo_ener_serv = custo_ener_mes / qtd_serv
-var custo_ener_ar = custo_ener_mes / qtd_ar
+    // Preco de energia do estado(Media de Sao Paulo)
+    var preco_ener_estado = 0.14
 
-exibir.innerHTML = `${empresa}, esta tendo um consumo de ${consumo_ener_kWh} Kwh (kilowatt-hora)/mes<br>`
-exibir.innerHTML += `${empresa}, esta tendo um gasto de energia de R$${custo_ener_mes}/mes<br>`
-exibir.innerHTML += `${empresa}, tem um gasto por servidor de ${custo_ener_serv}/mes<br>`
-exibir.innerHTML += `${empresa}, tem um gasto por ar-condicionado de ${custo_ener_ar}/mes<br><br>`
+    // Nossa regra de negocio.
+
+    var consumo_ener_kWh = (qtd_serv * poten_Serv + qtd_ar * poten_Ar) * hrs_porDia_datacenter * 30 / 1000
+
+
+    //Arrendondar os numeros, e adicionar cores aos valores finais.
+    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado
+    var custo_ener_serv = custo_ener_mes / qtd_serv
+    var custo_ener_ar = custo_ener_mes / qtd_ar
+
+    exibir.innerHTML = `${empresa}, esta tendo um consumo de ${consumo_ener_kWh} Kwh (kilowatt-hora)/mes<br>`
+    exibir.innerHTML += `${empresa}, esta tendo um gasto de energia de R$${custo_ener_mes}/mes<br>`
+    exibir.innerHTML += `${empresa}, tem um gasto por servidor de ${custo_ener_serv}/mes<br>`
+    exibir.innerHTML += `${empresa}, tem um gasto por ar-condicionado de ${custo_ener_ar}/mes<br><br>`
 
 }
 
 function lucros() {
 
-var empresa = input_empresa.value
-var qtd_serv = Number(input_qtdServ.value)
-var poten_Serv = Number(input_potenServ.value)
-var qtd_ar = Number(input_qtdAr.value)
-var poten_Ar = Number(input_potenAr.value)
-var preco_ener_estado = 0.39
-var hrs_porDia_datacenter = Number(input_hrsData.value)
 
-var consumo_ener_kWh = (qtd_serv * poten_Serv + qtd_ar * poten_Ar) * hrs_porDia_datacenter * 30 / 1000
-var custo_ener_mes = consumo_ener_kWh * preco_ener_estado
-var custo_ener_serv = custo_ener_mes / qtd_serv
-var custo_ener_ar = custo_ener_mes / qtd_ar
+    // Variaveis que o usuario inseriu.
+    var empresa = input_empresa.value
+    var qtd_serv = Number(input_qtdServ.value)
+    var poten_Serv = Number(input_potenServ.value)
+    var qtd_ar = Number(input_qtdAr.value)
+    var poten_Ar = Number(input_potenAr.value)
+    var preco_ener_estado = 0.39
+    var hrs_porDia_datacenter = Number(input_hrsData.value) 
 
-var novo_cons_enerkWh = consumo_ener_kWh * 0.88
-var novo_custo_ener = custo_ener_mes * 0.88
-var novo_custo_serv = custo_ener_serv * 0.88
-var novo_custo_ar = custo_ener_ar * 0.88
+    // Calculo de consumo kWh
 
+    var consumo_ener_kWh = (qtd_serv * poten_Serv + qtd_ar * poten_Ar) * hrs_porDia_datacenter * 30 / 1000
+    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado
+    var custo_ener_serv = custo_ener_mes / qtd_serv
+    var custo_ener_ar = custo_ener_mes / qtd_ar
+    
+    //Arrendondar os numeros, e adicionar cores aos valores finais.
+    var novo_cons_enerkWh = consumo_ener_kWh * 0.88
+    var novo_custo_ener = custo_ener_mes * 0.88
+    var novo_custo_serv = custo_ener_serv * 0.88
+    var novo_custo_ar = custo_ener_ar * 0.88
 
-p.innerHTML = `Agora ${empresa}, tera um consumo de ${novo_cons_enerkWh}Kwh (kilowatt-hora)/mes<br>`
-p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ener}/mes<br>`
-p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_serv}/mes<br>`
-p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ar}/mes<br>`
+    p.innerHTML = `Agora ${empresa}, tera um consumo de ${novo_cons_enerkWh}Kwh (kilowatt-hora)/mes<br>`
+    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ener}/mes<br>`
+    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_serv}/mes<br>`
+    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ar}/mes<br>`
 
 }
     
