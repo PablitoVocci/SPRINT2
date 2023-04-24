@@ -24,7 +24,7 @@ INSERT INTO empresa VALUES
 (NULL, 'Apple Inc.', 'Apple', '33333333333333', NULL, 'AppleIncent@outlook.com', 'fjhkshgklshglskhgkbg123');
 
 
--- CRIAR A TABELA USUARIO
+-- CRIAR A TABELA USUARIO QUE É DEPENDENTE DA TABELA EMPRESA
 
 CREATE TABLE usuario (
 idUsuario INT AUTO_INCREMENT,
@@ -115,15 +115,16 @@ SELECT idEmpresa, nome, nomeFantasia, CNPJ, emailEmpresarial, pais, CEP, numero
 	FROM empresa JOIN endereco ON idEmpresa = fkEmpresa;
     
     
--- CRIAR A TABELA SETOREMPRESA
+-- CRIAR A TABELA SETOREMPRESA QUE É DEPENDENTE DA TABELA EMPRESA
 
 CREATE TABLE setorEmpresa (
-idSetorEmp INT PRIMARY KEY AUTO_INCREMENT,
+idSetorEmp INT AUTO_INCREMENT,
 nome VARCHAR(40) NOT NULL,
 andar INT NOT NULL,
 representante VARCHAR(50),
 fkEmpresa INT,
-CONSTRAINT fkEmpresaSet FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+CONSTRAINT fkEmpresaSet FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
+CONSTRAINT pkSetorEmp PRIMARY KEY (idSetorEmp, fkEmpresa)
 );
 
 
@@ -146,7 +147,8 @@ SELECT * FROM empresa JOIN setorEmpresa ON idEmpresa = fkEmpresa;
 SELECT idEmpresa, NomeFantasia, idSetorEmp AS SetoresEmpresa, setorEmpresa.nome AS NomeSetor, andar, representante
 	FROM empresa JOIN setorEmpresa ON idEmpresa = fkEmpresa;
     
--- CRIAR A TABELA SERVIDORES
+    
+-- CRIAR A TABELA SERVIDORES QUE É DEPENDENDETE DA TABEA SETOREMPRESA
 
 CREATE TABLE servidores  (
 idServidores INT AUTO_INCREMENT,
@@ -230,7 +232,7 @@ INSERT INTO tipoSensor VALUES
 
 
 
--- CRIAR A TABELA SENSOR
+-- CRIAR A TABELA SENSOR QUE É DEPENDENDE DA TABELA TIPOSENSOR
 
 CREATE TABLE sensor (
 idSensor INT AUTO_INCREMENT,
@@ -265,7 +267,7 @@ SELECT idTipoSensor AS TipoSensor, tipoSensor.nome AS NomeSensor, estado, IdServ
 		JOIN servidores ON idServidores = fkServidores;
         
         
--- CRIAR A TABELA LEITURA
+-- CRIAR A TABELA LEITURA QUE É DEPENDENTE DA TABELA SENSOR
 
 CREATE TABLE leitura (
 idLeitura INT AUTO_INCREMENT,
@@ -297,6 +299,29 @@ SELECT * FROM sensor JOIN leitura ON idSensor = fkSensor;
 SELECT idLeitura AS Leitura, temperatura, umidade, dtCaptura AS DataHoraCaptura, 
 	nome AS nomeServidor, fkSetor AS SetorServidor FROM sensor JOIN leitura ON idSensor = fkSensor
 		 JOIN servidores ON idServidores = fkServidores;
+         
+
+-- UPDATE NO CEP DA EMPRESA EPIC GAMES
+
+UPDATE endereco SET CEP = '12345-789' where idEndereco = 1;
+
+
+-- DELETANDO O USUARIO ANA 
+
+/*DELETE FROM endereco where fkUsuario = 501;
+DELETE FROM usuario where idUsuario = 501;
+SELECT idUsuario, nome, email, telefoneCelular, CPF, pais, CEP, numero 
+	FROM usuario JOIN endereco ON idUsuario = fkUsuario;*/
+
+
+
+-- ATUALIZANDO O EMAIL DA EMPRESA EPIC GAMES
+
+/*UPDATE empresa SET emailEmpresarial = 'epicGames@' where idEmpresa = 2;
+select * from empresa;*/
+
+
+
 
 
 
