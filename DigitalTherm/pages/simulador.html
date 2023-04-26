@@ -125,9 +125,9 @@ function gastos() {
 
 
     //Arrendondar os numeros, e adicionar cores aos valores finais.
-    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado
-    var custo_ener_serv = custo_ener_mes / qtd_serv
-    var custo_ener_ar = custo_ener_mes / qtd_ar
+    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado.toFixed(2)
+    var custo_ener_serv = custo_ener_mes / qtd_serv.toFixed(2)
+    var custo_ener_ar = custo_ener_mes / qtd_ar.toFixed(2)
 
     exibir.innerHTML = `${empresa}, esta tendo um consumo de ${consumo_ener_kWh} Kwh (kilowatt-hora)/mes<br>`
     exibir.innerHTML += `${empresa}, esta tendo um gasto de energia de R$${custo_ener_mes}/mes<br>`
@@ -145,15 +145,15 @@ function lucros() {
     var poten_Serv = Number(input_potenServ.value)
     var qtd_ar = Number(input_qtdAr.value)
     var poten_Ar = Number(input_potenAr.value)
-    var preco_ener_estado = 0.39
+    var preco_ener_estado = 0.14
     var hrs_porDia_datacenter = Number(input_hrsData.value) 
 
     // Calculo de consumo kWh
 
     var consumo_ener_kWh = (qtd_serv * poten_Serv + qtd_ar * poten_Ar) * hrs_porDia_datacenter * 30 / 1000
-    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado
-    var custo_ener_serv = custo_ener_mes / qtd_serv
-    var custo_ener_ar = custo_ener_mes / qtd_ar
+    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado.toFixed(2)
+    var custo_ener_serv = custo_ener_mes / qtd_serv.toFixed(2)
+    var custo_ener_ar = custo_ener_mes / qtd_ar.toFixed(2)
     
     //Arrendondar os numeros, e adicionar cores aos valores finais.
     var novo_cons_enerkWh = consumo_ener_kWh * 0.88
