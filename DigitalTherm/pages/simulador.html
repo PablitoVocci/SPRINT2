@@ -125,14 +125,14 @@ function gastos() {
 
 
     //Arrendondar os numeros, e adicionar cores aos valores finais.
-    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado.toFixed(2)
-    var custo_ener_serv = custo_ener_mes / qtd_serv.toFixed(2)
-    var custo_ener_ar = custo_ener_mes / qtd_ar.toFixed(2)
+    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado
+    var custo_ener_serv = custo_ener_mes / qtd_serv
+    var custo_ener_ar = custo_ener_mes / qtd_ar
 
     exibir.innerHTML = `${empresa}, esta tendo um consumo de ${consumo_ener_kWh} Kwh (kilowatt-hora)/mes<br>`
-    exibir.innerHTML += `${empresa}, esta tendo um gasto de energia de R$${custo_ener_mes}/mes<br>`
-    exibir.innerHTML += `${empresa}, tem um gasto por servidor de ${custo_ener_serv}/mes<br>`
-    exibir.innerHTML += `${empresa}, tem um gasto por ar-condicionado de ${custo_ener_ar}/mes<br><br>`
+    exibir.innerHTML += `${empresa}, esta tendo um gasto de energia de R$${custo_ener_mes.toFixed(2)}/mes<br>`
+    exibir.innerHTML += `${empresa}, tem um gasto por servidor de ${custo_ener_serv.toFixed(2)}/mes<br>`
+    exibir.innerHTML += `${empresa}, tem um gasto por ar-condicionado de ${custo_ener_ar.toFixed(2)}/mes<br><br>`
 
 }
 
@@ -151,9 +151,9 @@ function lucros() {
     // Calculo de consumo kWh
 
     var consumo_ener_kWh = (qtd_serv * poten_Serv + qtd_ar * poten_Ar) * hrs_porDia_datacenter * 30 / 1000
-    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado.toFixed(2)
-    var custo_ener_serv = custo_ener_mes / qtd_serv.toFixed(2)
-    var custo_ener_ar = custo_ener_mes / qtd_ar.toFixed(2)
+    var custo_ener_mes = consumo_ener_kWh * preco_ener_estado
+    var custo_ener_serv = custo_ener_mes / qtd_serv
+    var custo_ener_ar = custo_ener_mes / qtd_ar
     
     //Arrendondar os numeros, e adicionar cores aos valores finais.
     var novo_cons_enerkWh = consumo_ener_kWh * 0.88
@@ -162,9 +162,9 @@ function lucros() {
     var novo_custo_ar = custo_ener_ar * 0.88
 
     p.innerHTML = `Agora ${empresa}, tera um consumo de ${novo_cons_enerkWh}Kwh (kilowatt-hora)/mes<br>`
-    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ener}/mes<br>`
-    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_serv}/mes<br>`
-    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ar}/mes<br>`
+    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ener.toFixed(2)}/mes<br>`
+    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_serv.toFixed(2)}/mes<br>`
+    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ar.toFixed(2)}/mes<br>`
 
 }
     
