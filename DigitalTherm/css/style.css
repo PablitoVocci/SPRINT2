@@ -163,9 +163,6 @@ a:hover{
 
 footer{
     background-color:#3E68FF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
 }
 

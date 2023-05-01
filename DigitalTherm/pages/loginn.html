@@ -23,7 +23,7 @@
                         <a href="./index.html">Inicio</a>       
                     </li>
                     <li>
-                        <a href="#">Sobre Nos</a>
+                        <a href="./simulador.html">Simulador</a>
                     </li>
 
                     <li>
@@ -48,7 +48,7 @@
             <img src="../assets/digitalTherm.png" alt="" srcset="">
 
             <input type="text" placeholder="Login" class="inputCNPJ inputGrande" id="inputEmail">
-            <input type="text" placeholder="Senha" class="inputEmail inputGrande" id="inputSenha">
+            <input type="password" placeholder="Senha" class="inputEmail inputGrande" id="inputSenha">
 
             <button class="button" onclick="ValidarLogin()">Continuar</button>
 
@@ -67,13 +67,17 @@
 
 <script>
 
+
     function ValidarLogin() {
 
-        const email = document.getElementById("inputEmail")
-        const senha = document.getElementById("inputSenha")
+      // Constante "email" = documento. get(pegue) Element (elemento) By(do) Id ("X")
 
-        var emailValue = email.value
-        var senhaValue = senha.value
+        const email = document.getElementById("inputEmail");
+        const senha = document.getElementById("inputSenha");
+
+        var emailValue = email.value;
+        var senhaValue = senha.value;
+
         var check = false;
 
         if (emailValue == "") {
@@ -106,7 +110,19 @@
 
             check = true;
         }
+        
+        function toDash(){
 
+            window.location.href='dashboard.html'
+        }
+
+        if(emailValue == "admin@admin" && senhaValue == "123"){
+
+            check = true;
+
+            setInterval(toDash, 3000);
+
+        }
 
     }
 </script>
