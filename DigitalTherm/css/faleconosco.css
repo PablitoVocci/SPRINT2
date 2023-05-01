@@ -1,7 +1,10 @@
 .footer {
+  background-color: aliceblue;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin: 2px;
+  padding: 0%;
 }
 
 .logo-group {
@@ -21,4 +24,12 @@
 
 .fim {
   margin-top: 20px;
+}
+
+.linha {
+  border-bottom: 5px solid #3E68FF;
+  margin: 0;
+  padding: 0%;
+  width: 600%;
+  
 }
