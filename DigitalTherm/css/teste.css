@@ -96,6 +96,7 @@ a:hover {
 
 /* Card */
 .card-box {
+    margin-bottom: 10vh;
     background-color: #ffffff;
     padding: 20px;
     width: 550px;

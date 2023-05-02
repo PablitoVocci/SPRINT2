@@ -1,4 +1,4 @@
-body{
+.body{
     background-color: #F8F8F8;
     display: flex;
     justify-content: center;
@@ -14,7 +14,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 30px; 
     flex-direction: column;
 }
 .logo{
@@ -63,4 +63,38 @@ body{
 .opt_disabled{
     color: #797979;
     text-align: center;
+}
+.resultado{
+    margin-top: 20px;
+    width: 100%;
+    height: fit-content;
+    border-radius: 5%;
+}
+.r1{
+    background-color: rgb(205, 50, 50);
+    visibility: hidden;
+}
+.r2{
+    background-color: rgb(19, 131, 19);
+    visibility: hidden;
+}
+.title-resultado{
+    padding-top: 10px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 50px -15px inset;
+}
+.title-resultado h2{
+    color: #ffffff;
+    font-weight: 500;
+}
+.resultado p{
+    color: #ffffff;
+    padding: 5px;
+}
+.resultados-p{
+    box-shadow: 0 10px 50px -15px inset;
+    height: fit-content;
+    width: 100%;
+    padding: 5px;
 }

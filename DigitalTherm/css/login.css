@@ -243,3 +243,9 @@ input::placeholder{
 
     border: 2px solid rgb(0, 255, 0);
 }
+.footer-login{
+    margin-top: 20vh;
+}
+.form{
+    margin-bottom: 10vh;
+}

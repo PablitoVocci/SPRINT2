@@ -8,6 +8,8 @@
         <title>DigitalTherm</title>
         <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/simulador.css">
+        <link rel="stylesheet" href="../css/faleconosco.css">
+        <link rel="stylesheet" href="../css/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
@@ -15,98 +17,150 @@
     </head>
 
     <body>
-        
-        <header class="header">
+        <div class="body">
 
-            <div class="parte-1">
-                <img src="../assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo">
-
-                <nav class="container-1">
-                    <ul>
-                        <li>
-                            <b><a href="./index.html">Inicio</a></b>
-                        </li>
-                        <li>
-                            <a href="simulador.html">Simulador</a>
-                        </li>
-
-                        <li>
-                            <a href="./index.html#faleconosco">Fale Conosco</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="container-2">
-
-                <a href="./loginn.html">Login</a>
-                <a href="./cadastro.html">
-                    <button class="cadastro">Cadastre-se</button>
-                </a>
-
-            </div>
-        </header>
-        <div class="container-simulador">
-            <div class="logo">
-                <img src="../assets/digitalTherm.png" alt="">
-            </div>
-            <div class="div_inputs">
-                <div class="inputs_column">
-                    <div>
-                        <p class="txt_inputs">Nome da Empresa</p>
-                        <input type="text" id="input_empresa" class="inputs" placeholder="Nome da empresa...">
-                    </div>
-                    <div>
-                        <p class="txt_inputs">Horas de uso por dia do DataCenter (h)</p>
-                        <input type="text" id="input_hrsData" placeholder="6 (horas por dia)" class="inputs">
-                    </div>
+            <header class="header">
+    
+                <div class="parte-1">
+                    <img src="../assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo">
+    
+                    <nav class="container-1">
+                        <ul>
+                            <li>
+                                <b><a href="./index.html">Inicio</a></b>
+                            </li>
+                            <li>
+                                <a href="simulador.html">Simulador</a>
+                            </li>
+    
+                            <li>
+                                <a href="#faleconosco">Fale Conosco</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-                <div class="inputs_column">
-                    <div>
-                        <p class="txt_inputs">Informe a quantidade de servidores </p>
-                        <input type="text" id="input_qtdServ" placeholder="7 (Servidores no DataCenter)" class="inputs">
-                    </div>
-                    <div>
-                        <p class="txt_inputs">Potência dos Servidores (W)</p>
-                        <input type="text" id="input_potenServ" placeholder="Insira a potencia em Watts(W)" class="inputs">
-                    </div>
+    
+                <div class="container-2">
+    
+                    <a href="./loginn.html">Login</a>
+                    <a href="./cadastro.html">
+                        <button class="cadastro">Cadastre-se</button>
+                    </a>
+    
                 </div>
-                <div class="inputs_column">
-                    <div>
-                        <p class="txt_inputs">Informe a quantidade de Ares-Condicionados </p>
-                        <input type="text" id="input_qtdAr" placeholder="(Servidores no Ares-Condicionados)" class="inputs">
-                    </div>
-                    <div>
-                        <p class="txt_inputs">Potência dos Ares-Condicionados (W)</p>
-                        <input type="text" id="input_potenAr" placeholder="Insira a potencia em Watts(W)" class="inputs">
-                    </div>
+            </header>
+            <div class="container-simulador">
+                <div class="logo">
+                    <img src="../assets/digitalTherm.png" alt="">
                 </div>
-                <div class="inputs_column">
-                    <div>
-                        <br>
-                        <button onclick="gastos()" class="btn_simular">Gastos da sua empresa</button>
-                        <div id ="exibir"></div>
-                        <br>
+                <div class="div_inputs">
+                    <div class="inputs_column">
+                        <div>
+                            <p class="txt_inputs">Nome da Empresa</p>
+                            <input type="text" id="input_empresa" class="inputs" placeholder="Nome da empresa...">
+                        </div>
+                        <div>
+                            <p class="txt_inputs">Horas de uso por dia do DataCenter (h)</p>
+                            <input type="text" id="input_hrsData" placeholder="6 (horas por dia)" class="inputs">
+                        </div>
                     </div>
-                    <div>
-                        <br>
-                        <button onclick="lucros()" class="btn_simular">Lucros com a nossa ferramenta</button>
-                        <div id="p"></div>
-                        <br>
-                        
+                    <div class="inputs_column">
+                        <div>
+                            <p class="txt_inputs">Informe a quantidade de servidores </p>
+                            <input type="text" id="input_qtdServ" placeholder="7 (Servidores no DataCenter)" class="inputs">
+                        </div>
+                        <div>
+                            <p class="txt_inputs">Potência dos Servidores (W)</p>
+                            <input type="text" id="input_potenServ" placeholder="Insira a potencia em Watts(W)" class="inputs">
+                        </div>
                     </div>
+                    <div class="inputs_column">
+                        <div>
+                            <p class="txt_inputs">Informe a quantidade de Ares-Condicionados </p>
+                            <input type="text" id="input_qtdAr" placeholder="(Servidores no Ares-Condicionados)" class="inputs">
+                        </div>
+                        <div>
+                            <p class="txt_inputs">Potência dos Ares-Condicionados (W)</p>
+                            <input type="text" id="input_potenAr" placeholder="Insira a potencia em Watts(W)" class="inputs">
+                        </div>
+                    </div>
+                    <div class="inputs_column">
+                        <div>
+                            <br>
+                            <button onclick="gastos()" class="btn_simular">Gastos da sua empresa</button>
+                            <div id ="exibir" class="resultado r1">
+                                <div class="title-resultado"><h2 id="nome_empresa"></h2></div>
+                                <div class="resultados-p">
+                                    <p id="consumo"></p>
+                                    <br>
+                                    <p id="gasto_energia"></p>
+                                    <br>
+                                    <p id="gasto_servidor"></p>
+                                    <br>
+                                    <p id="gasto_arcondicionado"></p>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div>
+                            <br>
+                            <button onclick="lucros()" class="btn_simular">Lucros com a nossa ferramenta</button>
+                            <div id="exibir2" class="resultado r2">
+                                <div class="title-resultado"><h2 id="nome_empresa2"></h2></div>
+                                <div class="resultados-p">
+                                    <p id="consumo_lucro"></p>
+                                    <br>
+                                    <p id="gasto_energia_lucro"></p>
+                                    <br>
+                                    <p id="gasto_servidor_lucro"></p>
+                                    <br>
+                                    <p id="gasto_arcondicionado_lucro"></p>
+                                </div>
+                            </div>
+                            <br>
+                            
+                        </div>
+                    </div> 
+                    
                 </div>
                 
             </div>
-            
         </div>
+        <footer id="faleconosco" class="footer footer-login">
+            <div class="linha"></div>
+            <div class="logo-group">
+              <div class="logo.email">
+                <img src="../assets/logo.email.png" alt="Logo de e-mail">
+                <br>
+                <a href="digitaltherm@sptech.school"><span style="color: #3E68FF;">digitaltherm@sptech.school</span></a>
+              </div>
+          
+              <div class="logo.telefone">
+                <img src="../assets/logo.tel.png" alt="Logo de telefone">
+                <br>
+                <a href="115898-2678"> <span style="color: #3E68FF;">(11) 5809-9323</span></a>
+              </div>
+          
+              <div class="logo.github">
+                <img src="../assets/logo.git.png" alt="Logo do GitHub">
+                <br>
+                <a href="https://github.com/PablitoVocci/SPRINT2"><span style="color: #3E68FF;">GitHub</span></a>
+              </div>
+            </div>
         
+            <div class="fim">
+              <h3 style="color: #3E68FF;;">DigitalTherm © 2023. Todos os direitos reservados.</h3>
+            </div>
+          </footer>
     </body>
 </html>
 <script>
 
 
 function gastos() {
+
+    var mostrar = document.getElementById('exibir');
+    mostrar.style.visibility = "visible";
 
     // Variaveis ditas pelo usuario!
     var empresa = input_empresa.value
@@ -129,16 +183,18 @@ function gastos() {
     var custo_ener_serv = custo_ener_mes / qtd_serv
     var custo_ener_ar = custo_ener_mes / qtd_ar
 
-    exibir.innerHTML = `${empresa}, esta tendo um consumo de ${consumo_ener_kWh} Kwh (kilowatt-hora)/mes<br>`
-    exibir.innerHTML += `${empresa}, esta tendo um gasto de energia de R$${custo_ener_mes.toFixed(2)}/mes<br>`
-    exibir.innerHTML += `${empresa}, tem um gasto por servidor de ${custo_ener_serv.toFixed(2)}/mes<br>`
-    exibir.innerHTML += `${empresa}, tem um gasto por ar-condicionado de ${custo_ener_ar.toFixed(2)}/mes<br><br>`
+    nome_empresa.innerHTML = `Empresa: ${empresa} `
+    consumo.innerHTML = `Consumo :${consumo_ener_kWh.toFixed(2)} Kwh (kilowatt-hora) / Mês`
+    gasto_energia.innerHTML = `Gasto de energia: R$${custo_ener_mes.toFixed(2)} / Mês`
+    gasto_servidor.innerHTML = `Gasto por servidor: ${custo_ener_serv.toFixed(2)} / Mês`
+    gasto_arcondicionado.innerHTML = `Gasto por ar-condicionado: ${custo_ener_ar.toFixed(2)} / Mês`
 
 }
 
 function lucros() {
 
-
+    var mostrar = document.getElementById('exibir2');
+    mostrar.style.visibility = "visible";
     // Variaveis que o usuario inseriu.
     var empresa = input_empresa.value
     var qtd_serv = Number(input_qtdServ.value)
@@ -161,10 +217,11 @@ function lucros() {
     var novo_custo_serv = custo_ener_serv * 0.88
     var novo_custo_ar = custo_ener_ar * 0.88
 
-    p.innerHTML = `Agora ${empresa}, tera um consumo de ${novo_cons_enerkWh}Kwh (kilowatt-hora)/mes<br>`
-    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ener.toFixed(2)}/mes<br>`
-    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_serv.toFixed(2)}/mes<br>`
-    p.innerHTML += `Agora ${empresa}, tera um gasto de R$${novo_custo_ar.toFixed(2)}/mes<br>`
+    nome_empresa2.innerHTML = `Empresa: ${empresa}`;
+    consumo_lucro.innerHTML = `Consumo: ${novo_cons_enerkWh.toFixed(2)} Kwh (kilowatt-hora) / Mês`
+    gasto_energia_lucro.innerHTML = `Gasto de energia: R$${novo_custo_ener.toFixed(2)} / Mês`
+    gasto_servidor_lucro.innerHTML = `Gasto por Servidor: R$${novo_custo_serv.toFixed(2)} / Mês`
+    gasto_arcondicionado_lucro.innerHTML = `Gasto por Ar-condicionado: R$${novo_custo_ar.toFixed(2)} / Mês`
 
 }
     
