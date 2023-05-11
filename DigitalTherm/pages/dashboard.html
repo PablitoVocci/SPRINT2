@@ -13,26 +13,37 @@
         <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <header class="header">
-            <div class="logo-empresa">
-                <span class="foto">
-                    <img src="../assets/logo-empresa.png" alt="Logo empresa" class="imagem-logo">
-                    <p>Epic Games</p>
-                </span>
-            </div>
-            <div class="div-setores">
-                <select name="" id="">
-                    <option value="">Setor 1</option>
-                    <option value="">Setor 2</option>
-                    <option value="">Setor 3</option>
-                </select>
-            </div>
-            <div class="sair">
-                <a href="loginn.html"><img src="../assets/btn-sair.png" alt=""><h3>Sair</h3></a>
-            </div>
+        <header class="container-nav">
+            <img src="../assets/digitalTherm.png" class="logo" alt="">
+            <ul class="navbar">
+                <li>Estátistica</li>
+                <li>Sair</li>
+            </ul>
         </header>
-        <div class="div-logo">
-            <img src="../assets/digitalTherm.png" alt="">
+        <div class="metricas">
+            <div class="quadrado-alertas">
+                <button onclick="abrirModal()" class="alertas altBom">Ver mais</button>
+                <p class="desc-alertas"> - BOM</p>
+            </div>
+            <div class="quadrado-alertas">
+                <button onclick="abrirModal()" class="alertas altAtencao">Ver mais</button>
+                <p class="desc-alertas"> - ATENÇÃO</p>
+            </div>
+            <div class="quadrado-alertas">
+                <button onclick="abrirModal()" class="alertas altCuidado">Ver mais</button>
+                <p class="desc-alertas"> - CUIDADO</p>
+            </div>
+            <div class="quadrado-alertas">
+                <button onclick="abrirModal()" class="alertas altUrgente">Ver mais</button>
+                <p class="desc-alertas"> - URGENTE</p>
+            </div>
+        </div>
+        <div id="fundo_modal" class="fundo-modal">
+            <div class="modal" id="modal">
+                <div class="fechar">
+                    <button onclick="fecharModal()">X</button>
+                </div>
+            </div>
         </div>
         <div class="container-charts">
             <div class="charts-row1">
@@ -291,4 +302,29 @@
         document.getElementById('myChart4'),
         config4
     );
+
+
+
+    //MODAL
+    function abrirModal(){
+        var fundo = document.getElementById("fundo_modal");
+        var modal = document.getElementById("modal");
+
+        fundo.style.zIndex = 999;
+        modal.style.zIndex = 999;
+        fundo.style.animation = "modal 1s";
+        modal.style.animation = "modal 1s";
+        fundo.style.transform = "translateY(0)";
+        modal.style.transform = "translateY(0)";
+    }
+    function fecharModal(){
+        var fundo = document.getElementById("fundo_modal");
+        var modal = document.getElementById("modal");
+
+        fundo.style.animation = "fecharModal 1s";
+        modal.style.animation = "fecharModal 1s";
+        fundo.style.transform = "translateY(-200%)";
+        modal.style.transform = "translateY(-200%)";
+        
+    }
 </script>

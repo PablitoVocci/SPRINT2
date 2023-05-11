@@ -5,37 +5,149 @@ body{
     background-color: #eee7e7;
     background-size: cover;
     overflow-y: hidden;
+    position: relative;
 }
-.header{
-    background-color: #3E68FF;
-    width: 15%;
+.metricas{
+    position: absolute;
+    left: 0;
+    width: 40vh;
     height: 100vh;
-    position: fixed;
-    box-shadow: 5px 1px 3px #d3d3d3;
-    z-index: 999;
-    border-radius: 0% 15% 0% 0%;
+    background-color: #2352ff;
+    box-shadow: 0 150px 300px -15px black inset;
+    display: flex;
     flex-direction: column;
 }
-.foto{
-    width: fit-content;
-    height: fit-content;
-}
-.foto img{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-}
-.foto p{
+.alertas{
+    width: 7vh;
+    height: 7vh;
+    border: 1px solid black;
+    margin-left: 2vh;
+    margin-top: 2vh;
     color: white;
-    font-weight: bold;
-    font-size: 18px;
+    box-shadow: 1px 1px 5px black inset;
 }
-.logo-empresa{
-    display: flex;
+.alertas:hover{
+    cursor: pointer;
+    transition: 1s;
+    border: 3px solid rgb(255, 255, 255);
+    border-radius: 10%;
+    box-shadow: 0 0 0 ;
+}
+.fundo-modal{
+   position: absolute;
+   width: 100%;
+   height: 300vh;
+   box-shadow: 0 150px 300px -15px black inset;
+   background-color: rgb(35, 82, 255,0.6); 
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index:-2;
+   transform: translateY(-100%);
+}
+.modal{
+    position: absolute;
+    box-shadow: 0 50px 100px -15px black inset;
+    top: 15vh;
+    background-color: white;
+    width: 80vh;
+    height: 50vh;
+    border-radius: 10%;
+    transform: translateY(-100%);
+}
+.fechar{
+    width: 100%;
+    height: 3vh;
+    position: relative;
+}
+.fechar button{
+    right: -3px;
+    top: -8px;
+    cursor: pointer;
+    position: absolute;
+    width: 7vh;
+    height: 7vh;
+    background-color: red;
+    color: white;
+    font-weight: 900;
+    border-radius: 50% ;
+}
+@keyframes fecharModal {
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-200%);
+    }
+}
+@keyframes modal {
+    0%{
+        transform: translateY(-200%);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+.quadrado-alertas{
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: 5vh;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.desc-alertas{
+    color: white;
+    font-weight: 500;
+    margin-left: 5px;
+}
+.altBom{
+    background-color: rgb(77, 129, 77);
+
+}
+.altAtencao{
+    background-color: rgb(221, 221, 27);
+}
+.altCuidado{
+    background-color: orange;
+}
+.altUrgente{
+    background-color: red;
+}
+.container-nav{
+    width: 100%;
+    height: 80px;
+    background-color: #fff;
+    border: 1px solid #3E68FF;
+    box-shadow: 1px 1px 4px #3E68FF;
+    display: flex;
+    z-index: 999;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 20px 20px -15px #3E68FF,0 10px 20px -15px #2352ff inset;
+}
+.logo{
+    width: 45vh;
+    height: 8vh;
+    margin-left: 3vh;
+}
+.navbar{
+    margin-right: 3vh;
+    display: flex;
+    justify-content: space-around;
+    width: 30vh;
+    height: fit-content;
+    font-size: 30px;
+    list-style: none;
+    color: #3E68FF;
+}
+.navbar li{
+    padding: 2px;
+    border-radius: 10%;
+}
+.navbar li:hover{
+    background-color: #3E68FF;
+    color: #fff;
+    transition: 3s;
+    cursor: pointer;
 }
 .container-charts{
     width: 100%;
