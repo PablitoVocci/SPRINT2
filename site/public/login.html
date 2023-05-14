@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/login.css"/>
+    <link rel="stylesheet" href="../css/faleconosco.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+    <title>DigitalTherm - Login</title>
+</head>
+
+<body style="">
+    <header class="header">
+        <div class="parte-1">
+            <img src="../assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo" />
+
+            <nav class="container-1">
+                <ul>
+                    <li>
+                        <a href="./index.html">Inicio</a>       
+                    </li>
+                    <li>
+                        <a href="./simulador.html">Simulador</a>
+                    </li>
+
+                    <li>
+                        <a href="#faleconosco">Fale Conosco</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container-2">
+            <a href="./loginn.html"><b>Login</b></a>
+            <a href="./cadastro.html">
+                <button class="cadastro">Cadastre-se</button>
+            </a>
+        </div>
+    </header>
+
+    <section id="form-section" class="form">
+
+        <div class="card-box">
+
+            <img src="../assets/digitalTherm.png" alt="" srcset="">
+
+            <input type="text" placeholder="Login" class="inputCNPJ inputGrande" id="inputEmail">
+            <input type="password" placeholder="Senha" class="inputEmail inputGrande" id="inputSenha">
+
+            <button class="button" onclick="entrar()">Continuar</button>
+
+            <button class="button2" onclick="window.location.href='cadastro.html'">Criar nova conta</button>
+
+            <p class="esqueceu">Esqueceu sua senha?</p>
+
+        </div>
+
+    </section>
+    <footer id="faleconosco" class="footer footer-login">
+        <div class="linha"></div>
+        <div class="logo-group">
+          <div class="logo.email">
+            <img src="../assets/logo.email.png" alt="Logo de e-mail">
+            <br>
+            <a href="digitaltherm@sptech.school"><span style="color: #3E68FF;">digitaltherm@sptech.school</span></a>
+          </div>
+      
+          <div class="logo.telefone">
+            <img src="../assets/logo.tel.png" alt="Logo de telefone">
+            <br>
+            <a href="115898-2678"> <span style="color: #3E68FF;">(11) 5809-9323</span></a>
+          </div>
+      
+          <div class="logo.github">
+            <img src="../assets/logo.git.png" alt="Logo do GitHub">
+            <br>
+            <a href="https://github.com/PablitoVocci/SPRINT2"><span style="color: #3E68FF;">GitHub</span></a>
+          </div>
+        </div>
+    
+        <div class="fim">
+          <h3 style="color: #3E68FF;;">DigitalTherm © 2023. Todos os direitos reservados.</h3>
+        </div>
+      </footer>
+
+</body>
+
+</html>
+
+<script>
+
+function entrar() {
+        // aguardar();
+
+        var emailVar = inputEmail.value;
+        var senhaVar = inputSenha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            // finalizarAguardar();
+            return false;
+        }
+        else {
+            // setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "dashboard.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+
+    function ValidarLogin() {
+
+      // Constante "email" = documento. get(pegue) Element (elemento) By(do) Id ("X")
+
+        const email = document.getElementById("inputEmail");
+        const senha = document.getElementById("inputSenha");
+
+        var emailValue = email.value;
+        var senhaValue = senha.value;
+
+        var check = false;
+
+        if (emailValue == "") {
+
+            email.className = "error " + email.className
+            email.className = email.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else {
+
+            email.className = email.className.replaceAll("error ", " ")
+            email.className = "valid " + email.className
+
+            check = true;
+
+        }
+
+        if (senhaValue == "") {
+
+            senha.className = "error " + senha.className
+            senha.className = senha.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else {
+
+            senha.className = senha.className.replaceAll("error ", " ")
+            senha.className = "valid " + senha.className
+
+            check = true;
+        }
+        
+        function toDash(){
+
+            window.location.href='dashboard.html'
+        }
+
+        if(emailValue == "admin@admin" && senhaValue == "123"){
+
+            check = true;
+
+            setInterval(toDash, 3000);
+
+        }
+
+    }
+</script>

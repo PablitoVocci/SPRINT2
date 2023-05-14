@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/teste.css" />
+    <link rel="stylesheet" href="../css/faleconosco.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+    <title>DigitalTherm - Cadastro</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="parte-1">
+            <img src="../assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo" />
+
+            <nav class="container-1">
+                <ul>
+                    <li>
+                        <a href="./index.html">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="./simulador.html">Simulador</a>
+                    </li>
+
+                    <li>
+                        <a href="#faleconosco">Fale Conosco</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container-2">
+            <a href="./loginn.html">Login</a>
+            <a href="./cadastro.html">
+                <button class="cadastro"><b>Cadastre-se</b></button>
+            </a>
+        </div>
+    </header>
+
+    <section id="form-section">
+
+        <div class="card-box">
+
+            <img src="../assets/digitalTherm.png" alt="" srcset="">
+
+            <div class="inputs-div-card-box">
+
+                <input type="text" placeholder="Nome*" class="inputNome input" id="inputNome">
+
+                <input type="text" placeholder="Nome Fantasia" class="inputSobrenome input" id="inputNomeFantasia">
+            </div>
+
+            <input type="text" placeholder="CNPJ*" class="inputCNPJ inputGrande input" id="inputCNPJ">
+            <input type="text" placeholder="E-mail*" class="inputEmail inputGrande input" id="inputEmail">
+
+            <div class="inputs-div-card-box">
+                <input type="text" placeholder="Senha*" class="inputSenha input" id="inputSenha">
+                <input type="text" placeholder="Telefone" class="inputTelefone input" id="inputTelefone">
+            </div>
+
+            <input type="text" class="inputGrande input" placeholder="Confirme sua Senha*" id="confirmacao_senha_input">
+            <button class="button" onclick="Cadastrar()">Continuar!</button>
+        </div>
+
+    </section>
+    <footer id="faleconosco" class="footer footer-login">
+        <div class="linha"></div>
+        <div class="logo-group">
+            <div class="logo.email">
+                <img src="../assets/logo.email.png" alt="Logo de e-mail">
+                <br>
+                <a href="digitaltherm@sptech.school"><span style="color: #3E68FF;">digitaltherm@sptech.school</span></a>
+            </div>
+
+            <div class="logo.telefone">
+                <img src="../assets/logo.tel.png" alt="Logo de telefone">
+                <br>
+                <a href="115898-2678"> <span style="color: #3E68FF;">(11) 5809-9323</span></a>
+            </div>
+
+            <div class="logo.github">
+                <img src="../assets/logo.git.png" alt="Logo do GitHub">
+                <br>
+                <a href="https://github.com/PablitoVocci/SPRINT2"><span style="color: #3E68FF;">GitHub</span></a>
+            </div>
+        </div>
+
+        <div class="fim">
+            <h3 style="color: #3E68FF;;">DigitalTherm © 2023. Todos os direitos reservados.</h3>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+<script>
+
+function Cadastrar() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = inputNome.value;
+        var nomeFantasiaVar = inputNomeFantasia.value
+        var CNPJVar = inputCNPJ.value
+        var emailVar = inputEmail.value;
+        var senhaVar = inputSenha.value;
+        var telefoneVar = inputTelefone.value;
+        var confirmacaoSenhaVar = confirmacao_senha_input.value;
+
+        if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "" || CNPJVar == "" || nomeFantasiaVar == "" || telefoneVar == "" ) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+            // finalizarAguardar();
+            return false;
+        }
+        else {
+            // setInterval(sumirMensagem, 5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                nomeFantasiaServer: nomeFantasiaVar,
+                CNPJServer: CNPJVar,
+                telefoneServer: telefoneVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                // cardErro.style.display = "block";
+
+                // mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
+    
+    function Validacao() {
+
+
+        const nome = document.getElementById("inputNome");
+        const CNPJ = document.getElementById("inputCNPJ");
+        const email = document.getElementById("inputEmail");
+        const senha = document.getElementById("inputSenha");
+        const ConfSenha = document.getElementById("inputConfSenha");
+
+        var nomeValue = nome.value
+        var CNPJValue = CNPJ.value;
+        var emailValue = email.value;
+        var senhaValue = senha.value;
+        var ConfSenhaValue = ConfSenha.value;
+
+        var check = false;
+
+        if (nomeValue == "") {
+
+            nome.className = "error " + nome.className
+            nome.className = nome.className.replaceAll("valid ", " ")
+            check = false;
+
+        } else {
+            nome.className = nome.className.replaceAll("error ", " ")
+            nome.className = "valid " + nome.className
+            check = true;
+        }
+
+        if (CNPJValue == "") {
+
+            CNPJ.className = "error " + CNPJ.className
+            CNPJ.className = CNPJ.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else if (CNPJValue.length != 14) {
+
+            alert("O campo de CNPJ deve conter 14 caracteres.")
+
+            check = false;
+
+        } else {
+            CNPJ.className = CNPJ.className.replaceAll("error ", " ")
+            CNPJ.className = "valid " + CNPJ.className
+
+            check = true;
+        }
+
+        if (emailValue == "") {
+
+            email.className = "error " + email.className
+            email.className = email.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else {
+
+            email.className = email.className.replaceAll("error ", " ")
+            email.className = "valid " + email.className
+
+            check = true;
+
+        }
+
+        if (senhaValue == "") {
+
+            senha.className = "error " + senha.className
+            senha.className = senha.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else {
+
+            senha.className = senha.className.replaceAll("error ", " ")
+            senha.className = "valid " + senha.className
+
+            check = true;
+        }
+
+        if (ConfSenhaValue == "") {
+
+            ConfSenha.className = "error " + ConfSenha.className
+            ConfSenha.className = ConfSenha.className.replaceAll("valid ", " ")
+            check = false;
+
+        } else if (ConfSenhaValue != senhaValue) {
+
+            ConfSenha.className = ConfSenha.className.replaceAll("valid ", " ")
+            ConfSenha.className = "error " + ConfSenha.className
+            alert("As senhas devem ser identicas")
+
+            check = false;
+
+        } else {
+
+            ConfSenha.className = ConfSenha.className.replaceAll("error ", " ")
+            ConfSenha.className = "valid " + ConfSenha.className
+
+            check = true;
+
+        }
+
+        function toLogin() {
+
+            window.location.href = 'login.html'
+
+        }
+
+        if (check == false) {
+
+            alert("Confira os campos!")
+
+        } else {
+
+            setInterval(toLogin, 3000)
+        }
+
+
+    }
+</script>
