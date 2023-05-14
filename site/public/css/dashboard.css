@@ -17,6 +17,7 @@ body{
     display: flex;
     flex-direction: column;
 }
+
 .alertas{
     width: 7vh;
     height: 7vh;
@@ -47,7 +48,7 @@ body{
 }
 .modal{
     position: absolute;
-    box-shadow: 0 50px 100px -15px black inset;
+    box-shadow: 0 50px 100px -15px rgb(63, 63, 63) inset;
     top: 15vh;
     background-color: white;
     width: 80vh;
@@ -71,6 +72,9 @@ body{
     color: white;
     font-weight: 900;
     border-radius: 50% ;
+}
+.fechar button:hover{
+    background-color: rgb(179, 3, 3);
 }
 @keyframes fecharModal {
     0%{
@@ -122,7 +126,7 @@ body{
     z-index: 999;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 20px 20px -15px #3E68FF,0 10px 20px -15px #2352ff inset;
+    box-shadow: 0 10px 20px -15px black,10px 10px 20px -15px black inset;
 }
 .logo{
     width: 45vh;
@@ -130,23 +134,26 @@ body{
     margin-left: 3vh;
 }
 .navbar{
-    margin-right: 3vh;
+    margin-right: 5vh;
     display: flex;
     justify-content: space-around;
     width: 30vh;
     height: fit-content;
     font-size: 30px;
     list-style: none;
-    color: #3E68FF;
+
 }
 .navbar li{
-    padding: 2px;
-    border-radius: 10%;
+    box-shadow: 5px 5px 5px 5px inset #001d85, 10px 10px 10px 10px inset #0227ad,20px 20px 20px 20px inset #022ece;
+    padding: 5px;
+    margin-right: 3vh;
+    background-color: #3E68FF;
+    color: white;
+    border-radius: 8%;
 }
 .navbar li:hover{
-    background-color: #3E68FF;
-    color: #fff;
-    transition: 3s;
+    transition: 1s;
+    box-shadow: 5px 5px 5px 5px inset #022ece, 10px 10px 10px 10px inset #0227ad,20px 20px 20px 20px inset #001d85;
     cursor: pointer;
 }
 .container-charts{
@@ -195,6 +202,7 @@ body{
     justify-content: center;
     align-items: center;
     opacity: none;
+    margin: 3vh;
 }
 .img-termometro{
     height: 100px;
@@ -277,4 +285,48 @@ body{
     cursor: pointer;
     box-shadow: 0px 10px 60px -15px #2352ff inset;
     transition: 1s;
+}
+.title-modal{
+    width: 100%;
+    height: 5vh;
+    text-align: center;
+}
+.conteudo-modal{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    padding-left: 4vh;
+    flex-direction: row;
+}
+.info-modal p{
+    font-weight: 500;
+}
+.cor-alerta-modal{
+    margin-right: 2vh;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    border: 3px solid black;
+}
+.info-modal{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+}
+.modal-verde{
+    box-shadow: 5px 5px 30px 5px rgb(3, 243, 3) inset;
+    background-color: rgb(77, 129, 77);
+}
+.modal-amarela{
+    box-shadow: 5px 5px 30px 5px rgb(255, 255, 0) inset;
+    background-color: rgb(221, 221, 27);
+}
+.modal-laranja{
+    box-shadow: 5px 5px 30px 5px rgb(247, 170, 27) inset;
+    background-color: orange;
+}
+.modal-vermelha{
+    box-shadow: 5px 5px 30px 5px red inset;
+    background-color: rgb(255, 87, 87);
 }
