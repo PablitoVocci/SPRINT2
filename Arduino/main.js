@@ -37,10 +37,10 @@ const serial = async (
             {
                 // altere!
                 // CREDENCIAIS DO BANCO LOCAL - MYSQL WORKBENCH
-                host: 'localhost',
-                user: 'insertUser',
-                password: 'urubu100',
-                database: 'projetopi'
+                host: '10.18.34.174',
+                user: 'guilherme',
+                password: '2153',
+                database: 'digitaltherm'
             }
         ).promise();
     } else if (AMBIENTE == 'producao') {
