@@ -51,37 +51,37 @@
             
             <div class="inputs-div-card-box">
                 
-                <input type="text" placeholder="Nome" class="inputNome">
+                <input type="text" id="inputNome" placeholder="Nome" class="inputNome">
 
-                <input type="text"placeholder="Sobrenome" class="inputSobrenome">
+                <input type="text" id="inputSobrenome" placeholder="Sobrenome" class="inputSobrenome">
             </div>
 
             <div class="inputs-div-card-box">
                 
-              <input type="text" placeholder="Data de Nascimento" class="inputNascimento">
+              <input type="date" id="inputData" placeholder="Data de Nascimento" class="inputNascimento">
 
-              <input type="text"placeholder="CPF" class="inputCpf">
+              <input type="text" id="inputCpf" placeholder="CPF" class="inputCpf">
           </div>
 
-            <input type="text" placeholder="E-mail" class="inputEmail inputGrande">
+            <input type="text" id="inputEmail" placeholder="E-mail" class="inputEmail inputGrande">
 
             <div class="inputs-div-card-box">
                 
-              <input type="text" placeholder="Celular" class="inputCelular">
+              <input type="text" id="inputCel" placeholder="Celular" class="inputCelular">
 
-              <input type="text"placeholder="Telefone Fixo" class="inputTelefoneFixo">
+              <input type="text" id="inputTel" placeholder="Telefone Fixo" class="inputTelefoneFixo">
           </div>
 
           <div class="inputs-div-card-box">
                 
-            <input type="text" placeholder="CEP" class="inputCep">
+            <input type="text" id="inputCep" placeholder="CEP" class="inputCep">
 
-            <input type="text"placeholder="Num" class="inputNumero">
+            <input type="text" id="inputNum" placeholder="Num" class="inputNumero">
         </div>
         
-            <input type="text" class="inputGrande1" placeholder="Insira sua senha">
+            <input type="text" id="inputSenha" class="inputGrande1" placeholder="Insira sua senha">
             <input type="text" class="inputGrande2" placeholder="Confirme sua Senha">
-            <button class="button">Continuar!</button>
+            <button class="button" onclick="Cadastrar()">Continuar!</button>
         </div>
 
     </section>
@@ -93,5 +93,79 @@
 
 <script>
 
+function Cadastrar() {
+        // aguardar();
+   
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = inputNome.value;
+        var sobrenomeVar = inputSobrenome.value;
+        var dataNascVar = inputData.value;
+        var cpfVar = inputCpf.value;
+        var emailVar = inputEmail.value;
+        var celVar = inputCel.value;
+        var telVar = inputTel.value;
+        var cepVar = inputCep.value;
+        var numVar = inputNum.value;
+        var senhaVar = inputSenha.value;
+        console.log(nomeVar,sobrenomeVar,dataNascVar,cpfVar,emailVar,celVar,telVar,cepVar,numVar,senhaVar)
 
+        if (nomeVar == "" ) {
+            // cardErro.style.display = "block"
+            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+            // finalizarAguardar();
+            return false;
+        }
+        else {
+            // setInterval(sumirMensagem, 5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/pFisica/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                sobrenomeServer: sobrenomeVar,
+                dataNascServer: dataNascVar,
+                cpfServer: cpfVar,
+                emailServer: emailVar,
+                celServer: celVar,
+                telServer: telVar,
+                cepServer: cepVar,
+                numServer: numVar,
+                senhaServer: senhaVar,
+                fkEmpresaServer: sessionStorage.ID_USUARIO
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                // cardErro.style.display = "block";
+
+                // mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+
+                // limparFormulario();
+                // finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            // finalizarAguardar();
+        });
+
+        return false;
+    }
+    console.log(sessionStorage.ID_USUARIO)
 </script>
