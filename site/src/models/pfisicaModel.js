@@ -25,7 +25,7 @@ function cadastrar(nome,sobrenome,email,senha,dataNasc,cel,cep,num,tel,cpf,fk) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO funcionario (nome,sobrenome,email,senha,dtNasc,cel,cep,num,telefone,CPF,fkEmpresa) VALUES ('${nome}', '${sobrenome}', '${email}','${senha}','${dataNasc}', '${cel}', '${cep}', '${num}','${tel}', '${cpf}', '${fk}');
+        INSERT INTO funcionario (nome,sobrenome,email,senha,dtNasc,celular,telefone,CPF,CEP,num, fkEmpresa) VALUES ('${nome}', '${sobrenome}', '${email}','${senha}','${dataNasc}', '${cel}', '${tel}', '${cpf}','${cep}','${num}','${fk}');
 
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
