@@ -99,7 +99,7 @@ a:hover{
     background-color: #ffffff;
     padding: 20px;
     width: 529px;
-    height: 500px;
+    height: 570px;
     top: 263px;
     left: 455px;
     border-radius: 5px;
@@ -110,6 +110,7 @@ a:hover{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     margin-top: 20vh;
+    font-family: Raleway,Arial, Helvetica, sans-serif;
     /* vertical-align:middle; */
     
 }
@@ -198,6 +199,32 @@ a:hover{
     left: 729px;
     border-radius: 5px;
     padding: 15px;
+}
+
+.inputSetorNome{
+    width: 308px;
+    height: 25px;
+    top: 548px;
+    left: 485px;
+    border-radius: 5px;
+    padding: 15px;
+    margin-right: 1vh;
+
+}
+
+.inputAndar {
+    width: 150px;
+    height: 25px;
+    top: 548px;
+    left: 729px;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.card-box .setor {
+    font-size: 2.7vh;
+    margin-left: -45vh;
+    color: #474682;
 }
 
 

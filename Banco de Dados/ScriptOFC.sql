@@ -47,14 +47,14 @@ constraint fkEmpresaEnd FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
 
-CREATE TABLE empresaEndereco (
-idEmpresaEndereco INT AUTO_INCREMENT,
-fkEmpresa INT,
+CREATE TABLE enderecoSetor (
+idEnderecoSetor INT AUTO_INCREMENT,
+fkSetor INT,
 fkEndereco INT,
 numero VARCHAR(10),
-complemento VARCHAR(55),
-CONSTRAINT fkEmpEnd FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
-CONSTRAINT FKEndEmp FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
+complemento VARCHAR(61),
+CONSTRAINT fkSetorEnd FOREIGN KEY (fkSetor) REFERENCES setorEmpresa(idSetorEmp),
+CONSTRAINT FKEndSet FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
 CONSTRAINT pkEmpEnd PRIMARY KEY (idEmpresaEndereco, fkEmpresa, fkEndereco)
 );
 
