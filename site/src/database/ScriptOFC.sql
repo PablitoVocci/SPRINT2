@@ -53,6 +53,19 @@ constraint fkEmpresaEnd FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 INSERT INTO endereco VALUES
 (null, 'Brasil', '09990560', 'são paulo', 'maua', 'josePedro', 'Rua jorge', 1);
 
+
+CREATE TABLE setorEmpresa (
+idSetorEmp INT AUTO_INCREMENT,
+nome VARCHAR(40) NOT NULL,
+andar INT,
+fkEmpresa INT,
+CONSTRAINT fkEmpresaSet FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
+CONSTRAINT pkSetorEmp PRIMARY KEY (idSetorEmp, fkEmpresa)
+);
+
+INSERT INTO setorEmpresa VALUES
+(null, 'setor leste', 5, 1);
+
 CREATE TABLE enderecoSetor (
 idEnderecoSetor INT AUTO_INCREMENT,
 fkSetor INT,
@@ -66,19 +79,6 @@ CONSTRAINT pkEmpEnd PRIMARY KEY (idEnderecoSetor, fksetor, fkEndereco)
 
 INSERT INTO enderecoSetor VALUES
 (null, 1, 1, '33c', 'casa azul');
-
-
-CREATE TABLE setorEmpresa (
-idSetorEmp INT AUTO_INCREMENT,
-nome VARCHAR(40) NOT NULL,
-andar INT,
-fkEmpresa INT,
-CONSTRAINT fkEmpresaSet FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
-CONSTRAINT pkSetorEmp PRIMARY KEY (idSetorEmp, fkEmpresa)
-);
-
-INSERT INTO setorEmpresa VALUES
-(null, 'setor leste', 5, 1);
 
 
 CREATE TABLE servidor  (
