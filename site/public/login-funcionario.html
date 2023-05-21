@@ -14,7 +14,7 @@
     <title>DigitalTherm - Login</title>
 </head>
 
-<body style="">
+<body>
     <header class="header">
         <div class="parte-1">
             <img src="assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo" />
@@ -83,7 +83,7 @@
         </div>
     
         <div class="fim">
-          <h3 style="color: #3E68FF;;">DigitalTherm © 2023. Todos os direitos reservados.</h3>
+          <h3 style="color: #3E68FF;">DigitalTherm © 2023. Todos os direitos reservados.</h3>
         </div>
       </footer>
 
@@ -113,7 +113,7 @@ function entrar() {
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
 
-        fetch("/usuarios/autenticar", {
+        fetch("/pFisica/autenticar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -136,7 +136,7 @@ function entrar() {
                     sessionStorage.ID_USUARIO = json.idEmpresa;
 
                     setTimeout(function () {
-                        window.location = "./dashboard/dashboard.html";
+                        window.location = "./dashboard/dashboard-funcionario.html";
                     }, 1000); // apenas para exibir o loading
 
                 });

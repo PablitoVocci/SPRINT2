@@ -5,7 +5,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/endereço.css"/>
+    <link rel="stylesheet" href="./css/endereço.css" />
+    <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
@@ -13,79 +14,77 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="parte-1">
-            <img src="./assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo" />
+    <div class="container">
+        <div class="container-left">
+            <div class="container-left-logo">
+                <img src="../assets/logo 1.svg" alt="">
+                <h1>DigitalTherm</h1>
+            </div>
 
-            <nav class="container-1">
-                <ul>
-                    <li>
-                        <b>
-                            <a href="./index.html">Inicio</a>
-                        </b>
-                    </li>
-                    <li>
-                        <a href="./simulador.html">Simulador</a>
-                    </li>
+            <h3>
+                Bem vindo!
+                <span id="b_usuario"></span>
+            </h3>
 
-                    <li>
-                        <a href="./index.html#faleconosco">Fale Conosco</a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="container-left-buttons">
+                <button class="buttons-left-func" onclick="window.location.href='../endereco.html'"><i
+                        class="fa fa-user-o" aria-hidden="true"></i></i>Setor</button>
+
+                <button class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
+            </div>
+
+            <div class="container-left-func">
+                <button class="buttons-left-func" onclick="window.location.href='../cadastroPfisica.html'"><i
+                        class="fa fa-user-o" aria-hidden="true"></i></i>Funcionarios</button>
+                <button id="button-logout" class="buttons-left-func button-logout">Logout</button>
+            </div>
         </div>
+    </div>
 
-        <div class="container-2">
-            <a href="./novo_acesso.html">Login</a>
-            <a href="./cadastro.html">
-                <button class="cadastro">Cadastre-se</button>
-            </a>
-        </div>
-    </header>
+    <div class="dash">
+        <section id="form-section">
 
-    <section id="form-section">
+            <div class="card-box">
 
-        <div class="card-box">
+                <img src="./assets/digitalTherm.png" alt="" srcset="">
 
-            <img src="./assets/digitalTherm.png" alt="" srcset="">
-            
-            <div class="inputs-div-card-box">
-                
-                <input type="text" placeholder="Pais*" class="inputPais">
+                <div class="inputs-div-card-box">
 
-                <input type="text"placeholder="CEP*" class="inputCep">
+                    <input type="text" placeholder="Pais*" class="inputPais">
+
+                    <input type="text" placeholder="CEP*" class="inputCep">
+                </div>
+
+                <input type="text" placeholder="Rua*" class="inputRua inputGrande">
+
+                <div class="inputs-div-card-box">
+                    <input type="text" placeholder="Numero*" class="inputNumero inputGrande">
+                    <input type="text" placeholder="Complemento" class="inputComplemento">
+                </div>
+
+                <div class="inputs-div-card-box">
+                    <input type="text" placeholder="Cidade*" class="inputCidade">
+                    <input type="text" placeholder="Bairro*" class="inputBairro">
+                </div>
+                <div class="inputs-setor">
+                    <div class="setor">Cadastrar Setor</div>
+                    <div class="inputs-setor-all">
+                        <input type="text" placeholder="Nome*" class="inputSetorNome" id="inputNomeSetor">
+                        <input type="text" placeholder="Andar" class="inputAndar" id="inputAndarSetor">
+                    </div>
+                </div>
+                <button class="button" onclick="Cadastrar()">Cadastrar</button>
             </div>
 
-            <input type="text" placeholder="Rua*" class="inputRua inputGrande">
-
-            <div class="inputs-div-card-box">
-            <input type="text" placeholder="Numero*" class="inputNumero inputGrande">
-            <input type="text" placeholder="Complemento" class="inputComplemento">
-            </div>
-
-            <div class="inputs-div-card-box">
-                <input type="text" placeholder="Cidade*" class="inputCidade">
-                <input type="text" placeholder="Bairro*" class="inputBairro">
-            </div>
-            <br>
-            <div class="setor">Cadastrar Setor</div>
-            <div class="inputs-div-card-box">
-                <input type="text" placeholder="Nome*" class="inputSetorNome" id="inputNomeSetor">
-                <input type="text" placeholder="Andar" class="inputAndar" id="inputAndarSetor">
-            </div>
-            <br>
-            <button class="button" onclick="Cadastrar()">Cadastrar</button>
-        </div>
-
-    </section>
-
+        </section>
+    </div>
 
 </body>
 
 </html>
-    <script>
+<script>
     function Cadastrar() {
-      
+
         // aguardar();
 
         //Recupere o valor da nova input pelo nome do id
@@ -93,7 +92,7 @@
         var nomeVar = inputNomeSetor.value;
         var andarVar = inputAndarSetor.value;
 
-        if (nomeVar == "" ) {
+        if (nomeVar == "") {
             // cardErro.style.display = "block"
             // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
@@ -127,7 +126,7 @@
                 // mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
                 setTimeout(() => {
-                    window.location = "login.html";
+                    window.location = "/dashboard/dashboard.html";
                 }, "2000")
 
                 // limparFormulario();
