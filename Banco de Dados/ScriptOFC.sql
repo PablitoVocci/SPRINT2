@@ -1,5 +1,5 @@
 CREATE DATABASE digitalTherm;
-
+DROP DATABASE digitaltherm;
 USE digitalTherm;
 
 -- CRIAR A TABELA (EMPRESA)
@@ -31,7 +31,7 @@ fkEmpresa INT,
 CONSTRAINT fkEmpresaU FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 CONSTRAINT pkEmpFu PRIMARY KEY (idFuncionario, fkEmpresa)
 ) AUTO_INCREMENT = 500;
-
+SELECT * FROM setorEmpresa;
 
 
 CREATE TABLE endereco (
@@ -47,19 +47,6 @@ constraint fkEmpresaEnd FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
 
-CREATE TABLE enderecoSetor (
-idEnderecoSetor INT AUTO_INCREMENT,
-fkSetor INT,
-fkEndereco INT,
-numero VARCHAR(10),
-complemento VARCHAR(61),
-CONSTRAINT fkSetorEnd FOREIGN KEY (fkSetor) REFERENCES setorEmpresa(idSetorEmp),
-CONSTRAINT FKEndSet FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
-CONSTRAINT pkEmpEnd PRIMARY KEY (idEmpresaEndereco, fkEmpresa, fkEndereco)
-);
-
-
-
 
 CREATE TABLE setorEmpresa (
 idSetorEmp INT AUTO_INCREMENT,
@@ -70,7 +57,17 @@ CONSTRAINT fkEmpresaSet FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 CONSTRAINT pkSetorEmp PRIMARY KEY (idSetorEmp, fkEmpresa)
 );
 
-
+SELECT * FROM setorEmpresa;
+CREATE TABLE enderecoSetor (
+idEnderecoSetor INT AUTO_INCREMENT,
+fkSetor INT,
+fkEndereco INT,
+numero VARCHAR(10),
+complemento VARCHAR(61),
+CONSTRAINT fkSetorEnd FOREIGN KEY (fkSetor) REFERENCES setorEmpresa(idSetorEmp),
+CONSTRAINT FKEndSet FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
+CONSTRAINT pkEmpEnd PRIMARY KEY (idEnderecoSetor, fkSetor, fkEndereco)
+);
 
 
 CREATE TABLE servidor  (

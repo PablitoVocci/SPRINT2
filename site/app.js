@@ -11,6 +11,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var pFisicaRouter = require("./src/routes/pFisica");
+var setorRouter = require("./src/routes/setor");
 var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
 
@@ -22,6 +23,7 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
+app.use("/setor", setorRouter);
 app.use("/pFisica", pFisicaRouter);
 app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter)
