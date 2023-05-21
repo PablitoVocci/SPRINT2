@@ -99,7 +99,7 @@ a:hover{
     background-color: #ffffff;
     padding: 20px;
     width: 529px;
-    height: 527px;
+    height: 500px;
     top: 263px;
     left: 455px;
     border-radius: 5px;
@@ -119,6 +119,11 @@ a:hover{
     justify-content: center;
 }
 
+.inputs-div-card-box {
+    display: flex;
+    
+}
+
 .inputPais {
     width: 204px;
     height: 25px;
@@ -126,6 +131,8 @@ a:hover{
     left: 485px;
     border-radius: 5px;
     padding: 15px;
+    margin-right: 1vh;
+    
 }
 
 .inputCep {
@@ -160,6 +167,7 @@ a:hover{
     left: 485px;
     border-radius: 5px;
     padding: 15px;
+    margin-right: 1vh;
 }
 
 .inputComplemento{
@@ -179,6 +187,7 @@ a:hover{
     left: 485px;
     border-radius: 5px;
     padding: 15px;
+    margin-right: 1vh;
 
 }
 
@@ -199,7 +208,6 @@ a:hover{
     margin: 20px 0px;
 }
 
-.inputs-div-card-box {}
 
 input {
     border-radius: 5px;
@@ -231,6 +239,5 @@ input {
 }
 
 input::placeholder{
-
     font-size: 16px;
 }

@@ -1,8 +1,6 @@
 CREATE DATABASE digitalTherm;
 
-
 USE digitalTherm;
-
 
 -- CRIAR A TABELA (EMPRESA)
 
@@ -66,7 +64,7 @@ CONSTRAINT pkEmpEnd PRIMARY KEY (idEmpresaEndereco, fkEmpresa, fkEndereco)
 CREATE TABLE setorEmpresa (
 idSetorEmp INT AUTO_INCREMENT,
 nome VARCHAR(40) NOT NULL,
-andar INT NOT NULL,
+andar INT,
 fkEmpresa INT,
 CONSTRAINT fkEmpresaSet FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 CONSTRAINT pkSetorEmp PRIMARY KEY (idSetorEmp, fkEmpresa)
@@ -102,7 +100,7 @@ unidadeSensor VARCHAR(20)
 
 CREATE TABLE sensor (
 idSensor INT AUTO_INCREMENT,
-chave TINYINT CONSTRAINT chkEstado CHECK (estado in (0, 1)),
+chave TINYINT CONSTRAINT chkchave CHECK (chave in (0, 1)),
 fkTipoSensor INT,
 fkUnidadeMedida INT,
 fkServidor INT,
