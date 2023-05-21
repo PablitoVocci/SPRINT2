@@ -1,5 +1,4 @@
 CREATE DATABASE digitalTherm;
-
 USE digitalTherm;
 
 -- CRIAR A TABELA (EMPRESA)
@@ -13,6 +12,9 @@ telefone CHAR(15),
 email VARCHAR(80) NOT NULL CONSTRAINT chkEmailEmp CHECK (email LIKE '%@%'),
 senha VARCHAR(50) NOT NULL
 );
+
+INSERT INTO empresa VALUES
+(null, 'epic', 'Games', '12345678901234', '123456789012345', 'EpicGames@EPic', 'senha123');
 
 
 CREATE TABLE funcionario (
@@ -32,6 +34,8 @@ CONSTRAINT fkEmpresaU FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 CONSTRAINT pkEmpFu PRIMARY KEY (idFuncionario, fkEmpresa)
 ) AUTO_INCREMENT = 500;
 
+INSERT INTO funcionario VALUES
+(null, 'pedro', 'malon', 'pedromalon@pedro', '1234', '2001-12-11', '11111111111', null, '1111111111', '11111111', '12a', 1);
 
 
 CREATE TABLE endereco (
@@ -46,6 +50,8 @@ fkEmpresa INT,
 constraint fkEmpresaEnd FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
+INSERT INTO endereco VALUES
+(null, 'Brasil', '09990560', 'são paulo', 'maua', 'josePedro', 'Rua jorge', 1);
 
 CREATE TABLE enderecoSetor (
 idEnderecoSetor INT AUTO_INCREMENT,
@@ -55,10 +61,11 @@ numero VARCHAR(10),
 complemento VARCHAR(61),
 CONSTRAINT fkSetorEnd FOREIGN KEY (fkSetor) REFERENCES setorEmpresa(idSetorEmp),
 CONSTRAINT FKEndSet FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
-CONSTRAINT pkEmpEnd PRIMARY KEY (idEmpresaEndereco, fkEmpresa, fkEndereco)
+CONSTRAINT pkEmpEnd PRIMARY KEY (idEnderecoSetor, fksetor, fkEndereco)
 );
 
-
+INSERT INTO enderecoSetor VALUES
+(null, 1, 1, '33c', 'casa azul');
 
 
 CREATE TABLE setorEmpresa (
@@ -70,7 +77,8 @@ CONSTRAINT fkEmpresaSet FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 CONSTRAINT pkSetorEmp PRIMARY KEY (idSetorEmp, fkEmpresa)
 );
 
-
+INSERT INTO setorEmpresa VALUES
+(null, 'setor leste', 5, 1);
 
 
 CREATE TABLE servidor  (
@@ -85,17 +93,27 @@ CONSTRAINT pkSetorSe PRIMARY KEY (idServidor, fkSetorEmp, fkEmpresa)
 ) AUTO_INCREMENT = 50;
 
 
+INSERT INTO servidor VALUES 
+(null, '1A', 'primeiro', 1, 1);
+
+
 
 CREATE TABLE tipoSensor (
 idTipoSensor INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(30) NOT NULL
 );
 
+INSERT INTO tipoSensor VALUES
+(null, 'DHT11');
+
 
 CREATE TABLE unidadeMedida (
 idUnidadeMedida INT PRIMARY KEY AUTO_INCREMENT,
 unidadeSensor VARCHAR(20)
 );
+
+INSERT INTO unidadeMedida VALUES
+(null, 'C°');
 
 
 CREATE TABLE sensor (
@@ -109,6 +127,9 @@ CONSTRAINT fkSensorUni FOREIGN KEY (fkUnidadeMedida) REFERENCES unidadeMedida(id
 CONSTRAINT fkSensorServ FOREIGN KEY (fkServidor) REFERENCES Servidor(idServidor),
 CONSTRAINT pkSensorT PRIMARY KEY (idSensor, fkTipoSensor, fkUnidadeMedida)
 );
+
+INSERT INTO sensor VALUES
+(null, 1, 1, 1, 50);
 
 
 /*
@@ -125,3 +146,6 @@ create table medida (
 	CONSTRAINT fkMedSen FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
     CONSTRAINT pkMedSen PRIMARY KEY (idMedida, fkSensor)
 );
+
+INSERT INTO medida VALUES
+(null, 22.55, 85.55, now(), 1);
