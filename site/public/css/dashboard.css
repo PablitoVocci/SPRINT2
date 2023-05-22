@@ -31,7 +31,9 @@ body {
     width: 50px;
 }
 
+.graph-dash2{
 
+}
 .container-left-logo {
     display: flex;
     justify-content: center;
@@ -181,4 +183,15 @@ body {
     font-weight: 300;
     font-size: 16px;
     text-align: center;
+}
+.graficos-dash2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.graph2{
+    margin: 5vh;
+    width: 90%;
+    height: 40vh;
 }

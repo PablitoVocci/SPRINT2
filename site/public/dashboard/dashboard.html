@@ -44,7 +44,7 @@
             <div class="container-left-buttons">
                 <button class="buttons-left-func" onclick="window.location.href='../endereco.html'"><i class="fa fa-user-o" aria-hidden="true"></i></i>Setor</button>
 
-                <button onclick="outradash()" class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
+                <button onclick="outradash() , obterDadosGrafico(1)" class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
             </div>
 
             <div class="container-left-func">
@@ -109,6 +109,34 @@
                     <p id="avisoCaptura4" style="color: white"></p>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="dash" id="dash2" style="display: none;">
+       
+        <div id="graficos" class="graficos-dash2">
+            <div id="grafico1" class="display-block graph2">
+
+                <div class="graph">
+                    <canvas id="myChartCanvas5" style="width: auto; height: 15vh; margin: 0;"></canvas>
+                </div>
+                <div class="label-captura">
+                    <p id="avisoCaptura1" style="color: white"></p>
+                </div>
+            </div>
+
+            <div id="grafico2" class="display-block graph2">
+                <h3 class="tituloGraficos">
+                    <span id="titulosensor2"></span>
+                </h3>
+                <div class="graph">
+                    <canvas id="myChartCanvas6" style="width: auto; height: 15vh;"></canvas>
+                </div>
+                <div class="label-captura">
+                    <p id="avisoCaptura2" style="color: white"></p>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -259,6 +287,75 @@
             
         };
 
+        let dados2 = {
+            labels: labels,
+            datasets: [{
+                label: 'Umidade',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            },
+            {
+                label: 'Maximo',
+                data: [27,27,27,27,27,27,27],
+                fill: false,
+                borderColor: 'rgb(255,0,0)',
+                tension: 0.1
+            },
+            {
+                label: 'Ideal',
+                data: [22.5,22.5,22.5,22.5,22.5,22.5,22.5],
+                fill: false,
+                borderColor: 'rgb(0,255,0)',
+                tension: 0.1
+            },
+            {
+                label: 'Minimo',
+                data: [18,18,18,18,18,18,18],
+                fill: false,
+                borderColor: 'rgb(0,0,255)',
+                tension: 0.1
+            }
+            
+        ]
+            
+        };
+        let dados3 = {
+            labels: labels,
+            datasets: [{
+                label: 'Temperatura',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(62, 104, 255)',
+                tension: 0.1
+            },
+            {
+                label: 'Maximo',
+                data: [27,27,27,27,27,27,27],
+                fill: false,
+                borderColor: 'rgb(255,0,0)',
+                tension: 0.1
+            },
+            {
+                label: 'Ideal',
+                data: [22.5,22.5,22.5,22.5,22.5,22.5,22.5],
+                fill: false,
+                borderColor: 'rgb(0,255,0)',
+                tension: 0.1
+            },
+            {
+                label: 'Minimo',
+                data: [18,18,18,18,18,18,18],
+                fill: false,
+                borderColor: 'rgb(0,0,255)',
+                tension: 0.1
+            }
+            
+        ]
+            
+        };
+
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
         console.log(resposta)
@@ -285,10 +382,28 @@
             data: dados,
         };
 
+        const config2 = {
+            type: 'line',
+            data: dados2,
+        };
+        const config3 = {
+            type: 'line',
+            data: dados3,
+        };
+
         // Adicionando gráfico criado em div na tela
         let myChart = new Chart(
             document.getElementById(`myChartCanvas${idsensor}`),
             config
+        );
+
+        let myChart2 = new Chart(
+            document.getElementById(`myChartCanvas5`),
+            config2
+        );
+        let myChart3 = new Chart(
+            document.getElementById(`myChartCanvas6`),
+            config3
         );
 
         setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
@@ -357,11 +472,13 @@
 
     function outradash() {
         var dash = document.getElementById('outraD');
+        var dash2 = document.getElementById('dash2');
         if (dash.style.display == 'block') {
             dash.style.display = 'none';
-            lima.style.display = 'block';
-        } else {
+            dash2.style.display = 'block';
+        }else if(dash2.style.display == 'block') {
             dash.style.display = 'block';
+            dash2.style.display = 'none';
         }
     }
 </script>
