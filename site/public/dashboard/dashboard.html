@@ -44,7 +44,7 @@
             <div class="container-left-buttons">
                 <button class="buttons-left-func" onclick="window.location.href='../endereco.html'"><i class="fa fa-user-o" aria-hidden="true"></i></i>Setor</button>
 
-                <button class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
+                <button onclick="outradash()" class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
             </div>
 
             <div class="container-left-func">
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="dash">
+    <div class="dash" id="outraD" style="display: block;">
         <div class="btns-dash">
             <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
             <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
@@ -111,6 +111,8 @@
             </div>
         </div>
     </div>
+
+    
 </div>
 
 </body>
@@ -350,5 +352,16 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
+    }
+
+
+    function outradash() {
+        var dash = document.getElementById('outraD');
+        if (dash.style.display == 'block') {
+            dash.style.display = 'none';
+            lima.style.display = 'block';
+        } else {
+            dash.style.display = 'block';
+        }
     }
 </script>
