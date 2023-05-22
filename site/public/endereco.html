@@ -17,7 +17,7 @@
     <div class="container">
         <div class="container-left">
             <div class="container-left-logo">
-                <img src="../assets/logo 1.svg" alt="">
+                <img src="./assets/logo.png" alt="">
                 <h1>DigitalTherm</h1>
             </div>
 
@@ -50,22 +50,22 @@
 
                 <div class="inputs-div-card-box">
 
-                    <input type="text" placeholder="Pais*" class="inputPais">
+                    <input type="text" placeholder="Pais*" class="inputPais" id="input_pais">
 
-                    <input type="text" placeholder="CEP*" class="inputCep">
+                    <input type="text" placeholder="CEP*" class="inputCep" id="input_cep">
                 </div>
-
-                <input type="text" placeholder="Rua*" class="inputRua inputGrande">
+                <input type="text" placeholder="Estado*" class="inputRua inputGrande" id="input_estado">
+                <input type="text" placeholder="Rua*" class="inputRua inputGrande" id="input_rua">
+                <div class="inputs-div-card-box">
+                    <input type="text" placeholder="Cidade*" class="inputCidade" id="input_cidade">
+                    <input type="text" placeholder="Bairro*" class="inputBairro" id="input_bairro">
+                </div>
 
                 <div class="inputs-div-card-box">
-                    <input type="text" placeholder="Numero*" class="inputNumero inputGrande">
-                    <input type="text" placeholder="Complemento" class="inputComplemento">
+                    <input type="text" placeholder="Numero*" class="inputNumero inputGrande" id="input_num">
+                    <input type="text" placeholder="Complemento" class="inputComplemento" id="input_comp">
                 </div>
 
-                <div class="inputs-div-card-box">
-                    <input type="text" placeholder="Cidade*" class="inputCidade">
-                    <input type="text" placeholder="Bairro*" class="inputBairro">
-                </div>
                 <div class="inputs-setor">
                     <div class="setor">Cadastrar Setor</div>
                     <div class="inputs-setor-all">
@@ -89,22 +89,39 @@
 
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
+        console.log("function");
+        //Cadastro Setor
         var nomeVar = inputNomeSetor.value;
         var andarVar = inputAndarSetor.value;
 
-        if (nomeVar == "") {
-            // cardErro.style.display = "block"
-            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
-            // finalizarAguardar();
-            return false;
-        }
-        else {
-            // setInterval(sumirMensagem, 5000)
-        }
+        //Cadastro ENdereço
+        var paisVar = input_pais.value;
+        var cepVar = input_cep.value;
+        var estadoVar = input_estado.value;
+        var cidadeVar = input_cidade.value;
+        var bairroVar =  input_bairro.value;
+        var ruaVar = input_rua.value;
+        console.log(paisVar,cepVar,estadoVar,cidadeVar,bairroVar,ruaVar);
+
+        //Cadastro Associativa NpraN
+        var numeroVar = input_num.value;
+        var complementoVar = input_comp.value;
+
+        // if (nomeVar == "" ) {
+        //     // cardErro.style.display = "block"
+        //     // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+        //     // finalizarAguardar();
+        //     return false;
+        // }
+        // else {
+        //     // setInterval(sumirMensagem, 5000)
+        // }
 
         // Enviando o valor da nova input
-        fetch("/setor/cadastrar", {
+        // fetch("/setor/cadastrar","/endereco/cadastrar", {
+            fetch("/setor/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -114,10 +131,68 @@
                 // Agora vá para o arquivo routes/usuario.js
                 nomeServer: nomeVar,
                 andarServer: andarVar,
+                // paisServer: paisVar,
+                // cepServer: cepVar,
+                // estadoServer: estadoVar,
+                // cidadeServer: cidadeVar,
+                // bairroServer: bairroVar,
+                // ruaServer: ruaVar,
                 fkEmpresaServer: sessionStorage.ID_USUARIO
             })
+        }),
+        fetch("/endereco/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                // nomeServer: nomeVar,
+                // andarServer: andarVar,
+                paisServer: paisVar,
+                cepServer: cepVar,
+                estadoServer: estadoVar,
+                cidadeServer: cidadeVar,
+                bairroServer: bairroVar,
+                ruaServer: ruaVar,
+                fkEmpresaServer: sessionStorage.ID_USUARIO
+            })
+        }),
+        fetch("/enderecoSetor/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                // nomeServer: nomeVar,
+                // andarServer: andarVar,
+                // paisServer: paisVar,
+                // cepServer: cepVar,
+                // estadoServer: estadoVar,
+                // cidadeServer: cidadeVar,
+                // bairroServer: bairroVar,
+                // ruaServer: ruaVar,
+                numServer: numeroVar,
+                compServer: complementoVar,
+                
+                // fkEmpresaServer: sessionStorage.ID_USUARIO
+            })
         }).then(function (resposta) {
+            // resposta.json().then(json => {
+            //         console.log(json);
+            //         console.log(JSON.stringify(json));
+            //         sessionStorage.EMAIL_USUARIO = json.email;
+            //         sessionStorage.NOME_USUARIO = json.nome;
+            //         sessionStorage.ID_USUARIO = json.idEmpresa;
 
+            //         setTimeout(function () {
+            //             window.location = "./dashboard/dashboard.html";
+            //         }, 1000); // apenas para exibir o loading
+
+            //     });
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
@@ -126,7 +201,7 @@
                 // mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
                 setTimeout(() => {
-                    window.location = "/dashboard/dashboard.html";
+                    // window.location = "/dashboard/dashboard.html";
                 }, "2000")
 
                 // limparFormulario();
