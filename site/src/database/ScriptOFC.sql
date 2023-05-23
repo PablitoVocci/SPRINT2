@@ -64,7 +64,11 @@ CONSTRAINT pkSetorEmp PRIMARY KEY (idSetorEmp, fkEmpresa)
 );
 
 INSERT INTO setorEmpresa VALUES
-(null, 'setor leste', 5, 1);
+(null, 'setor leste', 5, 1),
+(null, 'Sul', 3, 1),
+(null, 'matagal', 6, 1),
+(null, 'aka', 9, 1);
+
 
 CREATE TABLE enderecoSetor (
 idEnderecoSetor INT AUTO_INCREMENT,
@@ -78,7 +82,10 @@ CONSTRAINT pkEmpEnd PRIMARY KEY (idEnderecoSetor, fksetor, fkEndereco)
 );
 
 INSERT INTO enderecoSetor VALUES
-(null, 1, 1, '33c', 'casa azul');
+(null, 1, 1, '33c', 'casa marinho'),
+(null, 2, 1, '33b', 'casa verde'),
+(null, 3, 1, '33a', 'casa rosa'),
+(null, 4, 1, '11', 'casa amarela');
 
 
 CREATE TABLE servidor  (
@@ -94,8 +101,10 @@ CONSTRAINT pkSetorSe PRIMARY KEY (idServidor, fkSetorEmp, fkEmpresa)
 
 
 INSERT INTO servidor VALUES 
-(null, '1A', 'primeiro', 1, 1);
-
+(null, '1A', 'primeiro', 1, 1),
+(null, '3A', 'segundo', 2, 1),
+(null, '4A', 'terceiro', 3, 1),
+(null, '2A', 'quarto', 4, 1);
 
 
 CREATE TABLE tipoSensor (
@@ -128,8 +137,12 @@ CONSTRAINT fkSensorServ FOREIGN KEY (fkServidor) REFERENCES Servidor(idServidor)
 CONSTRAINT pkSensorT PRIMARY KEY (idSensor, fkTipoSensor, fkUnidadeMedida)
 );
 
+
 INSERT INTO sensor VALUES
-(null, 1, 1, 1, 50);
+(null, 1, 1, 1, 50),
+(null, 1, 1, 1, 51),
+(null, 1, 1, 1, 52),
+(null, 1, 1, 1, 53);
 
 
 /*
@@ -147,5 +160,26 @@ create table medida (
     CONSTRAINT pkMedSen PRIMARY KEY (idMedida, fkSensor)
 );
 
+
 INSERT INTO medida VALUES
-(null, 22.55, 85.55, now(), 1);
+(null, 21.55, 55.55, now(), 1),
+(null, 20.55, 85.55, now(), 2),
+(null, 22.55, 85.55, now(), 3),
+(null, 10.55, 55.55, now(), 4),
+(null, 32.55, 45.55, now(), 3),
+(null, 12.55, 65.55, now(), 4),
+(null, 42.55, 15.55, now(), 3),
+(null, 32.55, 85.55, now(), 2);
+
+    
+SELECT AVG(medida.temperatura) AS temperatura_media, AVG(medida.umidade) AS umidade_media, setorEmpresa.nome
+FROM medida
+JOIN sensor ON medida.fkSensor = sensor.idSensor
+JOIN servidor ON sensor.fkServidor = servidor.idServidor
+JOIN setorEmpresa ON servidor.fkSetorEmp = setorEmpresa.idSetorEmp
+JOIN empresa ON setorEmpresa.fkEmpresa = empresa.idEmpresa where setorEmpresa.fkEmpresa = 1
+GROUP BY setorEmpresa.nome;
+
+
+
+    
