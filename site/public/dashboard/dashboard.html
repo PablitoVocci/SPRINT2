@@ -43,7 +43,9 @@
 
             <div class="container-left-buttons">
                 <button class="buttons-left-func" onclick="window.location.href='../endereco.html'"><i class="fa fa-user-o" aria-hidden="true"></i></i>Setor</button>
-
+                <select name="" id="select_setor"class="select-endereco buttons-left-func">
+                    <option value="" disabled selected >Selecione o Setor</option>
+                </select>
                 <button onclick="outradash() , obterDadosGrafico(1)" class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
             </div>
 
@@ -67,7 +69,7 @@
                     <span id="titulosensor1">123</span>
                 </h3>
                 <div class="graph">
-                    <canvas id="myChartCanvas1"></canvas>
+                    <canvas id="myChartCanvas1"></canvas> 
                 </div>
                 <div class="label-captura">
                     <p id="avisoCaptura1" style="color: white"></p>
@@ -148,6 +150,53 @@
 </html>
 
 <script>
+    var fkSetor;
+    setInterval(() => fkSetorEmp =  select_setor.value, 500);
+    var fkVar = sessionStorage.ID_USUARIO;
+     fetch("/setor/consultar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkServer: fkVar
+            })
+        }).then(function (resultadoSetor) {
+            console.log("ESTOU NO THEN DO NOVA FUnCTIONS()!")
+
+            if (resultadoSetor.ok) {
+                console.log(resultadoSetor);
+                console.log("TAMANHO "+resultadoSetor.length);
+                resultadoSetor.json().then(jsonSetor => {
+                    console.log(jsonSetor);
+                    console.log("TAMANHO "+jsonSetor.length);
+                    console.log(JSON.stringify(jsonSetor));
+                    console.log("SETOR: "+ jsonSetor[0].nome);
+                    for(var i=0;i< jsonSetor.length; i++){
+                        select_setor.innerHTML += `<option onclick="mostrar()" value="${jsonSetor[i].idSetorEmp}">${jsonSetor[i].nome}</option>`;
+                    }
+
+                    // setTimeout(function () {
+                    //     window.location = "./dashboard/dashboard.html";
+                    // }, 1000); // apenas para exibir o loading    
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     let proximaAtualizacao;
@@ -209,6 +258,8 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
+     //SELECT SETOR
+
     function obterDadosGrafico(idsensor) {
 
         alterarTitulo(idsensor)
