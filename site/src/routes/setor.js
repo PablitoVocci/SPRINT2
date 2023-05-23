@@ -19,5 +19,7 @@ router.post("/cadastrar", function (req, res) {
 router.post("/autenticar", function (req, res) {
     setorController.entrar(req, res);
 });
-
+router.post("/consultar", function (req, res) {
+    setorController.consulta(req, res);
+});
 module.exports = router;

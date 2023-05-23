@@ -19,6 +19,8 @@ router.post("/cadastrar", function (req, res) {
 router.post("/autenticar", function (req, res) {
     setorEnderecoController.entrar(req, res);
 });
-
+router.post("/ultima", function (req, res) {
+    setorEnderecoController.ultima(req,res);
+});
 
 module.exports = router;

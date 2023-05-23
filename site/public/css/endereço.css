@@ -266,7 +266,95 @@ input {
     transition: 0.5s;
     cursor: pointer;
 }
-
+.div-etapa1{
+    width: 90vh;
+    height: 55vh;
+}
 input::placeholder{
     font-size: 16px;
+}
+.div-etapas{
+    width: 100%;
+    height: 5vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+.div-etapas button{
+    width: 5vh;
+    height: 5vh;
+    border-radius: 5px;
+}
+.btn-n-selecionado:hover{
+    background-color: #144fc4;
+    color: white;
+}
+.div-etapa1{
+    flex-direction: column;
+    align-items:center;
+}
+
+.btn-n-selecionado{
+    background-color: transparent;
+    cursor: pointer;
+    border: #144fc4 3px solid;
+    color: #144fc4;
+    font-weight: bold;
+    box-shadow: 5px 5px 15px -5px black ;
+}
+
+.btn-selecionado{
+    background-color: #144fc4;
+    color: white;
+}
+#etapa1{
+    display: flex;
+}
+#etapa2{
+    display: none;
+}
+#etapa3{
+    display: none;
+}
+.title-setor{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+
+.title-setor h1{
+    color: #144fc4;
+    font-size: 30px;
+}
+.title-setor2{
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3vh;
+}
+
+
+.title-setor2 h1{
+    color: #144fc4;
+    font-size: 25px;
+}
+
+
+.div-selects{
+    width: 91%;
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+}   
+.select-endereco{
+    text-align: center;
+    width: 48%;
+    height: 8vh;
+    border-radius: 5px;
+    border: 3px solid black;
 }

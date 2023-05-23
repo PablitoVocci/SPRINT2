@@ -6,7 +6,7 @@ function testar(req, res) {
     console.log("ENTRAMOS NA SETORController");
     res.json("ESTAMOS FUNCIONANDO!");
 }
-
+ 
 function listar(req, res) {
     enderecoModel.listar()
         .then(function (resultado) {
@@ -48,6 +48,45 @@ function entrar(req, res) {
                     } else {
                         res.status(403).send("Mais de um usuário com o mesmo login e senha!");
                     }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
+function consulta(req, res) {
+    var fk = req.body.fkServer;
+    console.log("FKSERVER: "+ fk);
+    if (fk == undefined) {
+        res.status(400).send("Sua fk está undefined!");
+    } else {
+        
+        enderecoModel.consulta(fk)
+            .then(
+                function (resultado) {
+                    console.log(`\nResultados encontrados: ${resultado.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+                    // if (resultado.length == 1) {
+                    //     console.log(resultado);
+                    //     res.json(resultado[0]);
+                    // } else if (resultado.length == 0) {
+                    //     res.status(403).send("Email e/ou senha inválido(s)");
+                    // } else {
+                    //     res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    // }
+                    if (resultado.length > 0) {
+                        res.status(200).json(resultado);
+                    } else {
+                        res.status(204).send("Nenhum resultado encontrado!")
+                    }
+                    console.log("Estou no método de consulta");
                 }
             ).catch(
                 function (erro) {
@@ -108,5 +147,5 @@ module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    consulta
 }

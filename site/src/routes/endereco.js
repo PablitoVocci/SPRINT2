@@ -20,4 +20,8 @@ router.post("/autenticar", function (req, res) {
     enderecoController.entrar(req, res);
 });
 
+router.post("/consultar", function (req, res) {
+    enderecoController.consulta(req, res);
+});
+
 module.exports = router;

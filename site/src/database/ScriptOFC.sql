@@ -1,4 +1,5 @@
 CREATE DATABASE digitalTherm;
+
 USE digitalTherm;
 
 -- CRIAR A TABELA (EMPRESA)
@@ -12,9 +13,6 @@ telefone CHAR(15),
 email VARCHAR(80) NOT NULL CONSTRAINT chkEmailEmp CHECK (email LIKE '%@%'),
 senha VARCHAR(50) NOT NULL
 );
-
-INSERT INTO empresa VALUES
-(null, 'epic', 'Games', '12345678901234', '123456789012345', 'EpicGames@EPic', 'senha123');
 
 
 CREATE TABLE funcionario (
@@ -34,8 +32,6 @@ CONSTRAINT fkEmpresaU FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 CONSTRAINT pkEmpFu PRIMARY KEY (idFuncionario, fkEmpresa)
 ) AUTO_INCREMENT = 500;
 
-INSERT INTO funcionario VALUES
-(null, 'pedro', 'malon', 'pedromalon@pedro', '1234', '2001-12-11', '11111111111', null, '1111111111', '11111111', '12a', 1);
 
 
 CREATE TABLE endereco (
@@ -50,8 +46,19 @@ fkEmpresa INT,
 constraint fkEmpresaEnd FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
-INSERT INTO endereco VALUES
-(null, 'Brasil', '09990560', 'são paulo', 'maua', 'josePedro', 'Rua jorge', 1);
+
+CREATE TABLE enderecoSetor (
+idEnderecoSetor INT AUTO_INCREMENT,
+fkSetor INT,
+fkEndereco INT,
+numero VARCHAR(10),
+complemento VARCHAR(61),
+CONSTRAINT fkSetorEnd FOREIGN KEY (fkSetor) REFERENCES setorEmpresa(idSetorEmp),
+CONSTRAINT FKEndSet FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
+CONSTRAINT pkEmpEnd PRIMARY KEY (idEmpresaEndereco, fkEmpresa, fkEndereco)
+);
+
+
 
 
 CREATE TABLE setorEmpresa (
@@ -63,29 +70,7 @@ CONSTRAINT fkEmpresaSet FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 CONSTRAINT pkSetorEmp PRIMARY KEY (idSetorEmp, fkEmpresa)
 );
 
-INSERT INTO setorEmpresa VALUES
-(null, 'setor leste', 5, 1),
-(null, 'Sul', 3, 1),
-(null, 'matagal', 6, 1),
-(null, 'aka', 9, 1);
 
-
-CREATE TABLE enderecoSetor (
-idEnderecoSetor INT AUTO_INCREMENT,
-fkSetor INT,
-fkEndereco INT,
-numero VARCHAR(10),
-complemento VARCHAR(61),
-CONSTRAINT fkSetorEnd FOREIGN KEY (fkSetor) REFERENCES setorEmpresa(idSetorEmp),
-CONSTRAINT FKEndSet FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
-CONSTRAINT pkEmpEnd PRIMARY KEY (idEnderecoSetor, fksetor, fkEndereco)
-);
-
-INSERT INTO enderecoSetor VALUES
-(null, 1, 1, '33c', 'casa marinho'),
-(null, 2, 1, '33b', 'casa verde'),
-(null, 3, 1, '33a', 'casa rosa'),
-(null, 4, 1, '11', 'casa amarela');
 
 
 CREATE TABLE servidor  (
@@ -100,29 +85,17 @@ CONSTRAINT pkSetorSe PRIMARY KEY (idServidor, fkSetorEmp, fkEmpresa)
 ) AUTO_INCREMENT = 50;
 
 
-INSERT INTO servidor VALUES 
-(null, '1A', 'primeiro', 1, 1),
-(null, '3A', 'segundo', 2, 1),
-(null, '4A', 'terceiro', 3, 1),
-(null, '2A', 'quarto', 4, 1);
-
 
 CREATE TABLE tipoSensor (
 idTipoSensor INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(30) NOT NULL
 );
 
-INSERT INTO tipoSensor VALUES
-(null, 'DHT11');
-
 
 CREATE TABLE unidadeMedida (
 idUnidadeMedida INT PRIMARY KEY AUTO_INCREMENT,
 unidadeSensor VARCHAR(20)
 );
-
-INSERT INTO unidadeMedida VALUES
-(null, 'C°');
 
 
 CREATE TABLE sensor (
@@ -136,13 +109,6 @@ CONSTRAINT fkSensorUni FOREIGN KEY (fkUnidadeMedida) REFERENCES unidadeMedida(id
 CONSTRAINT fkSensorServ FOREIGN KEY (fkServidor) REFERENCES Servidor(idServidor),
 CONSTRAINT pkSensorT PRIMARY KEY (idSensor, fkTipoSensor, fkUnidadeMedida)
 );
-
-
-INSERT INTO sensor VALUES
-(null, 1, 1, 1, 50),
-(null, 1, 1, 1, 51),
-(null, 1, 1, 1, 52),
-(null, 1, 1, 1, 53);
 
 
 /*
@@ -159,27 +125,3 @@ create table medida (
 	CONSTRAINT fkMedSen FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor),
     CONSTRAINT pkMedSen PRIMARY KEY (idMedida, fkSensor)
 );
-
-
-INSERT INTO medida VALUES
-(null, 21.55, 55.55, now(), 1),
-(null, 20.55, 85.55, now(), 2),
-(null, 22.55, 85.55, now(), 3),
-(null, 10.55, 55.55, now(), 4),
-(null, 32.55, 45.55, now(), 3),
-(null, 12.55, 65.55, now(), 4),
-(null, 42.55, 15.55, now(), 3),
-(null, 32.55, 85.55, now(), 2);
-
-    
-SELECT AVG(medida.temperatura) AS temperatura_media, AVG(medida.umidade) AS umidade_media, setorEmpresa.nome
-FROM medida
-JOIN sensor ON medida.fkSensor = sensor.idSensor
-JOIN servidor ON sensor.fkServidor = servidor.idServidor
-JOIN setorEmpresa ON servidor.fkSetorEmp = setorEmpresa.idSetorEmp
-JOIN empresa ON setorEmpresa.fkEmpresa = empresa.idEmpresa where setorEmpresa.fkEmpresa = 1
-GROUP BY setorEmpresa.nome;
-
-
-
-    

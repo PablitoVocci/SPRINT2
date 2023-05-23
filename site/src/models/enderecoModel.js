@@ -17,6 +17,15 @@ function entrar(email, senha) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+
+function consulta(fk) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", fk)
+    var instrucao = `
+        SELECT * FROM endereco WHERE fkEmpresa = '${fk}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 console.log("estou no model de pfisica");
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 function cadastrar(pais,cep,estado,cidade,bairro,rua,fk) {
@@ -36,4 +45,5 @@ module.exports = {
     entrar,
     cadastrar,
     listar,
+    consulta,
 };

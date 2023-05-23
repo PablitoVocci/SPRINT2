@@ -47,34 +47,64 @@
             <div class="card-box">
 
                 <img src="./assets/digitalTherm.png" alt="" srcset="">
+                <div class="div-etapas" ><button class="btn-selecionado" id="etp1" onclick="etapas(this)" value="1">1</button><button class="btn-n-selecionado" id="etp2" onclick="etapas(this)" value="2">2</button><button id="etp3" class="btn-n-selecionado" onclick="etapas(this)" value="3">3</button></div>
+                <div id="etapa1" class="div-etapa1" >
 
-                <div class="inputs-div-card-box">
+                    <div class="inputs-div-card-box">
 
-                    <input type="text" placeholder="Pais*" class="inputPais" id="input_pais">
+                        <input type="text" placeholder="Pais*" class="inputPais" id="input_pais">
 
-                    <input type="text" placeholder="CEP*" class="inputCep" id="input_cep">
+                        <input type="text" placeholder="CEP*" class="inputCep" id="input_cep">
+                    </div>
+                    <input type="text" placeholder="Estado*" class="inputRua inputGrande" id="input_estado">
+                    <input type="text" placeholder="Rua*" class="inputRua inputGrande" id="input_rua">
+                    <div class="inputs-div-card-box">
+                        <input type="text" placeholder="Cidade*" class="inputCidade" id="input_cidade">
+                        <input type="text" placeholder="Bairro*" class="inputBairro" id="input_bairro">
+                    </div>
+
+
+                    <button class="button" value="cadastrarEndereco" onclick="CadastrarEndereco()">Cadastrar</button>
                 </div>
-                <input type="text" placeholder="Estado*" class="inputRua inputGrande" id="input_estado">
-                <input type="text" placeholder="Rua*" class="inputRua inputGrande" id="input_rua">
-                <div class="inputs-div-card-box">
-                    <input type="text" placeholder="Cidade*" class="inputCidade" id="input_cidade">
-                    <input type="text" placeholder="Bairro*" class="inputBairro" id="input_bairro">
-                </div>
+                <div id="etapa2" class="div-etapa1" >
 
-                <div class="inputs-div-card-box">
-                    <input type="text" placeholder="Numero*" class="inputNumero inputGrande" id="input_num">
-                    <input type="text" placeholder="Complemento" class="inputComplemento" id="input_comp">
-                </div>
-
+            
                 <div class="inputs-setor">
-                    <div class="setor">Cadastrar Setor</div>
+                    <div class="title-setor"><h1>Cadastrar Setor</h1></div>
                     <div class="inputs-setor-all">
                         <input type="text" placeholder="Nome*" class="inputSetorNome" id="inputNomeSetor">
                         <input type="text" placeholder="Andar" class="inputAndar" id="inputAndarSetor">
                     </div>
                 </div>
-                <button class="button" onclick="Cadastrar()">Cadastrar</button>
-            </div>
+                    <button class="button" onclick="cadastrarSetor()" value="cadastrarSetor">Setor</button>
+                </div>
+                <div id="etapa3" class="div-etapa1" >
+
+            
+                    <div class="title-setor2"><h1>Selecione o setor e seu endereço</h1></div>
+                    <div class="div-selects">
+                        <select name="" id="select_setor"class="select-endereco">
+                            <option value="" disabled selected >Selecione o Setor</option>
+                        </select>
+                        <select name="" id="select_endereco"  class="select-endereco">
+                            <option value="" disabled selected >Selecione o Endereço</option>
+                        </select>
+                    </div>
+                    <div class="title-setor2 "><h1>Adicione um complemento e um número</h1></div>
+                <div class="inputs-div-card-box">
+                    <input type="text" placeholder="Numero*" class="inputNumero inputGrande" id="input_num">
+                    <input type="text" placeholder="Complemento" class="inputComplemento" id="input_comp">
+                </div>     
+                <!-- <div class="inputs-setor">
+                    <div class="setor">Cadastrar Setor</div>
+                    <div class="inputs-setor-all">
+                        <input type="text" placeholder="Nome*" class="inputSetorNome" id="inputNomeSetor">
+                        <input type="text" placeholder="Andar" class="inputAndar" id="inputAndarSetor">
+                    </div>
+                </div> -->
+                    <button class="button" onclick="finalizarCadastro()" value="finalizarCadastro">Finalizar Cadastro</button>
+                </div>
+    
 
         </section>
     </div>
@@ -83,18 +113,54 @@
 
 </html>
 <script>
-    function Cadastrar() {
-
-        // aguardar();
-
-        //Recupere o valor da nova input pelo nome do id
-        // Agora vá para o método fetch logo abaixo
-        console.log("function");
-        //Cadastro Setor
-        var nomeVar = inputNomeSetor.value;
-        var andarVar = inputAndarSetor.value;
-
-
+   window.addEventListener('DOMContentLoaded', function() {
+  // Restaura as informações após o reload
+  var etapa = localStorage.getItem('tela');
+  if (etapa === '3') {
+    etapa1.style.display = "none";
+    etapa2.style.display = "none";
+    etapa3.style.display = "flex";
+    etp1.className = "btn-n-selecionado";
+    etp2.className = "btn-n-selecionado";
+    etp3.className = "btn-selecionado";
+  }
+});
+    var btn1 = document.getElementById('etp1');
+    var btn2 = document.getElementById('etp2');
+    var btn3 = document.getElementById('etp3');
+    var etapa1 = document.getElementById('etapa1');
+    var etapa2 = document.getElementById('etapa2');
+    var etapa3 = document.getElementById('etapa3');
+    function etapas(etapa){
+        localStorage.clear();
+        var etp = Number(etapa.value);
+        if(etp == 1){
+            etapa1.style.display = "flex";
+            etapa2.style.display = "none";
+            etapa3.style.display = "none";
+            etp1.className = "btn-selecionado";
+            etp2.className = "btn-n-selecionado";
+            etp3.className = "btn-n-selecionado";
+        }
+        else if(etp == 2){
+            etapa1.style.display = "none";
+            etapa2.style.display = "flex";
+            etapa3.style.display = "none";
+            etp1.className = "btn-n-selecionado";
+            etp2.className = "btn-selecionado";
+            etp3.className = "btn-n-selecionado";
+        }
+        else if(etp == 3){
+            etapa1.style.display = "none";
+            etapa2.style.display = "none";
+            etapa3.style.display = "flex";
+            etp1.className = "btn-n-selecionado";
+            etp2.className = "btn-n-selecionado";
+            etp3.className = "btn-selecionado";
+        }
+    }
+    
+    function CadastrarEndereco() {
         //Cadastro ENdereço
         var paisVar = input_pais.value;
         var cepVar = input_cep.value;
@@ -104,42 +170,6 @@
         var ruaVar = input_rua.value;
         console.log(paisVar,cepVar,estadoVar,cidadeVar,bairroVar,ruaVar);
 
-        //Cadastro Associativa NpraN
-        var numeroVar = input_num.value;
-        var complementoVar = input_comp.value;
-
-        // if (nomeVar == "" ) {
-        //     // cardErro.style.display = "block"
-        //     // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-
-        //     // finalizarAguardar();
-        //     return false;
-        // }
-        // else {
-        //     // setInterval(sumirMensagem, 5000)
-        // }
-
-        // Enviando o valor da nova input
-        // fetch("/setor/cadastrar","/endereco/cadastrar", {
-            fetch("/setor/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nomeVar,
-                andarServer: andarVar,
-                // paisServer: paisVar,
-                // cepServer: cepVar,
-                // estadoServer: estadoVar,
-                // cidadeServer: cidadeVar,
-                // bairroServer: bairroVar,
-                // ruaServer: ruaVar,
-                fkEmpresaServer: sessionStorage.ID_USUARIO
-            })
-        }),
         fetch("/endereco/cadastrar", {
             method: "POST",
             headers: {
@@ -158,50 +188,21 @@
                 ruaServer: ruaVar,
                 fkEmpresaServer: sessionStorage.ID_USUARIO
             })
-        }),
-        fetch("/enderecoSetor/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                // nomeServer: nomeVar,
-                // andarServer: andarVar,
-                // paisServer: paisVar,
-                // cepServer: cepVar,
-                // estadoServer: estadoVar,
-                // cidadeServer: cidadeVar,
-                // bairroServer: bairroVar,
-                // ruaServer: ruaVar,
-                numServer: numeroVar,
-                compServer: complementoVar,
-                
-                // fkEmpresaServer: sessionStorage.ID_USUARIO
-            })
         }).then(function (resposta) {
-            // resposta.json().then(json => {
-            //         console.log(json);
-            //         console.log(JSON.stringify(json));
-            //         sessionStorage.EMAIL_USUARIO = json.email;
-            //         sessionStorage.NOME_USUARIO = json.nome;
-            //         sessionStorage.ID_USUARIO = json.idEmpresa;
-
-            //         setTimeout(function () {
-            //             window.location = "./dashboard/dashboard.html";
-            //         }, 1000); // apenas para exibir o loading
-
-            //     });
+            
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                // cardErro.style.display = "block";
-
-                // mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+               
 
                 setTimeout(() => {
-                    // window.location = "/dashboard/dashboard.html";
+                    etapa1.style.display = "none";
+                    etapa2.style.display = "flex";
+                    etapa3.style.display = "none";
+                    etp1.className = "btn-n-selecionado";
+                    etp2.className = "btn-selecionado";
+                    etp3.className = "btn-n-selecionado";
+
                 }, "2000")
 
                 // limparFormulario();
@@ -216,5 +217,191 @@
 
         return false;
     }
-    console.log(sessionStorage.ID_USUARIO)
+
+ function cadastrarSetor() {
+        console.log("ESTOU AQUI")
+    //Cadastro Setor
+    var nomeVar = inputNomeSetor.value;
+    var andarVar = inputAndarSetor.value;
+
+
+    //Cadastro Associativa NpraN
+    var numeroVar = input_num.value;
+    var complementoVar = input_comp.value;
+
+    fetch("/setor/cadastrar", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        andarServer: andarVar,
+        fkEmpresaServer: sessionStorage.ID_USUARIO
+    })
+    }).then(function (resposta) {
+    
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+        
+
+            setTimeout(() => { 
+                
+                localStorage.setItem('tela', 3);
+                window.location.reload();
+            }, "2000")
+
+            // limparFormulario();
+            // finalizarAguardar();
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+    });
+
+    return false;
+
+}
+
+function finalizarCadastro() {
+        console.log("ESTOU AQUI no finalizar")
+    //Cadastro Associativa NpraN
+    var fkEnderecoVar = Number(select_endereco.value);
+    var fkSetorVar = Number(select_setor.value);
+    var numeroVar = input_num.value;
+    var complementoVar = input_comp.value;
+
+    fetch("/enderecoSetor/cadastrar", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        fkSetorServer: fkSetorVar,
+        fkEnderecoServer:fkEnderecoVar,
+        numServer: numeroVar,
+        compServer: complementoVar,
+        
+        // fkEmpresaServer: sessionStorage.ID_USUARIO
+    })
+    }).then(function (resposta) {
+    
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+        
+
+            setTimeout(() => {
+                localStorage.clear();
+            }, "2000")
+
+            // limparFormulario();
+            // finalizarAguardar();
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+    });
+
+    return false;
+}
+     var fkVar = sessionStorage.ID_USUARIO;
+        console.log(fkVar);
+        // //SELECT DO ENDEREÇO
+        fetch("/endereco/consultar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkServer: fkVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO NOVA FUnCTIONS()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+                console.log("TAMANHO "+resposta.length);
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log("TAMANHO "+json.length);
+                    console.log(JSON.stringify(json));
+                    console.log("Pais: "+ json[0].pais);
+                    for(var i=0;i< json.length; i++){
+                        select_endereco.innerHTML += `<option value="${json[i].idEndereco}">${json[i].rua}</option>`;
+                    }
+
+                    // setTimeout(function () {
+                    //     window.location = "./dashboard/dashboard.html";
+                    // }, 1000); // apenas para exibir o loading    
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+
+        //SELECT SETOR
+
+        fetch("/setor/consultar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkServer: fkVar
+            })
+        }).then(function (resultadoSetor) {
+            console.log("ESTOU NO THEN DO NOVA FUnCTIONS()!")
+
+            if (resultadoSetor.ok) {
+                console.log(resultadoSetor);
+                console.log("TAMANHO "+resultadoSetor.length);
+                resultadoSetor.json().then(jsonSetor => {
+                    console.log(jsonSetor);
+                    console.log("TAMANHO "+jsonSetor.length);
+                    console.log(JSON.stringify(jsonSetor));
+                    console.log("SETOR: "+ jsonSetor[0].nome);
+                    for(var i=0;i< jsonSetor.length; i++){
+                        select_setor.innerHTML += `<option value="${jsonSetor[i].idSetorEmp}">${jsonSetor[i].nome}</option>`;
+                    }
+
+                    // setTimeout(function () {
+                    //     window.location = "./dashboard/dashboard.html";
+                    // }, 1000); // apenas para exibir o loading    
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
 </script>

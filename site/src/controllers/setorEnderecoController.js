@@ -1,4 +1,6 @@
 var setorEnderecoModel = require("../models/setorEnderecoModel");
+// var setorModel = require("../models/setorEnderecoModel");
+// var enderecoModel = require("../models/enderecoModel");
 
 var sessoes = [];
 console.log("Controller endereço");
@@ -6,6 +8,21 @@ function testar(req, res) {
     console.log("ENTRAMOS NA SETORController");
     res.json("ESTAMOS FUNCIONANDO!");
 }
+
+function ultima(req, res) {
+    return setorEnderecoModel.ultima()
+        .then(function (resultado) {
+           console.log('DEU BOM PAPAI')
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+
 
 function listar(req, res) {
     setorEnderecoModel.listar()
@@ -64,8 +81,8 @@ function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var numero = req.body.numServer;
     var complemento = req.body.compServer;
-    var fkSetor = 1;
-    var fkEndereco = 1;
+    var fkSetor =  req.body.fkSetorServer;
+    var fkEndereco = req.body.fkEnderecoServer;
     // Faça as validações dos valores
     if (numero == undefined) {
         res.status(400).send("Seu Número está undefined!");
@@ -96,5 +113,6 @@ module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    ultima
 }
