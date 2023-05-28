@@ -60,6 +60,39 @@ function entrar(req, res) {
 
 }
 
+
+function consultaGeral(req, res) {
+    var fk = req.body.fkServer;
+
+    if (fk == undefined) {
+        res.status(400).send("Sua fk está undefined!");
+    }
+    else {
+        
+        usuarioModel.consultaGeral(fk)
+            .then(
+                function (resultado) {
+                    console.log(`\nResultados encontrados: ${response.length}`);
+                    console.log(`Resultados: ${JSON.stringify(response)}`); // transforma JSON em String
+
+                    if (response.length > 0) {
+                        res.status(200).json(response);
+                        console.log("Achei:"+response)
+                    } else {
+                        res.status(204).send("Nenhum resultado encontrado!")
+                    }
+                    console.log("Estou no método de consultaGeral");
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
@@ -101,5 +134,6 @@ module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    consultaGeral
 }

@@ -18,6 +18,18 @@ function entrar(email, senha) {
     return database.executar(instrucao);
 }
 
+
+function consultaGeral(fk) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ")
+    var instrucao = `
+    SELECT AVG(medida.temperatura) AS temperatura_media, AVG(medida.umidade) AS umidade_media, setorEmpresa.nome FROM medida JOIN sensor ON medida.fkSensor = sensor.idSensor JOIN servidor ON sensor.fkServidor = servidor.idServidor JOIN setorEmpresa ON servidor.fkSetorEmp = setorEmpresa.idSetorEmp JOIN empresa ON setorEmpresa.fkEmpresa = empresa.idEmpresa where setorEmpresa.fkEmpresa = ${fk} GROUP BY setorEmpresa.nome;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 function cadastrar(nome, nomeFantasia, CNPJ, telefone, email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
@@ -36,4 +48,5 @@ module.exports = {
     entrar,
     cadastrar,
     listar,
+    consultaGeral,
 };

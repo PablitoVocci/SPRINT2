@@ -15,9 +15,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;800&display=swap" rel="stylesheet">
 
     <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -53,80 +53,101 @@
 
                 <button class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
 
-                <button id="button-logout" class="buttons-left-func button-logout" style="margin-top: 30vh;" onclick="limparSessao()">Logout</button>
+                <button id="button-logout" class="buttons-left-func button-logout" style="margin-top: 30vh;"
+                    onclick="limparSessao()">Logout</button>
             </div>
 
-           
+
+        </div>
+        <div class="dashboard_full">
+            <div class="primaryDash">
+                <div class="dash">
+                    <div class="btns-dash">
+                        <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
+                        <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button>
+                    </div>
+                    <div id="graficos">
+                        <div id="grafico1" class="display-block grafico1">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor1">123</span>
+                            </h3>
+                            <div class="graph graph1">
+                                <canvas id="myChartCanvas1"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura1" style="color: white"></p>
+                            </div>
+                        </div>
+
+                        <div id="grafico2" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor2"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas2" style="width: auto;"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura2" style="color: white"></p>
+                            </div>
+                        </div>
+
+                        <div id="grafico3" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor3"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas3"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura3" style="color: white"></p>
+                            </div>
+                        </div>
+
+                        <div id="grafico4" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor4"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas4"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura4" style="color: white"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dash_graficos">
+                    <div class="title-graph2">
+                        <h1 id="yy">Média de temperatura e umidade por setor</h1>
+                    </div>
+                    <div class="graficoGeral">
+                        <canvas id="myChartCanvasGeral"></canvas>
+                    </div>
+
+                </div>
+            </div>
+            <div id="alerts">
+
+                <button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>
+
+            </div>
+
         </div>
     </div>
-    <div class="dash">
-        <div class="btns-dash">
-            <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
-            <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
-            <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
-            <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
-            <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button>
-        </div>
-        <div id="graficos">
-            <div id="grafico1" class="display-block">
-                <h3 class="tituloGraficos">
-                    <span id="titulosensor1">123</span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas1"></canvas>
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura1" style="color: white"></p>
-                </div>
-            </div>
 
-            <div id="grafico2" class="display-none">
-                <h3 class="tituloGraficos">
-                    <span id="titulosensor2"></span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas2" style="width: auto;"></canvas>
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura2" style="color: white"></p>
-                </div>
-            </div>
-
-            <div id="grafico3" class="display-none">
-                <h3 class="tituloGraficos">
-                    <span id="titulosensor3"></span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas3"></canvas>
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura3" style="color: white"></p>
-                </div>
-            </div>
-
-            <div id="grafico4" class="display-none">
-                <h3 class="tituloGraficos">
-                    <span id="titulosensor4"></span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas4"></canvas>
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura4" style="color: white"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 </body>
 
 </html>
 
 <script>
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    yy.innerHTML = sessionStorage.ID_USUARIO;
 
     let proximaAtualizacao;
+    let atualizacaoAlertas;
 
     window.onload = obterDadosGraficos();
 
@@ -193,6 +214,10 @@
             clearTimeout(proximaAtualizacao);
         }
 
+        if(atualizacaoAlertas != undefined){
+            clearTimeout(atualizacaoAlertas)
+        }
+
         fetch(`/medidas/ultimas/${idsensor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
@@ -218,10 +243,10 @@
         console.log('iniciando plotagem do gráfico...');
 
         // Criando estrutura para plotar gráfico - labels
-        let labels = [];
+        var labels = [];
 
         // Criando estrutura para plotar gráfico - dados
-        let dados = {
+        var dados = {
             labels: labels,
             datasets: [{
                 label: 'Umidade',
@@ -238,6 +263,7 @@
                 tension: 0.1
             }]
         };
+
 
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
@@ -272,6 +298,47 @@
         );
 
         setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
+
+        setTimeout(() => ExibirAlertas(dados, idsensor), 5000);
+
+    }
+    //Gráfico de setores geral
+    function obterDadosGraficoGeral(fkEmpresa) {
+
+        // if (proximaAtualizacao != undefined) {
+        //     clearTimeout(proximaAtualizacao);
+        // }
+        var fkVar = sessionStorage.ID_USUARIO;
+        fetch("/usuarios/consultaGeral", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                fkServer: fkVar
+            })
+          })
+            .then(function (response) {
+                if (response.ok) {
+                  console.log("TAMANHO DO RESPOSTA"+response.length);
+                  
+                  response.json().then(jsonConsultaGeral => {
+                      for(var i = 0; i < jsonConsultaGeral.length; i++){
+                        console.log("ESSE E O RETONRO DO VETOR!!!!!!!!!!!")
+                        console.log(jsonConsultaGeral);
+                      }
+                      plotarGraficoGeral(jsonConsultaGeral);
+                  });
+  
+              }  else {
+                    console.error('ERRRRRRRRRRRRRRRRRRRRRAAAAAAAAAAAAAADDDDDDDDDDDDDDDOOOOOOOOO');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
     }
 
 
@@ -281,8 +348,6 @@
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
     function atualizarGrafico(idsensor, dados, myChart) {
-
-
 
         fetch(`/medidas/tempo-real/${idsensor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
@@ -321,16 +386,74 @@
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
+                    atualizacaoAlertas = setTimeout(() => ExibirAlertas(), 5000)
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                 proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
+                atualizacaoAlertas = setTimeout(() => ExibirAlertas(), 5000)
             }
         })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
+    }
+
+    function LimparAlertas(){
+
+        alerts.innerHTML = `<button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>`
+        
+    }
+
+    function ExibirAlertas(dados, idsensor) {
+
+        var ultimaCapUmidade = dados.datasets[0].data[6];
+        var ultimaCapTemperatura = dados.datasets[1].data[6]
+
+        var amarelo = "rgba(251, 255, 0, 0.75)"
+        var vermelho = "rgba(187, 1, 1, 0.75)"
+        var laranja = "rgba(255, 153, 0, 0.75)"
+        var verde = "rgba(0, 255, 55, 0.75)"
+        var azul = "rgba(0, 0, 234, 0.75)"
+
+        if (ultimaCapTemperatura < 19.6) {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${azul}; border: 1px solid ${azul};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+
+        } else if (ultimaCapTemperatura > 19.6 && ultimaCapTemperatura < 20) {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${verde}; border: 1px solid ${verde};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+
+        } else if (ultimaCapTemperatura > 20 && ultimaCapTemperatura < 22.5) {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${amarelo}; border: 1px solid ${amarelo};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+
+        } else if (ultimaCapTemperatura > 22.5 && ultimaCapTemperatura < 26.5) {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${laranja}; border: 1px solid ${laranja};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+
+        } else {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${vermelho}; border: 1px solid ${vermelho};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+        }
+
+        atualizacaoAlertas = setTimeout(() => ExibirAlertas(dados,idsensor), 10000);
     }
 </script>
