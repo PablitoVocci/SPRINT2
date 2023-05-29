@@ -9,12 +9,16 @@ body{
     background-color: #f8f8f8;
 }
 
-/* nav bar */
+/* nav bar */ 
 
 .header{
     background-color: #3E68FF;
 }
-
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 .index-primaria{
 
     background: rgba(17, 17, 17, 0.8) url(../assets/servidor.jpg);
@@ -357,4 +361,7 @@ input::placeholder{
     height: 8vh;
     border-radius: 5px;
     border: 3px solid black;
+}
+.container-left{
+    width: 80vh;
 }

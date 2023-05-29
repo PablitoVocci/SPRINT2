@@ -42,24 +42,22 @@
             </h3>
 
             <div class="container-left-buttons">
-                <select class="seletor-setor">
-                    <option selected="true" disabled="disabled">Setor</option>
-                    <option value="">Setor A</option>
-                    <option value="">Setor B</option>
-                    <option value="">Setor C</option>
-                    <option value="">Setor D</option>
-
-                </select>
+                <div class="selecao-setor">
+                    <select name="" id="select_setor"class="select-endereco buttons-left-func">
+                        <option value="" disabled selected >Selecione o Setor</option>
+                    </select>
+                    <button class="btn-setor">Ver setor</button>
+                </div>
 
                 <button class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
-
+              
                 <button id="button-logout" class="buttons-left-func button-logout" style="margin-top: 30vh;"
                     onclick="limparSessao()">Logout</button>
             </div>
 
 
         </div>
-        <div class="dashboard_full">
+        <div class="dashboard_full" id="dash1">
             <div class="primaryDash">
                 <div class="dash">
                     <div class="btns-dash">
@@ -150,9 +148,10 @@
 
     let proximaAtualizacao;
     let atualizacaoAlertas;
-
+    var fkVar = sessionStorage.ID_EMPRESA;
     window.onload = obterDadosGraficos();
     window.onload = obterDadosGraficoGeral();
+    window.onload = verSetores();
 
     function obterDadosGraficos() {
         obterDadosGrafico(1)
@@ -162,7 +161,51 @@
     }
 
     verificar_autenticacao();
+    function verSetores(){
+        fetch("/setor/consultar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkServer: fkVar
+            })
+        }).then(function (resultadoSetor) {
+            console.log("ESTOU NO THEN DO NOVA FUnCTIONS()!")
 
+            if (resultadoSetor.ok) {
+                console.log(resultadoSetor);
+                console.log("TAMANHO "+resultadoSetor.length);
+                resultadoSetor.json().then(jsonSetor => {
+                    console.log(jsonSetor);
+
+                    for(var i=0;i< jsonSetor.length; i++){
+                        select_setor.innerHTML += `<option onclick="mostrar()" value="${jsonSetor[i].idSetorEmp}">${jsonSetor[i].nome}</option>`;
+                    }
+
+                    // setTimeout(function () {
+                    //     window.location = "./dashboard/dashboard.html";
+                    // }, 1000); // apenas para exibir o loading    
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+
+
+    }
     function alterarTitulo(idsensor) {
         var titulosensor = document.getElementById(`titulosensor${idsensor}`)
         titulosensor.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #3E68FF'>sensor" + idsensor + "</span>"
@@ -311,7 +354,7 @@
         // if (proximaAtualizacao != undefined) {
         //     clearTimeout(proximaAtualizacao);
         // }
-        var fkVar = sessionStorage.ID_EMPRESA;
+        
         fetch("/usuarios/consultaGeral", {
               method: "POST",
               headers: {

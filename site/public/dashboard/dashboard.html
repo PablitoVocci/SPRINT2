@@ -15,9 +15,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;800&display=swap" rel="stylesheet">
 
     <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -32,7 +32,7 @@
     <div class="container">
         <div class="container-left">
             <div class="container-left-logo">
-                <img src="../assets/logo 1.svg" alt="">
+                <img src="../assets/digitalTherm.png" alt="">
                 <h1>DigitalTherm</h1>
             </div>
 
@@ -42,122 +42,212 @@
             </h3>
 
             <div class="container-left-buttons">
-                <button class="buttons-left-func" onclick="window.location.href='../endereco.html'"><i class="fa fa-user-o" aria-hidden="true"></i></i>Setor</button>
-                <button onclick="outradash() , obterDadosGrafico(1)" class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
                 <div class="selecao-setor">
                     <select name="" id="select_setor"class="select-endereco buttons-left-func">
                         <option value="" disabled selected >Selecione o Setor</option>
                     </select>
                     <button class="btn-setor">Ver setor</button>
                 </div>
-    
+
+                <button onclick="trocaDash()" class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
+                
+                <div class="container-left-buttons">
+                    <button class="buttons-left-func" onclick="window.location.href='../endereco.html'"><i
+                            class="fa fa-user-o" aria-hidden="true"></i></i>Setor</button>
+                            <button class="buttons-left-func" onclick="window.location.href='../cadastroPfisica.html'"><i
+                                class="fa fa-user-o" aria-hidden="true"></i></i>Funcionarios</button>
+                            <button id="button-logout" class="buttons-left-func button-logout"
+                                    onclick="limparSessao()">Logout</button>
+
+                </div>
+
             </div>
 
-            <div class="container-left-func">
-                <button class="buttons-left-func" onclick="window.location.href='../cadastroPfisica.html'"><i class="fa fa-user-o" aria-hidden="true"></i></i>Funcionarios</button>
-                <button id = "button-logout"class="buttons-left-func button-logout" onclick="limparSessao()">Logout</button>
+
+        </div>
+        <div class="dashboard_full" >
+            <div class="primaryDash" id="dash1">
+                <div class="dash">
+                    <div class="btns-dash">
+                        <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
+                        <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button>
+                    </div>
+                    <div id="graficos">
+                        <div id="grafico1" class="display-block">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor1"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas1" style="width: auto;"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura1" style="color: white"></p>
+                            </div>
+                        </div>
+
+                        <div id="grafico2" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor2"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas2" style="width: auto;"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura2" style="color: white"></p>
+                            </div>
+                        </div>
+
+                        <div id="grafico3" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor3"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas3"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura3" style="color: white"></p>
+                            </div>
+                        </div>
+
+                        <div id="grafico4" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor4"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas4"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura4" style="color: white"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dash_graficos">
+                    <div class="title-graph2">
+                        <h1>Média de temperatura e Umidade de cada setor</h1>
+                    </div>
+                    <div class="graficoGeral">
+                        <div class="chartGeral">
+                            <canvas id="myChartCanvasGeral"></canvas>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
+            <!-- ESSA É A DASH DE DOIS GRÁFICOS -->
+
+
+            <div class="primaryDash secundaryDash" id="dash2">
+                <div class="dash">
+                    <div class="btns-dash">
+                        <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
+                        <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button>
+                    </div>
+                    <div id="graficos">
+                        <div id="grafico1" class="display-block">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor1"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas1" style="width: auto;"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura1" style="color: white"></p>
+                            </div>
+                        </div>
+
+                        <div id="grafico2" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor2"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas2" style="width: auto;"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura2" style="color: white"></p>
+                            </div>
+                        </div>
+
+                        <div id="grafico3" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor3"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas3"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura3" style="color: white"></p>
+                            </div>
+                        </div>
+
+                        <div id="grafico4" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor4"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas4"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura4" style="color: white"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dash_graficos">
+                    <div class="title-graph2">
+                        <h1>Média de temperatura e Umidade de cada setor 2</h1>
+                    </div>
+                    <div class="graficoGeral">
+                        <div class="chartGeral">
+                            <canvas id="myChartCanvasGeral"></canvas>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="alerts">
+
+                <button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>
+
+            </div>
+
         </div>
     </div>
-    <div class="dash" id="outraD" style="display: block;">
-        <div class="btns-dash">
-            <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
-            <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
-            <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
-            <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
-            <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button>
-        </div>
-        <div id="graficos">
-            <div id="grafico1" class="display-block">
-                <h3 class="tituloGraficos">
-                    <span id="titulosensor1">123</span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas1"></canvas> 
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura1" style="color: white"></p>
-                </div>
-            </div>
 
-            <div id="grafico2" class="display-none">
-                <h3 class="tituloGraficos">
-                    <span id="titulosensor2"></span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas2" style="width: auto;"></canvas>
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura2" style="color: white"></p>
-                </div>
-            </div>
-
-            <div id="grafico3" class="display-none">
-                <h3 class="tituloGraficos">
-                    <span id="titulosensor3"></span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas3"></canvas>
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura3" style="color: white"></p>
-                </div>
-            </div>
-
-            <div id="grafico4" class="display-none">
-                <h3 class="tituloGraficos">
-                    <span id="titulosensor4"></span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas4"></canvas>
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura4" style="color: white"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="dash" id="dash2" style="display: none;">
-       
-        <div id="graficos" class="graficos-dash2">
-            <div id="grafico1" class="display-block graph2">
-
-                <div class="graph">
-                    <canvas id="myChartCanvas5" style="width: auto; height: 15vh; margin: 0;"></canvas>
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura1" style="color: white"></p>
-                </div>
-            </div>
-
-            <div id="grafico2" class="display-block graph2">
-                <h3 class="tituloGraficos">
-                    <span id="titulosensor2"></span>
-                </h3>
-                <div class="graph">
-                    <canvas id="myChartCanvas6" style="width: auto; height: 15vh;"></canvas>
-                </div>
-                <div class="label-captura">
-                    <p id="avisoCaptura2" style="color: white"></p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    
-</div>
 
 </body>
 
 </html>
 
 <script>
-    var fkSetor;
-    setInterval(() => fkSetorEmp =  select_setor.value, 500);
+
+    let proximaAtualizacao;
+    let atualizacaoAlertas;
     var fkVar = sessionStorage.ID_USUARIO;
-     fetch("/setor/consultar", {
+    window.onload = obterDadosGraficos();
+    window.onload = obterDadosGraficoGeral();
+    window.onload = verSetores();
+
+    function obterDadosGraficos() {
+        obterDadosGrafico(1)
+        obterDadosGrafico(2)
+        obterDadosGrafico(3)
+        obterDadosGrafico(4)
+    }
+
+    verificar_autenticacao();
+    function verSetores(){
+        fetch("/setor/consultar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -173,9 +263,7 @@
                 console.log("TAMANHO "+resultadoSetor.length);
                 resultadoSetor.json().then(jsonSetor => {
                     console.log(jsonSetor);
-                    console.log("TAMANHO "+jsonSetor.length);
-                    console.log(JSON.stringify(jsonSetor));
-                    console.log("SETOR: "+ jsonSetor[0].nome);
+
                     for(var i=0;i< jsonSetor.length; i++){
                         select_setor.innerHTML += `<option onclick="mostrar()" value="${jsonSetor[i].idSetorEmp}">${jsonSetor[i].nome}</option>`;
                     }
@@ -201,21 +289,8 @@
         })
 
 
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    let proximaAtualizacao;
-
-    window.onload = obterDadosGraficos();
-
-    function obterDadosGraficos() {
-        obterDadosGrafico(1)
-        obterDadosGrafico(2)
-        obterDadosGrafico(3)
-        obterDadosGrafico(4)
     }
-
-    verificar_autenticacao();
-
     function alterarTitulo(idsensor) {
         var titulosensor = document.getElementById(`titulosensor${idsensor}`)
         titulosensor.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #3E68FF'>sensor" + idsensor + "</span>"
@@ -251,25 +326,27 @@
         btnExibir.classList.add("btn-blue")
     }
 
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+    // // O gráfico é construído com três funções:
+    // // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
 
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+    // // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
 
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-     //SELECT SETOR
-
+    // //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    // //     Para ajustar o "select", ajuste o comando sql em src/models
     function obterDadosGrafico(idsensor) {
 
         alterarTitulo(idsensor)
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
+        }
+
+        if(atualizacaoAlertas != undefined){
+            clearTimeout(atualizacaoAlertas)
         }
 
         fetch(`/medidas/ultimas/${idsensor}`, { cache: 'no-store' }).then(function (response) {
@@ -289,18 +366,18 @@
             });
     }
 
-    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    // // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // // A função *plotarGrafico* também invoca a função *atualizarGrafico*
     function plotarGrafico(resposta, idsensor) {
 
         console.log('iniciando plotagem do gráfico...');
 
         // Criando estrutura para plotar gráfico - labels
-        let labels = [];
+        var labels = [];
 
         // Criando estrutura para plotar gráfico - dados
-        let dados = {
+        var dados = {
             labels: labels,
             datasets: [{
                 label: 'Umidade',
@@ -315,101 +392,9 @@
                 fill: false,
                 borderColor: 'rgb(62, 104, 255)',
                 tension: 0.1
-            },
-            {
-                label: 'Maximo',
-                data: [27,27,27,27,27,27,27],
-                fill: false,
-                borderColor: 'rgb(255,0,0)',
-                tension: 0.1
-            },
-            {
-                label: 'Ideal',
-                data: [22.5,22.5,22.5,22.5,22.5,22.5,22.5],
-                fill: false,
-                borderColor: 'rgb(0,255,0)',
-                tension: 0.1
-            },
-            {
-                label: 'Minimo',
-                data: [18,18,18,18,18,18,18],
-                fill: false,
-                borderColor: 'rgb(0,0,255)',
-                tension: 0.1
-            }
-            
-        ]
-            
+            }]
         };
 
-        let dados2 = {
-            labels: labels,
-            datasets: [{
-                label: 'Umidade',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            },
-            {
-                label: 'Maximo',
-                data: [27,27,27,27,27,27,27],
-                fill: false,
-                borderColor: 'rgb(255,0,0)',
-                tension: 0.1
-            },
-            {
-                label: 'Ideal',
-                data: [22.5,22.5,22.5,22.5,22.5,22.5,22.5],
-                fill: false,
-                borderColor: 'rgb(0,255,0)',
-                tension: 0.1
-            },
-            {
-                label: 'Minimo',
-                data: [18,18,18,18,18,18,18],
-                fill: false,
-                borderColor: 'rgb(0,0,255)',
-                tension: 0.1
-            }
-            
-        ]
-            
-        };
-        let dados3 = {
-            labels: labels,
-            datasets: [{
-                label: 'Temperatura',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(62, 104, 255)',
-                tension: 0.1
-            },
-            {
-                label: 'Maximo',
-                data: [27,27,27,27,27,27,27],
-                fill: false,
-                borderColor: 'rgb(255,0,0)',
-                tension: 0.1
-            },
-            {
-                label: 'Ideal',
-                data: [22.5,22.5,22.5,22.5,22.5,22.5,22.5],
-                fill: false,
-                borderColor: 'rgb(0,255,0)',
-                tension: 0.1
-            },
-            {
-                label: 'Minimo',
-                data: [18,18,18,18,18,18,18],
-                fill: false,
-                borderColor: 'rgb(0,0,255)',
-                tension: 0.1
-            }
-            
-        ]
-            
-        };
 
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
@@ -437,42 +422,124 @@
             data: dados,
         };
 
-        const config2 = {
-            type: 'line',
-            data: dados2,
-        };
-        const config3 = {
-            type: 'line',
-            data: dados3,
-        };
-
         // Adicionando gráfico criado em div na tela
         let myChart = new Chart(
             document.getElementById(`myChartCanvas${idsensor}`),
             config
         );
 
-        let myChart2 = new Chart(
-            document.getElementById(`myChartCanvas5`),
-            config2
-        );
-        let myChart3 = new Chart(
-            document.getElementById(`myChartCanvas6`),
-            config3
+        setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
+
+        setTimeout(() => ExibirAlertas(dados, idsensor), 5000);
+
+    }
+ //   Gráfico de setores geral
+    function obterDadosGraficoGeral() {
+        console.log("ESTOU NA FUNCTION OBTER DADOS GERAIS");
+        // if (proximaAtualizacao != undefined) {
+        //     clearTimeout(proximaAtualizacao);
+        // }
+        
+        fetch("/usuarios/consultaGeral", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                fkServer: fkVar
+            })
+          })
+            .then(function (resultado) {
+                if (resultado.ok) {
+                  console.log("TAMANHO DO RESPOSTA"+resultado.length);
+                  
+                  resultado .json().then(jsonConsultaGeral => {
+                      for(var i = 0; i < jsonConsultaGeral.length; i++){
+                        console.log("ESSE E O RETONRO DO VETOR!!!!!!!!!!!")
+                        console.log(jsonConsultaGeral);
+                      }
+                      plotarGraficoGeral(jsonConsultaGeral);
+                  });
+  
+              }  else {
+                    console.error('ERRO NA CONSULTA');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+   
+    function plotarGraficoGeral(jsonConsultaGeral) {
+// cavalo
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+            let labels = [];
+            // Criando estrutura para plotar gráfico - dados
+            let dados = {
+                labels: labels,
+                datasets: [
+                  {
+                    label: "Temperatura",
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgb(75, 192, 192)',
+                    tension: 0.1,
+                  },
+                  {
+                    label: "Umidade",
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgb(62, 104, 255)',
+                    tension: 0.1,
+                  },
+                  
+                ]
+            };
+            console.log('----------------------------------------------')
+            console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+            console.log(jsonConsultaGeral)
+            // Inserindo valores recebidos em estrutura para plotar o gráfico
+            for (i = 0; i < jsonConsultaGeral.length; i++) {
+              var registro = jsonConsultaGeral[i];
+              labels.push(registro.nome);
+                dados.datasets[0].data.push(registro.temperatura_media);
+                dados.datasets[1].data.push(registro.umidade_media);
+  
+            }
+            
+            console.log('----------------------------------------------')
+            console.log('O gráfico será plotado com os respectivos valores:')
+            console.log('Labels:')
+            console.log(labels)
+            console.log('Dados:')
+            console.log(dados.datasets)
+            console.log('----------------------------------------------')
+            
+            // Criando estrutura para plotar gráfico - config
+            let config = {
+              type: 'bar',
+              data: dados
+            };
+            
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`myChartCanvasGeral`),
+            config
         );
 
-        setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
+        // setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
     }
 
+    // // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+    // // buscando a última medida inserida em tabela contendo as capturas, 
 
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
+    // //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    // //     Para ajustar o "select", ajuste o comando sql em src/models
     function atualizarGrafico(idsensor, dados, myChart) {
-
-
 
         fetch(`/medidas/tempo-real/${idsensor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
@@ -511,11 +578,13 @@
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
+                    atualizacaoAlertas = setTimeout(() => ExibirAlertas(), 5000)
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                 proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
+                atualizacaoAlertas = setTimeout(() => ExibirAlertas(), 5000)
             }
         })
             .catch(function (error) {
@@ -524,16 +593,71 @@
 
     }
 
+    function LimparAlertas(){
 
-    function outradash() {
-        var dash = document.getElementById('outraD');
+        alerts.innerHTML = `<button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>`
+        
+    }
+
+    function ExibirAlertas(dados, idsensor) {
+
+        var ultimaCapUmidade = dados.datasets[0].data[6];
+        var ultimaCapTemperatura = dados.datasets[1].data[6]
+
+        var amarelo = "rgba(251, 255, 0, 0.75)"
+        var vermelho = "rgba(187, 1, 1, 0.75)"
+        var laranja = "rgba(255, 153, 0, 0.75)"
+        var verde = "rgba(0, 255, 55, 0.75)"
+        var azul = "rgba(0, 0, 234, 0.75)"
+
+        if (ultimaCapTemperatura < 19.6) {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${azul}; border: 1px solid ${azul};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+
+        } else if (ultimaCapTemperatura > 19.6 && ultimaCapTemperatura < 20) {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${verde}; border: 1px solid ${verde};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+
+        } else if (ultimaCapTemperatura > 20 && ultimaCapTemperatura < 22.5) {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${amarelo}; border: 1px solid ${amarelo};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+
+        } else if (ultimaCapTemperatura > 22.5 && ultimaCapTemperatura < 26.5) {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${laranja}; border: 1px solid ${laranja};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+
+        } else {
+
+            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${vermelho}; border: 1px solid ${vermelho};">
+                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+                </div>`
+        }
+
+        atualizacaoAlertas = setTimeout(() => ExibirAlertas(dados,idsensor), 10000);
+    }
+    function trocaDash(){
+        var dash1 = document.getElementById('dash1');
         var dash2 = document.getElementById('dash2');
-        if (dash.style.display == 'block') {
-            dash.style.display = 'none';
-            dash2.style.display = 'block';
-        }else if(dash2.style.display == 'block') {
-            dash.style.display = 'block';
-            dash2.style.display = 'none';
+        if(dash1.style.display != "none"){
+            dash1.style.display = "none";
+            dash2.style.display = "flex";
+        }
+        else if(dash2.style.display != "none"){
+            dash2.style.display = "none";
+            dash1.style.display = "flex";
         }
     }
 </script>
