@@ -32,7 +32,7 @@
     <div class="container">
         <div class="container-left">
             <div class="container-left-logo">
-                <img src="../assets/logo 1.svg" alt="">
+                <img src="../assets/digitalTherm.png" alt="">
                 <h1>DigitalTherm</h1>
             </div>
 
@@ -70,12 +70,12 @@
                         <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button>
                     </div>
                     <div id="graficos">
-                        <div id="grafico1" class="display-block grafico1">
+                        <div id="grafico1" class="display-block">
                             <h3 class="tituloGraficos">
-                                <span id="titulosensor1">123</span>
+                                <span id="titulosensor1"></span>
                             </h3>
-                            <div class="graph graph1">
-                                <canvas id="myChartCanvas1"></canvas>
+                            <div class="graph">
+                                <canvas id="myChartCanvas1" style="width: auto;"></canvas>
                             </div>
                             <div class="label-captura">
                                 <p id="avisoCaptura1" style="color: white"></p>
@@ -121,10 +121,13 @@
                 </div>
                 <div class="dash_graficos">
                     <div class="title-graph2">
-                        <h1 id="yy">Média de temperatura e umidade por setor</h1>
+                        <h1>Média de temperatura e Umidade de cada setor</h1>
                     </div>
                     <div class="graficoGeral">
-                        <canvas id="myChartCanvasGeral"></canvas>
+                        <div class="chartGeral">
+                            <canvas id="myChartCanvasGeral"></canvas>
+
+                        </div>
                     </div>
 
                 </div>
@@ -144,12 +147,12 @@
 </html>
 
 <script>
-    yy.innerHTML = sessionStorage.ID_USUARIO;
 
     let proximaAtualizacao;
     let atualizacaoAlertas;
 
     window.onload = obterDadosGraficos();
+    window.onload = obterDadosGraficoGeral();
 
     function obterDadosGraficos() {
         obterDadosGrafico(1)
@@ -195,17 +198,17 @@
         btnExibir.classList.add("btn-blue")
     }
 
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+    // // O gráfico é construído com três funções:
+    // // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
 
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+    // // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
 
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
+    // //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    // //     Para ajustar o "select", ajuste o comando sql em src/models
     function obterDadosGrafico(idsensor) {
 
         alterarTitulo(idsensor)
@@ -235,9 +238,9 @@
             });
     }
 
-    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    // // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // // A função *plotarGrafico* também invoca a função *atualizarGrafico*
     function plotarGrafico(resposta, idsensor) {
 
         console.log('iniciando plotagem do gráfico...');
@@ -302,13 +305,13 @@
         setTimeout(() => ExibirAlertas(dados, idsensor), 5000);
 
     }
-    //Gráfico de setores geral
-    function obterDadosGraficoGeral(fkEmpresa) {
-
+ //   Gráfico de setores geral
+    function obterDadosGraficoGeral() {
+        console.log("ESTOU NA FUNCTION OBTER DADOS GERAIS");
         // if (proximaAtualizacao != undefined) {
         //     clearTimeout(proximaAtualizacao);
         // }
-        var fkVar = sessionStorage.ID_USUARIO;
+        var fkVar = sessionStorage.ID_EMPRESA;
         fetch("/usuarios/consultaGeral", {
               method: "POST",
               headers: {
@@ -320,11 +323,11 @@
                 fkServer: fkVar
             })
           })
-            .then(function (response) {
-                if (response.ok) {
-                  console.log("TAMANHO DO RESPOSTA"+response.length);
+            .then(function (resultado) {
+                if (resultado.ok) {
+                  console.log("TAMANHO DO RESPOSTA"+resultado.length);
                   
-                  response.json().then(jsonConsultaGeral => {
+                  resultado .json().then(jsonConsultaGeral => {
                       for(var i = 0; i < jsonConsultaGeral.length; i++){
                         console.log("ESSE E O RETONRO DO VETOR!!!!!!!!!!!")
                         console.log(jsonConsultaGeral);
@@ -333,20 +336,81 @@
                   });
   
               }  else {
-                    console.error('ERRRRRRRRRRRRRRRRRRRRRAAAAAAAAAAAAAADDDDDDDDDDDDDDDOOOOOOOOO');
+                    console.error('ERRO NA CONSULTA');
                 }
             })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
+   
+    function plotarGraficoGeral(jsonConsultaGeral) {
+// cavalo
+        console.log('iniciando plotagem do gráfico...');
 
+        // Criando estrutura para plotar gráfico - labels
+            let labels = [];
+            // Criando estrutura para plotar gráfico - dados
+            let dados = {
+                labels: labels,
+                datasets: [
+                  {
+                    label: "Temperatura",
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgb(75, 192, 192)',
+                    tension: 0.1,
+                  },
+                  {
+                    label: "Umidade",
+                    data: [],
+                    fill: false,
+                    backgroundColor: 'rgb(62, 104, 255)',
+                    tension: 0.1,
+                  },
+                  
+                ]
+            };
+            console.log('----------------------------------------------')
+            console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+            console.log(jsonConsultaGeral)
+            // Inserindo valores recebidos em estrutura para plotar o gráfico
+            for (i = 0; i < jsonConsultaGeral.length; i++) {
+              var registro = jsonConsultaGeral[i];
+              labels.push(registro.nome);
+                dados.datasets[0].data.push(registro.temperatura_media);
+                dados.datasets[1].data.push(registro.umidade_media);
+  
+            }
+            
+            console.log('----------------------------------------------')
+            console.log('O gráfico será plotado com os respectivos valores:')
+            console.log('Labels:')
+            console.log(labels)
+            console.log('Dados:')
+            console.log(dados.datasets)
+            console.log('----------------------------------------------')
+            
+            // Criando estrutura para plotar gráfico - config
+            let config = {
+              type: 'bar',
+              data: dados
+            };
+            
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`myChartCanvasGeral`),
+            config
+        );
 
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
+        // setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+    }
 
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
+    // // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+    // // buscando a última medida inserida em tabela contendo as capturas, 
+
+    // //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    // //     Para ajustar o "select", ajuste o comando sql em src/models
     function atualizarGrafico(idsensor, dados, myChart) {
 
         fetch(`/medidas/tempo-real/${idsensor}`, { cache: 'no-store' }).then(function (response) {

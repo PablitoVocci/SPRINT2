@@ -12,6 +12,7 @@ body {
     display: flex;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 .container-left {
@@ -160,8 +161,8 @@ body {
 }
 
 .graph {
-    width: 65vw;
-    height: 65vh;
+    width: 135vh;
+    height: 47vh;
 }
 
 .graficos {
@@ -267,17 +268,6 @@ body {
     height: 40%;
     flex-direction: column;
 }
-.title-graph2{
-    height: 5vh;
-    width: 100%;
-    text-align: center;
-    background-color: rgba(187, 1, 1, 0.75);
-    
-}
-.title-graph2 h1{
-    color: white;
-
-}
 
 .dashboard_full{
     width: 100%;
@@ -305,5 +295,32 @@ body {
 .graficoGeral{
     width: 100%;
     height: 100%;
-
+    display: flex;
+    justify-content: center;
+}
+.chartGeral{
+    width: 65vh;
+    height: 50vh;
+}
+.title-graph2{
+    height: 4vh;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(62, 104, 255);
+    box-shadow: #161618 0 20px 40px -5px inset;
+    margin-top: 2vh;
+}
+.title-graph2 h1{
+    color: white;
+    font-size: 3vh;
+}
+.chartGeral{
+    width: 65vh;
+    height: 40vh;
+}
+.label-captura p{
+    font-size: 10px;
 }

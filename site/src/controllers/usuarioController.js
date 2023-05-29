@@ -72,12 +72,12 @@ function consultaGeral(req, res) {
         usuarioModel.consultaGeral(fk)
             .then(
                 function (resultado) {
-                    console.log(`\nResultados encontrados: ${response.length}`);
-                    console.log(`Resultados: ${JSON.stringify(response)}`); // transforma JSON em String
+                    console.log(`\nResultados encontrados: ${resultado.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
-                    if (response.length > 0) {
-                        res.status(200).json(response);
-                        console.log("Achei:"+response)
+                    if (resultado.length > 0) {
+                        res.status(200).json(resultado);
+                        console.log("Achei:"+resultado)
                     } else {
                         res.status(204).send("Nenhum resultado encontrado!")
                     }
