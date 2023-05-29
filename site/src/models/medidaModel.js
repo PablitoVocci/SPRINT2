@@ -1,4 +1,23 @@
 var database = require("../database/config");
+function buscarIds(nomeSetor){
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select ss.idSensor from sensor ss inner join servidor s on ss.fkServidor = s.idServidor inner join setorEmpresa se on s.fkSetorEmp = se.idSetorEmp where se.nome = '${nomeSetor}'`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        select ss.idSensor from sensor ss inner join servidor s on ss.fkServidor = s.idServidor inner join setorEmpresa se on s.fkSetorEmp = se.idSetorEmp where se.nome = '${nomeSetor}';
+        `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 function buscarUltimasMedidas(idAquario, limite_linhas) {
 
@@ -30,9 +49,7 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-
 function buscarMedidasEmTempoReal(idAquario) {
-
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
@@ -45,13 +62,7 @@ function buscarMedidasEmTempoReal(idAquario) {
                     order by idMedida desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
-        temperatura as temperatura, 
-        umidade as umidade,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fkSensor 
-                        from medida where fkSensor = ${idAquario} 
-                    order by idMedida desc limit 1`;
+        instrucaoSql = `select temperatura as temperatura, umidade as umidade, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, fkSensor from medida where fkSensor = ${idAquario} order by idMedida desc limit 1`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -64,5 +75,6 @@ function buscarMedidasEmTempoReal(idAquario) {
 
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarIds
 }

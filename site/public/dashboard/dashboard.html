@@ -44,9 +44,8 @@
             <div class="container-left-buttons">
                 <div class="selecao-setor">
                     <select name="" id="select_setor"class="select-endereco buttons-left-func">
-                        <option value="" disabled selected >Selecione o Setor</option>
                     </select>
-                    <button class="btn-setor">Ver setor</button>
+                    <button onclick="buscarIds()" class="btn-setor">Ver setor</button>
                 </div>
 
                 <button onclick="trocaDash()" class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
@@ -68,12 +67,12 @@
         <div class="dashboard_full" >
             <div class="primaryDash" id="dash1">
                 <div class="dash">
-                    <div class="btns-dash">
+                    <div class="btns-dash" id="btn_sensores">
                         <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
-                        <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
+                        <!-- <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
                         <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
                         <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
-                        <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button>
+                        <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button> -->
                     </div>
                     <div id="graficos">
                         <div id="grafico1" class="display-block">
@@ -230,7 +229,7 @@
 </html>
 
 <script>
-
+    
     let proximaAtualizacao;
     let atualizacaoAlertas;
     var fkVar = sessionStorage.ID_USUARIO;
@@ -265,7 +264,7 @@
                     console.log(jsonSetor);
 
                     for(var i=0;i< jsonSetor.length; i++){
-                        select_setor.innerHTML += `<option onclick="mostrar()" value="${jsonSetor[i].idSetorEmp}">${jsonSetor[i].nome}</option>`;
+                        select_setor.innerHTML += `<option onclick="mostrar()" value="${jsonSetor[i].nome}">${jsonSetor[i].nome}</option>`;
                     }
 
                     // setTimeout(function () {
@@ -337,8 +336,31 @@
 
     // //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     // //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idsensor) {
+    function buscarIds(nomeSetor) {
+        btn_sensores.innerHTML = "";
+        var nomeSetor = select_setor.value;
+        fetch(`/medidas/sensores/?nome=${nomeSetor}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    for(var i = 0; i<resposta.length; i++){
+                        console.log("ESTAMOS NO FOR BUSCAR IDS");
+                        btn_sensores.innerHTML += `<button class="btn-chart btn-blue" onclick="exibirsensor(${resposta[i].idSensor})" id="btnsensor${resposta[i].idSensor}">Sensor ${i+1}</button>`;
+                        obterDadosGrafico(resposta[i].idSensor); 
+                    }
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
 
+    function obterDadosGrafico(idsensor) {
         alterarTitulo(idsensor)
 
         if (proximaAtualizacao != undefined) {
@@ -352,7 +374,7 @@
         fetch(`/medidas/ultimas/${idsensor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log(`Dados recebidos NA BUSCAR DADOS GRAFICO: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
                     plotarGrafico(resposta, idsensor);
@@ -539,9 +561,9 @@
 
     // //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     // //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idsensor, dados, myChart) {
-
-        fetch(`/medidas/tempo-real/${idsensor}`, { cache: 'no-store' }).then(function (response) {
+    function atualizarGrafico(idsensor, dados, myChart, nomeSetor) {
+       var nomeSetor = select_setor.value;
+        fetch(`/medidas/tempo-real/${idsensor}?nome=${nomeSetor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 
@@ -577,13 +599,13 @@
                     }
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart,nomeSetor), 2000);
                     atualizacaoAlertas = setTimeout(() => ExibirAlertas(), 5000)
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart,nomeSetor), 2000);
                 atualizacaoAlertas = setTimeout(() => ExibirAlertas(), 5000)
             }
         })
