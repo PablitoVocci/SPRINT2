@@ -151,6 +151,7 @@
 
             <!-- ESSA É A DASH DE DOIS GRÁFICOS -->
 
+
             <!--
             <div class="primaryDash secundaryDash" id="dash2">
                 <div class="dash">
@@ -256,18 +257,16 @@
     let proximaAtualizacao;
     let atualizacaoAlertas;
     var fkVar = sessionStorage.ID_USUARIO;
-    window.onload = verSetores();
-    window.onload = obterDadosGraficoGeral();
-    window.onload = buscarIds();
-    window.onload = obterDadosGraficos();
-
-    function obterDadosGraficos() {
-        obterDadosGrafico(1)
-        obterDadosGrafico(2)
-        obterDadosGrafico(3)
-        obterDadosGrafico(4)
+    var setor1 = select_setor.value;
+    console.log("SEEEEETOOOOOOOORRRRR 111:: "+setor1);
+    function dashOnload() {
+        verSetores();
+        obterDadosGraficoGeral();
+        buscarIds(setor1);
+        obterDadosGraficos();
         // obterDadosGrafico(5)
     }
+    window.onload = dashOnload();
 
     verificar_autenticacao();
     function verSetores(){
@@ -289,6 +288,7 @@
                     console.log(jsonSetor);
 
                     for(var i=0;i< jsonSetor.length; i++){
+                        
                         select_setor.innerHTML += `<option onclick="mostrar()" value="${jsonSetor[i].nome}">${jsonSetor[i].nome}</option>`;
                     }
 
@@ -320,39 +320,50 @@
         titulosensor.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #3E68FF'>sensor" + idsensor + "</span>"
     }
 //guigui
+    var ultimoId = 0;
+    var numElementos = 0;
     function exibirsensor(idsensor) {
-        
-        var numElementos = Number(idsensor);
-
-        for (i = 1; i <= numElementos; i++) {
-            console.log("ESTOU PASSANDO AQUI "+i);
-            // exibindo - ou não - o gráfico
-            let elementoAtual = document.getElementById(`grafico${i}`)
-            if(elementoAtual != null){
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
-    
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnsensor${i}`)
-                if (btnAtual.classList.contains("btn-blue")) {
-                    btnAtual.classList.remove("btn-blue")
-                }
-                btnAtual.classList.add("btn-white")
-            }
+        numElementos = Number(idsensor);
+        if(numElementos < ultimoId){
+            numElementos = ultimoId;
         }
+        
 
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idsensor}`)
-        graficoExibir.classList.remove("display-none")
-        graficoExibir.classList.add("display-block")
-        console.log("GRÁFICO EXIBIR: "+graficoExibir)
-        // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnsensor${idsensor}`)
-        console.log("BOTÃO EXIBIR: "+btnExibir);
-        btnExibir.classList.remove("btn-white")
-        btnExibir.classList.add("btn-blue")
+            var div_graficos = document.getElementById('graficos');
+            // for(var i = 0; i < div_graficos.childElementCount; i++){
+            //     var graficosAparentes = 
+            // }
+            for (i = 1; i <= numElementos; i++) {
+                console.log("ESTOU PASSANDO AQUI "+i);
+                // exibindo - ou não - o gráfico
+                let elementoAtual = document.getElementById(`grafico${i}`)
+                if(elementoAtual != null){
+                    if (elementoAtual.classList.contains("display-block")) {
+                        elementoAtual.classList.remove("display-block")
+                    }
+                    elementoAtual.classList.add("display-none")
+        
+                    // alterando estilo do botão
+                    let btnAtual = document.getElementById(`btnsensor${i}`)
+                    if (btnAtual.classList.contains("btn-blue")) {
+                        btnAtual.classList.remove("btn-blue")
+                    }
+                    btnAtual.classList.add("btn-white")
+                }
+            }
+    
+            // exibindo - ou não - o gráfico
+            let graficoExibir = document.getElementById(`grafico${idsensor}`)
+            graficoExibir.classList.remove("display-none")
+            graficoExibir.classList.add("display-block")
+            console.log("GRÁFICO EXIBIR: "+graficoExibir)
+            // alterando estilo do botão
+            let btnExibir = document.getElementById(`btnsensor${idsensor}`)
+            console.log("BOTÃO EXIBIR: "+btnExibir);
+            btnExibir.classList.remove("btn-white")
+            btnExibir.classList.add("btn-blue")
+            ultimoId = numElementos;
+        
     }
 
     // // O gráfico é construído com três funções:
@@ -383,6 +394,7 @@
                         console.log("ESTAMOS NO FOR BUSCAR IDS");
                         //guigui
                         if(i == 0){
+                            
                             display = 'display-block';
                             btnCor = 'btn-chart btn-blue';
                         }
@@ -390,7 +402,14 @@
                             display = 'display-none';
                             btnCor = 'btn-chart btn-white';
                         }
-                  
+                        // var div_graph = document.getElementById('graficos');
+                        
+                        // for(var contador = 0;contador<div_graph.childElementCount;contador++){
+                        //     var idGrafico = document.getElementById(`grafico${resposta[contador].idSensor}`);
+                        //     if(idGrafico == null){
+                        //         cpm
+                        //     }
+                        // }
                         btn_sensores.innerHTML += `<button class="${btnCor}" onclick="exibirsensor(${resposta[i].idSensor})" id="btnsensor${resposta[i].idSensor}">Sensor ${i+1}</button>`;
                         graficos.innerHTML += `
                         <div id="grafico${resposta[i].idSensor}" class="${display}">
