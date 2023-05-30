@@ -69,13 +69,13 @@
                 <div class="dash">
                     <div class="btns-dash" id="btn_sensores">
                         <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
-                        <!-- <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
+                        <!-- <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>guigui
                         <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
                         <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
                         <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button> -->
                     </div>
                     <div id="graficos">
-                        <div id="grafico1" class="display-block">
+                        <!-- <div id="grafico1" class="display-block">
                             <h3 class="tituloGraficos">
                                 <span id="titulosensor1"></span>
                             </h3>
@@ -122,6 +122,17 @@
                                 <p id="avisoCaptura4" style="color: white"></p>
                             </div>
                         </div>
+                         <div id="grafico5" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor4"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas5"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura4" style="color: white"></p>
+                            </div>
+                        </div> --> 
                     </div>
                 </div>
                 <div class="dash_graficos">
@@ -140,11 +151,11 @@
 
             <!-- ESSA É A DASH DE DOIS GRÁFICOS -->
 
-
+            <!--
             <div class="primaryDash secundaryDash" id="dash2">
                 <div class="dash">
-                    <div class="btns-dash">
-                        <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
+                    <div class="btns-dash"> -->
+                        <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  
                         <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
                         <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
                         <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
@@ -198,8 +209,20 @@
                                 <p id="avisoCaptura4" style="color: white"></p>
                             </div>
                         </div>
+
+                        <div id="grafico5" class="display-none">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor4"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas5"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura4" style="color: white"></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div> 
                 <div class="dash_graficos">
                     <div class="title-graph2">
                         <h1>Média de temperatura e Umidade de cada setor 2</h1>
@@ -213,7 +236,7 @@
 
                 </div>
             </div>
-
+        -->
             <div id="alerts">
 
                 <button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>
@@ -233,15 +256,17 @@
     let proximaAtualizacao;
     let atualizacaoAlertas;
     var fkVar = sessionStorage.ID_USUARIO;
-    window.onload = obterDadosGraficos();
-    window.onload = obterDadosGraficoGeral();
     window.onload = verSetores();
+    window.onload = obterDadosGraficoGeral();
+    window.onload = buscarIds();
+    window.onload = obterDadosGraficos();
 
     function obterDadosGraficos() {
         obterDadosGrafico(1)
         obterDadosGrafico(2)
         obterDadosGrafico(3)
         obterDadosGrafico(4)
+        // obterDadosGrafico(5)
     }
 
     verificar_autenticacao();
@@ -294,33 +319,38 @@
         var titulosensor = document.getElementById(`titulosensor${idsensor}`)
         titulosensor.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #3E68FF'>sensor" + idsensor + "</span>"
     }
-
+//guigui
     function exibirsensor(idsensor) {
-        let todosOsGraficos = document.getElementById("graficos")
+        
+        var numElementos = Number(idsensor);
 
-        for (i = 1; i <= todosOsGraficos.childElementCount; i++) {
+        for (i = 1; i <= numElementos; i++) {
+            console.log("ESTOU PASSANDO AQUI "+i);
             // exibindo - ou não - o gráfico
             let elementoAtual = document.getElementById(`grafico${i}`)
-            if (elementoAtual.classList.contains("display-block")) {
-                elementoAtual.classList.remove("display-block")
+            if(elementoAtual != null){
+                if (elementoAtual.classList.contains("display-block")) {
+                    elementoAtual.classList.remove("display-block")
+                }
+                elementoAtual.classList.add("display-none")
+    
+                // alterando estilo do botão
+                let btnAtual = document.getElementById(`btnsensor${i}`)
+                if (btnAtual.classList.contains("btn-blue")) {
+                    btnAtual.classList.remove("btn-blue")
+                }
+                btnAtual.classList.add("btn-white")
             }
-            elementoAtual.classList.add("display-none")
-
-            // alterando estilo do botão
-            let btnAtual = document.getElementById(`btnsensor${i}`)
-            if (btnAtual.classList.contains("btn-blue")) {
-                btnAtual.classList.remove("btn-blue")
-            }
-            btnAtual.classList.add("btn-white")
         }
 
         // exibindo - ou não - o gráfico
         let graficoExibir = document.getElementById(`grafico${idsensor}`)
         graficoExibir.classList.remove("display-none")
         graficoExibir.classList.add("display-block")
-
+        console.log("GRÁFICO EXIBIR: "+graficoExibir)
         // alterando estilo do botão
         let btnExibir = document.getElementById(`btnsensor${idsensor}`)
+        console.log("BOTÃO EXIBIR: "+btnExibir);
         btnExibir.classList.remove("btn-white")
         btnExibir.classList.add("btn-blue")
     }
@@ -338,15 +368,42 @@
     // //     Para ajustar o "select", ajuste o comando sql em src/models
     function buscarIds(nomeSetor) {
         btn_sensores.innerHTML = "";
+        graficos.innerHTML = "";
+        var display;
+        var btnCor;
         var nomeSetor = select_setor.value;
         fetch(`/medidas/sensores/?nome=${nomeSetor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+                    console.log("ESSA É A RESPOSTA: "+resposta[0].idSensor);
+                    // resposta.reverse();
+                
                     for(var i = 0; i<resposta.length; i++){
                         console.log("ESTAMOS NO FOR BUSCAR IDS");
-                        btn_sensores.innerHTML += `<button class="btn-chart btn-blue" onclick="exibirsensor(${resposta[i].idSensor})" id="btnsensor${resposta[i].idSensor}">Sensor ${i+1}</button>`;
+                        //guigui
+                        if(i == 0){
+                            display = 'display-block';
+                            btnCor = 'btn-chart btn-blue';
+                        }
+                        else{
+                            display = 'display-none';
+                            btnCor = 'btn-chart btn-white';
+                        }
+                  
+                        btn_sensores.innerHTML += `<button class="${btnCor}" onclick="exibirsensor(${resposta[i].idSensor})" id="btnsensor${resposta[i].idSensor}">Sensor ${i+1}</button>`;
+                        graficos.innerHTML += `
+                        <div id="grafico${resposta[i].idSensor}" class="${display}">
+                            <h3 class="tituloGraficos">
+                                <span id="titulosensor${resposta[i].idSensor}"></span>
+                            </h3>
+                            <div class="graph">
+                                <canvas id="myChartCanvas${resposta[i].idSensor}" style="width: auto;"></canvas>
+                            </div>
+                            <div class="label-captura">
+                                <p id="avisoCaptura1" style="color: white"></p>
+                            </div>
+                        </div>`;
                         obterDadosGrafico(resposta[i].idSensor); 
                     }
                     
@@ -451,7 +508,6 @@
         );
 
         setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
-
         setTimeout(() => ExibirAlertas(dados, idsensor), 5000);
 
     }
