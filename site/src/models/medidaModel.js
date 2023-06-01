@@ -49,6 +49,37 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+function alertaSetor(idAquario, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top ${limite_linhas}
+        temperatura as temperatura, 
+        umidade as umidade,  
+                        momento,
+                        FORMAT(momento, 'HH:mm:ss') as momento_grafico
+                    from medida
+                    where fkSensor = ${idAquario}
+                    order by id desc`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select setorEmpresa.nome as NomeSetor, temperatura as temperatura, umidade as umidade, momento, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, setorEmpresa.fkEmpresa
+        from medida 
+            JOIN sensor ON medida.fkSensor = sensor.idSensor
+                JOIN servidor ON sensor.fkServidor = servidor.idServidor
+                    JOIN setorEmpresa ON servidor.fkSetorEmp = setorEmpresa.idSetorEmp
+                        where fkSensor = ${idAquario} order by idMedida desc limit ${limite_linhas};`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarMedidasEmTempoReal(idAquario) {
     instrucaoSql = ''
 
@@ -76,5 +107,6 @@ function buscarMedidasEmTempoReal(idAquario) {
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
+    alertaSetor,
     buscarIds
 }

@@ -15,4 +15,8 @@ router.get("/tempo-real/:idAquario", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 })
 
+router.get("/alertaSetor/:idAquario", function (req, res) {
+    medidaController.alertaSetor(req, res);
+})
+
 module.exports = router; 

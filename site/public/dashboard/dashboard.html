@@ -366,6 +366,7 @@
         
     }
 
+
     // // O gráfico é construído com três funções:
     // // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
     // // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
@@ -454,6 +455,7 @@
                     resposta.reverse();
 
                     plotarGrafico(resposta, idsensor);
+                    
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -527,7 +529,7 @@
         );
 
         setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
-        setTimeout(() => ExibirAlertas(dados, idsensor), 5000);
+        setTimeout(() => alertaSetor(idsensor), 5000);
 
     }
  //   Gráfico de setores geral
@@ -675,7 +677,7 @@
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart,nomeSetor), 2000);
-                    atualizacaoAlertas = setTimeout(() => ExibirAlertas(), 5000)
+                    setTimeout(() => alertaSetor(idsensor), 5000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -690,16 +692,55 @@
 
     }
 
+    alertaSetor(1) 
+
     function LimparAlertas(){
 
         alerts.innerHTML = `<button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>`
         
     }
 
-    function ExibirAlertas(dados, idsensor) {
+    function alertaSetor(idSensor){
+        fetch(`/medidas/alertaSetor/${idSensor}`
+        ).then(function (resultado) {
+            console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPE")
 
-        var ultimaCapUmidade = dados.datasets[0].data[6];
-        var ultimaCapTemperatura = dados.datasets[1].data[6]
+            if (resultado.ok) {
+                resultado.json().then(jsonAlertaS => {
+                    console.log(`FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF ${JSON.stringify(jsonAlertaS)}`);
+                    var medidasTemp = jsonAlertaS[0].temperatura
+                    var medidasUmi = jsonAlertaS[0].umidade
+                    var setorNome =jsonAlertaS[0].NomeSetor
+                    console.log("tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt" + idSensor)
+                    ExibirAlertas(medidasTemp, medidasUmi, idSensor, setorNome)
+                    // setTimeout(function () {
+                    //     window.location = "./dashboard/dashboard.html";
+                    // }, 1000); // apenas para exibir o loading    
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+
+
+    }
+
+    function ExibirAlertas(medidasTemp, medidasUmi, idsensor, setorNome) {
+        var nomeSetor = setorNome;
+        var ultimaCapUmidade = medidasUmi;
+        var ultimaCapTemperatura = medidasTemp
 
         var amarelo = "rgba(251, 255, 0, 0.75)"
         var vermelho = "rgba(187, 1, 1, 0.75)"
@@ -717,33 +758,33 @@
         } else if (ultimaCapTemperatura > 19.6 && ultimaCapTemperatura < 20) {
 
             alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${verde}; border: 1px solid ${verde};">
-                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <h1 id="nomeSetor">Sensor ${nomeSetor}</h1>
                     <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
                 </div>`
 
         } else if (ultimaCapTemperatura > 20 && ultimaCapTemperatura < 22.5) {
 
             alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${amarelo}; border: 1px solid ${amarelo};">
-                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <h1 id="nomeSetor">Sensor ${nomeSetor}</h1>
                     <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
                 </div>`
 
         } else if (ultimaCapTemperatura > 22.5 && ultimaCapTemperatura < 26.5) {
 
             alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${laranja}; border: 1px solid ${laranja};">
-                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <h1 id="nomeSetor">Sensor ${nomeSetor}</h1>
                     <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
                 </div>`
 
         } else {
 
             alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${vermelho}; border: 1px solid ${vermelho};">
-                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
+                    <h1 id="nomeSetor">Sensor ${nomeSetor}</h1>
                     <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
                 </div>`
         }
 
-        atualizacaoAlertas = setTimeout(() => ExibirAlertas(dados,idsensor), 10000);
+        atualizacaoAlertas = setTimeout(() => alertaSetor(idsensor), 10000);
     }
     function trocaDash(){
         var dash1 = document.getElementById('dash1');
