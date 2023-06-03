@@ -5,11 +5,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/cadastroPfisica.css"/>
+    <link rel="stylesheet" href="css/cadastroPfisica.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>DigitalTherm - Cadastro</title>
+
+    
 </head>
 
 <body>
@@ -18,7 +23,7 @@
             <img src="assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo" />
 
             <nav class="container-1">
-                <ul> 
+                <ul>
                     <li>
                         <b>
                             <a href="./index.html">Inicio</a>
@@ -48,54 +53,67 @@
         <div class="card-box">
 
             <img src="assets/digitalTherm.png" alt="" srcset="">
-            
+
             <div class="inputs-div-card-box">
-                
-                <input type="text" id="inputNome" placeholder="Nome" class="inputNome">
+
+                <input type="text" id="inputNome" placeholder="Nome*" class="inputNome">
 
                 <input type="text" id="inputSobrenome" placeholder="Sobrenome" class="inputSobrenome">
             </div>
 
             <div class="inputs-div-card-box">
-                
-              <input type="date" id="inputData" placeholder="Data de Nascimento" class="inputNascimento">
 
-              <input type="text" id="inputCpf" placeholder="CPF" class="inputCpf">
-          </div>
+                <input type="date" id="inputData" placeholder="Data de Nascimento*" class="inputNascimento">
 
-            <input type="text" id="inputEmail" placeholder="E-mail" class="inputEmail inputGrande">
+                <input type="text" id="inputCpf" placeholder="CPF*" class="inputCpf">
+            </div>
+
+            <input type="text" id="inputEmail" placeholder="E-mail*" class="inputEmail inputGrande">
 
             <div class="inputs-div-card-box">
-                
-              <input type="text" id="inputCel" placeholder="Celular" class="inputCelular">
 
-              <input type="text" id="inputTel" placeholder="Telefone Fixo" class="inputTelefoneFixo">
-          </div>
+                <input type="text" id="inputCel" placeholder="Celular" class="inputCelular">
 
-          <div class="inputs-div-card-box">
-                
-            <input type="text" id="inputCep" placeholder="CEP" class="inputCep">
+                <input type="text" id="inputTel" placeholder="Telefone Fixo" class="inputTelefoneFixo">
+            </div>
 
-            <input type="text" id="inputNum" placeholder="Num" class="inputNumero">
-        </div>
-        
-            <input type="text" id="inputSenha" class="inputGrande1" placeholder="Insira sua senha">
-            <input type="text" class="inputGrande2" placeholder="Confirme sua Senha">
+            <div class="inputs-div-card-box">
+
+                <input type="text" id="inputCep" placeholder="CEP" class="inputCep">
+
+                <input type="text" id="inputNum" placeholder="Num" class="inputNumero">
+            </div>
+
+            <input type="text" id="inputSenha" class="inputGrande1" placeholder="Insira sua senha*">
+
+            <input type="text" id="confirmacao_senha_input" class="inputGrande2" placeholder="Confirme sua Senha*">
             <button class="button" onclick="Cadastrar()">Continuar!</button>
         </div>
 
     </section>
 
-    <script type="text/javascript" nonce="{coloque_seu_valor_nonce_aqui}" src="https://desk.zoho.com/portal/api/web/inapp/863373000000292005?orgId=811744654" defer></script>
+    <script type="text/javascript" nonce="{coloque_seu_valor_nonce_aqui}"
+        src="https://desk.zoho.com/portal/api/web/inapp/863373000000292005?orgId=811744654" defer></script>
 </body>
 
 </html>
 
 <script>
 
-function Cadastrar() {
+    function Cadastrar() {
         // aguardar();
-   
+
+        // Obtém as referências para os elementos de entrada do formulário.
+        const nome = document.getElementById("inputNome");
+        const sobrenome = document.getElementById("inputSobrenome");
+        const dtNasc = document.getElementById("inputData");
+        const CPF = document.getElementById("inputCpf")
+        const email = document.getElementById("inputEmail");
+        const celular = document.getElementById("inputCel");
+        const telefoneFixo = document.getElementById("inputNum");
+        const senha = document.getElementById("inputSenha");
+        const ConfSenha = document.getElementById("confirmacao_senha_input")
+
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
         var nomeVar = inputNome.value;
@@ -104,68 +122,259 @@ function Cadastrar() {
         var cpfVar = inputCpf.value;
         var emailVar = inputEmail.value;
         var celVar = inputCel.value;
+        var cepVar = inputCep.value
         var telVar = inputTel.value;
-        var cepVar = inputCep.value;
         var numVar = inputNum.value;
         var senhaVar = inputSenha.value;
-        console.log(nomeVar,sobrenomeVar,dataNascVar,cpfVar,emailVar,celVar,telVar,cepVar,numVar,senhaVar)
+        var ConfSenhaVar = confirmacao_senha_input.value;
+        // console.log(nomeVar,sobrenomeVar,dataNascVar,cpfVar,emailVar,celVar,telVar,senhaVar,confSenhaVar)
 
-        if (nomeVar == "" ) {
-            // cardErro.style.display = "block"
-            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
-            // finalizarAguardar();
-            return false;
+        var check = false;
+
+        if (nomeVar == "" && sobrenomeVar == "" && dataNascVar == "" && cpfVar == "" && emailVar == "" && celVar == "" && telVar == "" && senhaVar == "" && ConfSenhaVar == "") {
+            alert("Preencha todos os campos obrigatórios")
         }
+
         else {
-            // setInterval(sumirMensagem, 5000)
-        }
 
-        // Enviando o valor da nova input
-        fetch("/pFisica/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nomeVar,
-                sobrenomeServer: sobrenomeVar,
-                dataNascServer: dataNascVar,
-                cpfServer: cpfVar,
-                emailServer: emailVar,
-                celServer: celVar,
-                telServer: telVar,
-                cepServer: cepVar,
-                numServer: numVar,
-                senhaServer: senhaVar,
-                fkEmpresaServer: sessionStorage.ID_USUARIO
-            })
-        }).then(function (resposta) {
+            // Verifica se o campo "nomeVar" está vazio.
+            if (nomeVar == "") {
 
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                // cardErro.style.display = "block";
-
-                // mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                setTimeout(() => {
-                    window.location = "login-funcionario.html";
-                }, "2000")
-
-                // limparFormulario();
-                // finalizarAguardar();
+                // Adiciona a classe de erro ao elemento "nome" e remove a classe "valid".
+                nome.className = " error " + nome.className
+                nome.className = nome.className.replaceAll(" valid ", " ")
+                check = false;
             } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            // finalizarAguardar();
-        });
 
-        return false;
+                // Remove a classe de erro do elemento "nome" e adiciona a classe "valid".
+                nome.className = nome.className.replaceAll(" error ", " ")
+                nome.className = " valid " + nome.className
+                check = true;
+            }
+
+
+
+            if (sobrenomeVar == "") {
+                sobrenome.className = " error " + sobrenome.className
+                sobrenome.className = sobrenome.className.replaceAll(" valid ", "")
+                check = false;
+            }
+
+            else {
+
+                // Remove a classe de erro do elemento "nome" e adiciona a classe "valid".
+                sobrenome.className = sobrenome.className.replaceAll("error ", " ")
+                sobrenome.className = " valid " + nome.className
+                check = true;
+
+            }
+
+            // data de nascimento
+
+            if (dataNascVar == "") {
+                dtNasc.className = " error " + dtNasc.className
+                dtNasc.className = dtNasc.className.replaceAll("valid ", "")
+                check = false;
+            }
+
+            else {
+                dtNasc.className = dtNasc.className.replaceAll("error ", " ")
+                dtNasc.className = " valid " + dtNasc.className
+                check = true;
+            }
+
+            // CPF 
+            if (cpfVar == "" || cpfVar.length != 11) {
+                CPF.className = " error " + CPF.className
+                CPF.className = CPF.className.replaceAll("valid ", "")
+                check = false;
+            }
+            
+
+            else {
+                CPF.className = CPF.className.replaceAll("error ", " ")
+                CPF.className = " valid " + CPF.className
+                check = true;
+            }
+
+
+            // email 
+
+            if (emailVar == "") {
+
+                // Adiciona a classe de erro ao elemento "email" e remove a classe "valid".
+                email.className = "error " + email.className
+                email.className = email.className.replaceAll("valid ", " ")
+                check = false;
+            } 
+            else if(emailVar.indexOf("@") == -1){
+                email.className = "error " + email.className
+                email.className = email.className.replaceAll("valid ", " ")
+                check = false;
+
+                alert("Email inválido!")
+            }
+            
+            else {
+
+                // Remove a classe de erro do elemento "email" e adiciona a classe "valid".
+                email.className = email.className.replaceAll("error ", " ")
+                email.className = "valid " + email.className
+                check = true;
+            }
+
+            // celular 
+
+            if (celVar == "") {
+
+                celular.className = "error " + celular.className
+                celular.className = celular.className.replaceAll("valid ", " ")
+                check = false;
+
+            } else {
+
+                celular.className = celular.className.replaceAll("error ", " ")
+                celular.className = "valid " + celular.className
+                check = true;
+            }
+
+            // telefone fixo
+
+            if (telVar == "") {
+
+                telefoneFixo.className = "error " + telefoneFixo.className
+                telefoneFixo.className = telefoneFixo.className.replaceAll("valid ", " ")
+                check = false;
+
+            } else {
+
+                telefoneFixo.className = telefoneFixo.className.replaceAll("error ", " ")
+                telefoneFixo.className = "valid " + telefoneFixo.className
+                check = true;
+            }
+
+            // senha
+
+            // Verifica se o campo "senhaVar" está vazio.
+            if (senhaVar == "") {
+
+                // Adiciona a classe de erro ao elemento "senha" e remove a classe "valid".
+                senha.className = "error " + senha.className
+                senha.className = senha.className.replaceAll("valid ", " ")
+                check = false;
+            } else {
+
+                // Remove a classe de erro do elemento "senha" e adiciona a classe "valid".
+                senha.className = senha.className.replaceAll("error ", " ")
+                senha.className = "valid " + senha.className
+                check = true;
+            }
+
+            // confirmar senha 
+
+            // Verifica se o campo "confirmacaoSenhaVar" está vazio.
+            if (ConfSenhaVar == "") {
+
+                // Adiciona a classe de erro ao elemento "ConfSenha" e remove a classe "valid".
+                ConfSenha.className = "error " + ConfSenha.className
+                ConfSenha.className = ConfSenha.className.replaceAll("valid ", " ")
+                check = false;
+            } else if (ConfSenhaVar != senhaVar) {
+
+                // Remove a classe "valid" do elemento "ConfSenha" e adiciona a classe "error".
+                ConfSenha.className = ConfSenha.className.replaceAll("valid ", " ")
+                ConfSenha.className = "error " + ConfSenha.className
+
+                // Exibe um alerta informando que as senhas devem ser idênticas.
+                alert("As senhas devem ser idênticas")
+                check = false;
+            } else {
+
+                // Remove a classe de erro do elemento "ConfSenha" e adiciona a classe "valid".
+                ConfSenha.className = ConfSenha.className.replaceAll("error ", " ")
+                ConfSenha.className = "valid " + ConfSenha.className
+                check = true;
+            }
+
+            // Verifica se a variável de verificação é falsa.
+            if (check == false) {
+
+                // Exibe um alerta solicitando que o usuário verifique os campos.
+                alert("Confira os campos!")
+            } else {
+
+                // aguardar();
+
+                //Recupere o valor da nova input pelo nome do id
+                // Agora vá para o método fetch logo abaixo
+
+
+                if (nomeVar == "" || emailVar == "" || senhaVar == "" || ConfSenhaVar == "" ) {
+                    // cardErro.style.display = "block"
+                    // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+
+                    // finalizarAguardar();
+                    return false;
+                }
+
+                // Enviando o valor da nova input
+                fetch("/pFisica/cadastrar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        // crie um atributo que recebe o valor recuperado aqui
+                        // Agora vá para o arquivo routes/usuario.js
+                        nomeServer: nomeVar,
+                        sobrenomeServer: sobrenomeVar,
+                        dataNascServer: dataNascVar,
+                        cpfServer: cpfVar,
+                        emailServer: emailVar,
+                        celServer: celVar,
+                        telServer: telVar,
+                        cepServer: cepVar,
+                        numServer: telVar,
+                        senhaServer: senhaVar,
+                        fkEmpresaServer: sessionStorage.ID_USUARIO
+                    })
+                }).then(function (resposta) {
+
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Cadastro realizado com sucesso',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+
+                        setTimeout(() => {
+                            window.location = "./dashboard/dashboard.html";
+                        }, "2000")
+
+                        // limparFormulario();
+                        // finalizarAguardar();
+                    } else {
+                        throw ("Houve um erro ao tentar realizar o cadastro!");
+                    }
+                }).catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Ouve um erro ao realizar o cadastro'
+                    });
+                    // finalizarAguardar();
+                });
+
+                return false;
+            }
+        }
     }
-    console.log(sessionStorage.ID_USUARIO)
+
 </script>

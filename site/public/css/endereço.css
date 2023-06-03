@@ -1,25 +1,27 @@
-*{
+* {
 
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: #f8f8f8;
 }
 
-/* nav bar */ 
+/* nav bar */
 
-.header{
+.header {
     background-color: #3E68FF;
 }
-.container{
+
+.container {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.index-primaria{
+
+.index-primaria {
 
     background: rgba(17, 17, 17, 0.8) url(../assets/servidor.jpg);
     background-blend-mode: darken;
@@ -31,7 +33,7 @@ body{
     background-size: cover;
 }
 
-header{
+header {
     display: flex;
     justify-content: center;
     padding: 5px 0px;
@@ -44,36 +46,36 @@ header{
     width: 100%;
 }
 
-nav ul{
+nav ul {
     display: flex;
     gap: 30px;
     list-style: none;
 }
 
-div img{
+div img {
     width: 50px;
     height: 50px;
     padding: 0 30px;
     margin: 0px 20px;
 }
 
-.parte-1{
+.parte-1 {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px;
 }
 
-a{
+a {
     text-decoration: none;
     color: white;
 }
 
-.container-2 a{
+.container-2 a {
     padding: 0 20px;
 }
 
-.cadastro{
+.cadastro {
     padding: 10px 15px;
     border-radius: 8px;
     background-color: #144fc4;
@@ -81,7 +83,7 @@ a{
     color: white;
 }
 
-.cadastro:hover{
+.cadastro:hover {
 
     padding: 10px 15px;
     border-radius: 8px;
@@ -92,9 +94,9 @@ a{
     transition: 0.3s;
 }
 
-a:hover{
+a:hover {
 
-    color:rgb(0, 27, 102);
+    color: rgb(0, 27, 102);
     transition: 0.4s;
 }
 
@@ -105,11 +107,11 @@ a:hover{
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
-    font-family: Raleway,Arial, Helvetica, sans-serif;
+    font-family: Raleway, Arial, Helvetica, sans-serif;
     /* vertical-align:middle; */
 }
 
@@ -120,15 +122,16 @@ a:hover{
 
 .inputs-div-card-box {
     display: flex;
-    
-}
-.inputs-setor{
-    display: flex;
-    flex-direction: column;
-    
+
 }
 
-.inputs-setor-all{
+.inputs-setor {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.inputs-setor-all {
     display: flex;
 }
 
@@ -140,7 +143,7 @@ a:hover{
     border-radius: 5px;
     padding: 15px;
     margin-right: 1vh;
-    
+
 }
 
 .inputCep {
@@ -159,7 +162,7 @@ a:hover{
     padding: 15px;
 }
 
-.inputRua{
+.inputRua {
     width: 497px;
     height: 25px;
     top: 432px;
@@ -178,7 +181,7 @@ a:hover{
     margin-right: 1vh;
 }
 
-.inputComplemento{
+.inputComplemento {
     width: 345px;
     height: 25px;
     top: 489px;
@@ -188,7 +191,7 @@ a:hover{
 
 }
 
-.inputCidade{
+.inputCidade {
     width: 229px;
     height: 25px;
     top: 548px;
@@ -208,7 +211,7 @@ a:hover{
     padding: 15px;
 }
 
-.inputSetorNome{
+.inputSetorNome {
     width: 308px;
     height: 25px;
     top: 548px;
@@ -262,7 +265,7 @@ input {
 
 }
 
-.button:hover{
+.button:hover {
 
     background-color: #FFFFFF;
     color: #474682;
@@ -270,56 +273,66 @@ input {
     transition: 0.5s;
     cursor: pointer;
 }
-.div-etapa1{
+
+.div-etapa1 {
     width: 90vh;
     height: 55vh;
 }
-input::placeholder{
+
+input::placeholder {
     font-size: 16px;
 }
-.div-etapas{
+
+.div-etapas {
     width: 100%;
     height: 5vh;
     display: flex;
     justify-content: space-evenly;
 }
-.div-etapas button{
+
+.div-etapas button {
     width: 5vh;
     height: 5vh;
     border-radius: 5px;
 }
-.btn-n-selecionado:hover{
+
+.btn-n-selecionado:hover {
     background-color: #144fc4;
     color: white;
 }
-.div-etapa1{
+
+.div-etapa1 {
     flex-direction: column;
-    align-items:center;
+    align-items: center;
 }
 
-.btn-n-selecionado{
+.btn-n-selecionado {
     background-color: transparent;
     cursor: pointer;
     border: #144fc4 3px solid;
     color: #144fc4;
     font-weight: bold;
-    box-shadow: 5px 5px 15px -5px black ;
+    box-shadow: 5px 5px 15px -5px black;
 }
 
-.btn-selecionado{
+.btn-selecionado {
     background-color: #144fc4;
     color: white;
 }
-#etapa1{
+
+#etapa1 {
     display: flex;
 }
-#etapa2{
+
+#etapa2 {
     display: none;
 }
-#etapa3{
+
+#etapa3 {
     display: none;
 }
-.title-setor{
+
+.title-setor {
     width: 100%;
     height: 10vh;
     display: flex;
@@ -329,11 +342,12 @@ input::placeholder{
 }
 
 
-.title-setor h1{
+.title-setor h1 {
     color: #144fc4;
     font-size: 30px;
 }
-.title-setor2{
+
+.title-setor2 {
     width: 100%;
     height: 8vh;
     display: flex;
@@ -343,25 +357,35 @@ input::placeholder{
 }
 
 
-.title-setor2 h1{
+.title-setor2 h1 {
     color: #144fc4;
     font-size: 25px;
 }
 
 
-.div-selects{
+.div-selects {
     width: 91%;
     height: 8vh;
     display: flex;
     justify-content: space-between;
-}   
-.select-endereco{
+}
+
+.select-endereco {
     text-align: center;
     width: 48%;
     height: 8vh;
     border-radius: 5px;
     border: 3px solid black;
 }
-.container-left{
+
+.container-left {
     width: 80vh;
+}
+
+.error {
+    border: 2px solid red;
+}
+
+.valid {
+    border: 2px solid rgb(0, 255, 0);
 }

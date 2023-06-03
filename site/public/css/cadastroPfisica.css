@@ -213,3 +213,10 @@ input::placeholder{
 
   font-size: 18px;
 }
+.error {
+  border: 2px solid red;
+}
+
+.valid {
+  border: 2px solid rgb(0, 255, 0);
+}
