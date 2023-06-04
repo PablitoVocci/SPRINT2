@@ -66,7 +66,7 @@
 
                             <input type="text" placeholder="Pais*" class="inputPais" id="input_pais">
 
-                            <input type="text" placeholder="CEP*" class="inputCep" id="input_cep">
+                            <input type="text" placeholder="CEP*" class="inputCep" id="input_cep" maxlength="8">
                         </div>
                         <input type="text" placeholder="Estado*" class="inputRua inputGrande" id="input_estado">
                         <input type="text" placeholder="Rua*" class="inputRua inputGrande" id="input_rua">
@@ -249,46 +249,58 @@
                 check = true;
             }
 
-            // cidade 
-
-            if (cidadeVar == "") {
-                cidade.className = " error " + cidade.className
-                cidade.className = cidade.className.replaceAll("valid ", " ")
-                check = false;
-            }
-            else {
-                cidade.className = cidade.className.replaceAll(" error ", " ")
-                cidade.className = " valid " + cep.className
-                check = true;
-            }
-
-            // bairro
-
-            if (bairroVar == "") {
-                bairro.className = " error " + bairro.className
-                bairro.className = bairro.className.replaceAll(" valid ", " ")
-                check = false;
-            }
-            else {
-                bairro.className = bairro.className.replaceAll(" error ", " ")
-                bairro.className = " valid " + bairro.className
-                check = true;
-            }
-
             // rua 
 
             if (ruaVar == "") {
 
-                rua.className = " error " + rua.className
-                rua.className = rua.className.replaceAll(" error ", " ")
+                rua.className = "error " + rua.className
+                rua.className = rua.className.replaceAll("valid ", " ")
+
                 check = false;
-            }
-            else {
-                rua.className = rua.className.replaceAll(" error ", " ")
-                rua.className = " valid " + bairro.className
-                check = true
+
+            } else {
+
+                rua.className = rua.className.replaceAll("error ", " ")
+                rua.className = "valid " + rua.className
+
+                check = true;
             }
 
+
+
+            // cidade
+
+            if (cidadeVar == "") {
+
+                cidade.className = "error " + cidade.className
+                cidade.className = cidade.className.replaceAll("valid ", " ")
+
+                check = false;
+
+            } else {
+
+                cidade.className = cidade.className.replaceAll("error ", " ")
+                cidade.className = "valid " + cidade.className
+
+                check = true;
+            }
+
+
+
+            if (bairroVar == "") {
+
+                bairro.className = "error " + bairro.className
+                bairro.className = bairro.className.replaceAll("valid ", " ")
+
+                check = false;
+
+            } else {
+
+                bairro.className = bairro.className.replaceAll("error ", " ")
+                bairro.className = "valid " + bairro.className
+
+                check = true;
+            }
 
 
             if (check == false) {
@@ -601,7 +613,7 @@
 
 
                     setTimeout(() => {
-                    window.location = 'endereco.html'
+                        window.location = 'endereco.html'
                     }, "2000")
 
                     // limparFormulario();

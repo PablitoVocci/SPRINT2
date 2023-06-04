@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Login</title>
 </head>
 
@@ -73,8 +75,58 @@
 function entrar() {
         // aguardar();
 
+        const email = document.getElementById("inputEmail");
+        const senha = document.getElementById("inputSenha");
+
         var emailVar = inputEmail.value;
         var senhaVar = inputSenha.value;
+
+       
+
+        var check = false;
+
+        if (emailVar == "") {
+
+            email.className = "error " + email.className
+            email.className = email.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        }else if (emailVar.indexOf('@') == -1) {
+            
+            alert("E-mail inválido!")
+            email.className = "error " + email.className
+            email.className = email.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        }
+        
+        else {
+
+            email.className = email.className.replaceAll("error ", " ")
+            email.className = "valid " + email.className
+
+            check = true;
+
+        }
+
+        if (senhaVar == "") {
+
+            senha.className = "error " + senha.className
+            senha.className = senha.className.replaceAll("valid ", " ")
+
+            check = false;
+
+        } else {
+
+            senha.className = senha.className.replaceAll("error ", " ")
+            senha.className = "valid " + senha.className
+
+            check = true;
+        }
+
+
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
@@ -103,6 +155,13 @@ function entrar() {
 
             if (resposta.ok) {
                 console.log(resposta);
+                Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Login realizado com sucesso',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
 
                 resposta.json().then(json => {
                     console.log(json);
@@ -118,7 +177,6 @@ function entrar() {
                 });
 
             } else {
-
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
@@ -129,67 +187,10 @@ function entrar() {
 
         }).catch(function (erro) {
             console.log(erro);
+            
         })
 
         return false;
     }
 
-
-    function ValidarLogin() {
-
-      // Constante "email" = documento. get(pegue) Element (elemento) By(do) Id ("X")
-
-        const email = document.getElementById("inputEmail");
-        const senha = document.getElementById("inputSenha");
-
-        var emailValue = email.value;
-        var senhaValue = senha.value;
-
-        var check = false;
-
-        if (emailValue == "") {
-
-            email.className = "error " + email.className
-            email.className = email.className.replaceAll("valid ", " ")
-
-            check = false;
-
-        } else {
-
-            email.className = email.className.replaceAll("error ", " ")
-            email.className = "valid " + email.className
-
-            check = true;
-
-        }
-
-        if (senhaValue == "") {
-
-            senha.className = "error " + senha.className
-            senha.className = senha.className.replaceAll("valid ", " ")
-
-            check = false;
-
-        } else {
-
-            senha.className = senha.className.replaceAll("error ", " ")
-            senha.className = "valid " + senha.className
-
-            check = true;
-        }
-        
-        function toDash(){
-
-            window.location.href='dashboard.html'
-        }
-
-        if(emailValue == "admin@admin" && senhaValue == "123"){
-
-            check = true;
-
-            setInterval(toDash, 3000);
-
-        }
-
-    }
 </script>

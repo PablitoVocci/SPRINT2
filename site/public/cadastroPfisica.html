@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/cadastroPfisica.css" />
     <link rel="icon" href="assets/logo.png">
+    <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
@@ -15,83 +16,92 @@
 
     <title>Cadastro</title>
 
-    
+
 </head>
 
 <body>
-    <header class="header">
-        <div class="parte-1">
-            <img src="assets/logo.png" alt="Logo DigitalTherm" class="imagem-logo" />
 
-            <nav class="container-1">
-                <ul>
-                    <li>
-                        <b>
-                            <a href="./index.html">Inicio</a>
-                        </b>
-                    </li>
-                    <li>
-                        <a href="#">Sobre Nos</a>
-                    </li>
+    <div class="container">
+        <div class="container-left">
+            <div class="container-left-logo">
+                <img src="./assets/logo.png" alt="">
+                <h1>DigitalTherm</h1>
+            </div>
 
-                    <li>
-                        <a href="#">Fale Conosco</a>
-                    </li>
-                </ul>
-            </nav>
+            <h3>
+                Bem vindo!
+                <span id="b_usuario"></span>
+            </h3>
+
+            <div class="container-left-buttons">
+
+                <button class="buttons-left" onclick="window.location.href='./dashboard/dashboard.html'"><i
+                        class="fa fa-line-chart" aria-hidden="true"></i></i>Graficos</button>
+
+                <button class="buttons-left-func" onclick="window.location.href='./endereco.html'"><i
+                        class="fa fa-user-o" aria-hidden="true"></i></i>Setor</button>
+
+                <button id="button-logout" class="buttons-left-func button-logout"
+                    onclick="window.location.href='./login.html'"><i class="fa fa-user-o"
+                        aria-hidden="true"></i></i>Logout</button>
+
+            </div>
+
+            <div class="container-left-func">
+
+                <!--Ta tudo na div de cima -->
+
+            </div>
+
         </div>
+        <div class="dash">
+            <section id="form-section">
 
-        <div class="container-2">
-            <a href="./loginn.html">Login</a>
-            <a href="./novo_acesso.html">
-                <button class="cadastro">Cadastre-se</button>
-            </a>
+                <div class="card-box">
+
+                    <img src="assets/digitalTherm.png" alt="" srcset="">
+
+                    <div class="inputs-div-card-box">
+
+                        <input type="text" id="inputNome" placeholder="Nome*" class="inputNome">
+
+                        <input type="text" id="inputSobrenome" placeholder="Sobrenome" class="inputSobrenome">
+                    </div>
+
+                    <div class="inputs-div-card-box">
+
+                        <input type="date" id="inputData" placeholder="Data de Nascimento*" class="inputNascimento">
+
+                        <input type="text" id="inputCpf" placeholder="CPF*" class="inputCpf" maxlength="11">
+                    </div>
+
+                    <input type="text" id="inputEmail" placeholder="E-mail*" class="inputEmail inputGrande">
+
+                    <div class="inputs-div-card-box">
+
+                        <input type="text" id="inputCel" placeholder="Celular*" class="inputCelular" maxlength="11">
+
+                        <input type="text" id="inputTel" placeholder="Telefone Fixo" class="inputTelefoneFixo"
+                            maxlength="15">
+                    </div>
+
+                    <div class="inputs-div-card-box">
+
+                        <input type="text" id="inputCep" placeholder="CEP" class="inputCep" maxlength="8">
+
+                        <input type="text" id="inputNum" placeholder="Num" class="inputNumero">
+                    </div>
+
+                    <input type="text" id="inputSenha" class="inputGrande1" placeholder="Insira sua senha*">
+
+                    <input type="text" id="confirmacao_senha_input" class="inputGrande2"
+                        placeholder="Confirme sua Senha*">
+                    <button class="button" onclick="Cadastrar()">Continuar!</button>
+                </div>
+
+            </section>
         </div>
-    </header>
-
-    <section id="form-section">
-
-        <div class="card-box">
-
-            <img src="assets/digitalTherm.png" alt="" srcset="">
-
-            <div class="inputs-div-card-box">
-
-                <input type="text" id="inputNome" placeholder="Nome*" class="inputNome">
-
-                <input type="text" id="inputSobrenome" placeholder="Sobrenome" class="inputSobrenome">
-            </div>
-
-            <div class="inputs-div-card-box">
-
-                <input type="date" id="inputData" placeholder="Data de Nascimento*" class="inputNascimento">
-
-                <input type="text" id="inputCpf" placeholder="CPF*" class="inputCpf">
-            </div>
-
-            <input type="text" id="inputEmail" placeholder="E-mail*" class="inputEmail inputGrande">
-
-            <div class="inputs-div-card-box">
-
-                <input type="text" id="inputCel" placeholder="Celular" class="inputCelular">
-
-                <input type="text" id="inputTel" placeholder="Telefone Fixo" class="inputTelefoneFixo">
-            </div>
-
-            <div class="inputs-div-card-box">
-
-                <input type="text" id="inputCep" placeholder="CEP" class="inputCep">
-
-                <input type="text" id="inputNum" placeholder="Num" class="inputNumero">
-            </div>
-
-            <input type="text" id="inputSenha" class="inputGrande1" placeholder="Insira sua senha*">
-
-            <input type="text" id="confirmacao_senha_input" class="inputGrande2" placeholder="Confirme sua Senha*">
-            <button class="button" onclick="Cadastrar()">Continuar!</button>
-        </div>
-
-    </section>
+    </div>
 
     <script type="text/javascript" nonce="{coloque_seu_valor_nonce_aqui}"
         src="https://desk.zoho.com/portal/api/web/inapp/863373000000292005?orgId=811744654" defer></script>
@@ -111,7 +121,6 @@
         const CPF = document.getElementById("inputCpf")
         const email = document.getElementById("inputEmail");
         const celular = document.getElementById("inputCel");
-        const telefoneFixo = document.getElementById("inputNum");
         const senha = document.getElementById("inputSenha");
         const ConfSenha = document.getElementById("confirmacao_senha_input")
 
@@ -154,23 +163,6 @@
                 check = true;
             }
 
-
-
-            if (sobrenomeVar == "") {
-                sobrenome.className = " error " + sobrenome.className
-                sobrenome.className = sobrenome.className.replaceAll(" valid ", "")
-                check = false;
-            }
-
-            else {
-
-                // Remove a classe de erro do elemento "nome" e adiciona a classe "valid".
-                sobrenome.className = sobrenome.className.replaceAll("error ", " ")
-                sobrenome.className = " valid " + nome.className
-                check = true;
-
-            }
-
             // data de nascimento
 
             if (dataNascVar == "") {
@@ -191,7 +183,7 @@
                 CPF.className = CPF.className.replaceAll("valid ", "")
                 check = false;
             }
-            
+
 
             else {
                 CPF.className = CPF.className.replaceAll("error ", " ")
@@ -208,15 +200,15 @@
                 email.className = "error " + email.className
                 email.className = email.className.replaceAll("valid ", " ")
                 check = false;
-            } 
-            else if(emailVar.indexOf("@") == -1){
+            }
+            else if (emailVar.indexOf("@") == -1) {
                 email.className = "error " + email.className
                 email.className = email.className.replaceAll("valid ", " ")
                 check = false;
 
                 alert("Email inválido!")
             }
-            
+
             else {
 
                 // Remove a classe de erro do elemento "email" e adiciona a classe "valid".
@@ -237,21 +229,6 @@
 
                 celular.className = celular.className.replaceAll("error ", " ")
                 celular.className = "valid " + celular.className
-                check = true;
-            }
-
-            // telefone fixo
-
-            if (telVar == "") {
-
-                telefoneFixo.className = "error " + telefoneFixo.className
-                telefoneFixo.className = telefoneFixo.className.replaceAll("valid ", " ")
-                check = false;
-
-            } else {
-
-                telefoneFixo.className = telefoneFixo.className.replaceAll("error ", " ")
-                telefoneFixo.className = "valid " + telefoneFixo.className
                 check = true;
             }
 
@@ -311,7 +288,7 @@
                 // Agora vá para o método fetch logo abaixo
 
 
-                if (nomeVar == "" || emailVar == "" || senhaVar == "" || ConfSenhaVar == "" ) {
+                if (nomeVar == "" || emailVar == "" || senhaVar == "" || ConfSenhaVar == "") {
                     // cardErro.style.display = "block"
                     // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 

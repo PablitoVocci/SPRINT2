@@ -115,116 +115,16 @@
 
             check = false;
 
-        } else {
+        } else if (emailVar.indexOf('@') == -1) {
 
-            email.className = email.className.replaceAll("error ", " ")
-            email.className = "valid " + email.className
-
-            check = true;
-
-        }
-
-        if (senhaVar == "") {
-
-            senha.className = "error " + senha.className
-            senha.className = senha.className.replaceAll("valid ", " ")
-
-            check = false;
-
-        } else {
-
-            senha.className = senha.className.replaceAll("error ", " ")
-            senha.className = "valid " + senha.className
-
-            check = true;
-        }
-
-
-            fetch("/pFisica/autenticar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    emailServer: emailVar,
-                    senhaServer: senhaVar
-                })
-            }).then(function (resposta) {
-                console.log("resposta: ", resposta);
-
-                if (resposta.ok) {
-                    // console.log(resposta);
-
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Login realizado com sucesso',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-                        sessionStorage.EMAIL_USUARIO = json.email;
-                        sessionStorage.NOME_USUARIO = json.nome;
-                        sessionStorage.ID_FUNC = json.idFuncionario;
-                        sessionStorage.ID_EMPRESA = json.fkEmpresa;
-
-                        setTimeout(function () {
-                            window.location = "./dashboard/dashboard-funcionario.html";
-                        }, 1000); // apenas para exibir o loading
-
-                    }
-                    );
-
-                } else {
-
-                    console.log("Houve um erro ao tentar realizar o login!");
-
-                    resposta.text().then(texto => {
-                        console.error(texto);
-                        // finalizarAguardar(texto);
-                    });
-                }
-
-            }).catch(function (erro) {
-                console.log(erro);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Houve um erro ao tentar realizar o login!'
-                });
-
-            })
-
-        
-
-
-    }
-
-
-
-    function ValidarLogin() {
-
-        // Constante "email" = documento. get(pegue) Element (elemento) By(do) Id ("X")
-
-        const email = document.getElementById("inputEmail");
-        const senha = document.getElementById("inputSenha");
-
-        var emailVar = email.value;
-        var senhaVar = senha.value;
-
-        var check = false;
-
-        if (emailVar == "") {
-
+            alert('E-mail inválido!')
             email.className = "error " + email.className
             email.className = email.className.replaceAll("valid ", " ")
 
             check = false;
+        }
 
-        } else {
+        else {
 
             email.className = email.className.replaceAll("error ", " ")
             email.className = "valid " + email.className
@@ -248,18 +148,69 @@
             check = true;
         }
 
-        function toDash() {
 
-            window.location.href = 'dashboard.html'
-        }
+        fetch("/pFisica/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta);
 
-        if (emailVar == "admin@admin" && senhaVar == "123") {
+            if (resposta.ok) {
+                // console.log(resposta);
 
-            check = true;
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Login realizado com sucesso',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
 
-            setInterval(toDash, 3000);
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_FUNC = json.idFuncionario;
+                    sessionStorage.ID_EMPRESA = json.fkEmpresa;
 
-        }
+                    setTimeout(function () {
+                        window.location = "./dashboard/dashboard-funcionario.html";
+                    }, 1000); // apenas para exibir o loading
+
+                }
+                );
+
+            } else {
+                
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Houve um erro ao tentar realizar o login!'
+            });
+
+        })
+
+
+
 
     }
+
+
 </script>
