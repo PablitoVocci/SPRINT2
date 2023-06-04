@@ -65,7 +65,7 @@ function alertaSetor(idAquario, limite_linhas) {
                     where fkSensor = ${idAquario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select setorEmpresa.nome as NomeSetor, temperatura as temperatura, umidade as umidade, momento, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, setorEmpresa.fkEmpresa
+        instrucaoSql = `select idSensor,setorEmpresa.nome as NomeSetor, temperatura as temperatura, umidade as umidade, momento, DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, setorEmpresa.fkEmpresa
         from medida 
             JOIN sensor ON medida.fkSensor = sensor.idSensor
                 JOIN servidor ON sensor.fkServidor = servidor.idServidor
