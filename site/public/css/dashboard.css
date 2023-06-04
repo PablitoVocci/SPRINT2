@@ -246,7 +246,7 @@ body {
     position: absolute;
     top: -10px;
     padding: 5px;
-    border-radius: 10%;
+    border-radius: 10px;
 }
 .cardAlerta{
     width: 70%;
