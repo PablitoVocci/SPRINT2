@@ -11,6 +11,7 @@ body{
 
 .header{
     background-color: #3E68FF;
+    box-shadow: 0 150px 300px -15px inset black;
 }
 
 .index-primaria{
@@ -192,7 +193,8 @@ footer h3{
 
 /* div SOBRE *********************** */
 .section-sobre{
-    background-color:#3E68FF;
+    background-color: #3E68FF;
+    box-shadow: 0 150px 300px -15px inset black;
 }
 .sobre{
     display: flex;
@@ -225,10 +227,11 @@ footer h3{
 
 /* div CULTURA *********************** */
 .section-cultura{
-    background-color:#F0F0F0;
+    background-color: #3E68FF;
+    box-shadow: 0 150px 300px -15px inset black;
 }
 .section-cultura .title{
-    color: #144fc4;
+    color: #fafafa;
     font-size: 70px;
 }
 .div-cultura{
@@ -242,7 +245,7 @@ footer h3{
 .msg-cultura{
     padding-left: 10vh;
     text-align: start;
-    color: #144fc4;
+    color: #ffffff;
     font-size: 35px;
 }
 .div-img{
@@ -252,7 +255,8 @@ footer h3{
 
 /* section Integrantes *********************/
 .integrantes{
-    background-color:#3E68FF;
+    background-color: #3E68FF;
+    box-shadow: 0 150px 300px -15px inset black;
     height: fit-content;
 }
 .integrantes .title{

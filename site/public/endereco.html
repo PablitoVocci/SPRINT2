@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/endereço.css" />
     <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="icon" href="assets/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>DigitalTherm - Endereço</title>
+    <title>Endereço</title>
 </head>
 
 <body>
@@ -488,10 +489,10 @@
     function finalizarCadastro() {
         console.log("ESTOU AQUI no finalizar")
 
-        const endereco = document.getElementById("select_endereco.value");
-        const setor = document.getElementById("select_setor.value");
-        const numero = document.getElementById("input_num.value");
-        const complemento = document.getElementById("input_comp.value")
+        const endereco = document.getElementById("select_endereco");
+        const setor = document.getElementById("select_setor");
+        const numero = document.getElementById("input_num");
+        const complemento = document.getElementById("input_comp")
 
         //Cadastro Associativa NpraN
         var fkEnderecoVar = Number(select_endereco.value);
@@ -600,7 +601,7 @@
 
 
                     setTimeout(() => {
-                        localStorage.clear();
+                    window.location = 'endereco.html'
                     }, "2000")
 
                     // limparFormulario();
@@ -621,101 +622,102 @@
 
             return false;
         }
-        var fkVar = sessionStorage.ID_USUARIO;
-        console.log(fkVar);
-
-
-
-
-        // //SELECT DO ENDEREÇO
-        fetch("/endereco/consultar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                fkServer: fkVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO NOVA FUnCTIONS()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-                console.log("TAMANHO " + resposta.length);
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log("TAMANHO " + json.length);
-                    console.log(JSON.stringify(json));
-                    console.log("Pais: " + json[0].pais);
-                    for (var i = 0; i < json.length; i++) {
-                        select_endereco.innerHTML += `<option value="${json[i].idEndereco}">${json[i].rua}</option>`;
-                    }
-
-                    // setTimeout(function () {
-                    //     window.location = "./dashboard/dashboard.html";
-                    // }, 1000); // apenas para exibir o loading    
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    // finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-
-        //SELECT SETOR
-
-        fetch("/setor/consultar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                fkServer: fkVar
-            })
-        }).then(function (resultadoSetor) {
-            console.log("ESTOU NO THEN DO NOVA FUnCTIONS()!")
-
-            if (resultadoSetor.ok) {
-                console.log(resultadoSetor);
-                console.log("TAMANHO " + resultadoSetor.length);
-                resultadoSetor.json().then(jsonSetor => {
-                    console.log(jsonSetor);
-                    console.log("TAMANHO " + jsonSetor.length);
-                    console.log(JSON.stringify(jsonSetor));
-                    console.log("SETOR: " + jsonSetor[0].nome);
-                    for (var i = 0; i < jsonSetor.length; i++) {
-                        select_setor.innerHTML += `<option value="${jsonSetor[i].idSetorEmp}">${jsonSetor[i].nome}</option>`;
-                    }
-
-                    // setTimeout(function () {
-                    //     window.location = "./dashboard/dashboard.html";
-                    // }, 1000); // apenas para exibir o loading    
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    // finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
     }
+    var fkVar = sessionStorage.ID_USUARIO;
+    console.log(fkVar);
+
+
+
+
+    // //SELECT DO ENDEREÇO
+    fetch("/endereco/consultar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            fkServer: fkVar
+        })
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO NOVA FUnCTIONS()!")
+
+        if (resposta.ok) {
+            console.log(resposta);
+            console.log("TAMANHO " + resposta.length);
+            resposta.json().then(json => {
+                console.log(json);
+                console.log("TAMANHO " + json.length);
+                console.log(JSON.stringify(json));
+                console.log("Pais: " + json[0].pais);
+                for (var i = 0; i < json.length; i++) {
+                    select_endereco.innerHTML += `<option value="${json[i].idEndereco}">${json[i].rua}</option>`;
+                }
+
+                // setTimeout(function () {
+                //     window.location = "./dashboard/dashboard.html";
+                // }, 1000); // apenas para exibir o loading    
+
+            });
+
+        } else {
+
+            console.log("Houve um erro ao tentar realizar o login!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+                // finalizarAguardar(texto);
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
+
+    //SELECT SETOR
+
+    fetch("/setor/consultar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            fkServer: fkVar
+        })
+    }).then(function (resultadoSetor) {
+        console.log("ESTOU NO THEN DO NOVA FUnCTIONS()!")
+
+        if (resultadoSetor.ok) {
+            console.log(resultadoSetor);
+            console.log("TAMANHO " + resultadoSetor.length);
+            resultadoSetor.json().then(jsonSetor => {
+                console.log(jsonSetor);
+                console.log("TAMANHO " + jsonSetor.length);
+                console.log(JSON.stringify(jsonSetor));
+                console.log("SETOR: " + jsonSetor[0].nome);
+                for (var i = 0; i < jsonSetor.length; i++) {
+                    select_setor.innerHTML += `<option value="${jsonSetor[i].idSetorEmp}">${jsonSetor[i].nome}</option>`;
+                }
+
+                // setTimeout(function () {
+                //     window.location = "./dashboard/dashboard.html";
+                // }, 1000); // apenas para exibir o loading    
+
+            });
+
+        } else {
+
+            console.log("Houve um erro ao tentar realizar o login!");
+
+            resposta.text().then(texto => {
+                console.error(texto);
+                // finalizarAguardar(texto);
+            });
+        }
+
+    }).catch(function (erro) {
+        console.log(erro);
+    })
+
 
 </script>
