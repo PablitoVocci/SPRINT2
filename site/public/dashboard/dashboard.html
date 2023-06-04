@@ -69,71 +69,10 @@
             <div class="primaryDash" id="dash1">
                 <div class="dash">
                     <div class="btns-dash" id="btn_sensores">
-                        <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  -->
-                        <!-- <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>guigui
-                        <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
-                        <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
-                        <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button> -->
+                    
                     </div>
                     <div id="graficos">
-                        <!-- <div id="grafico1" class="display-block">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor1"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas1" style="width: auto;"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura1" style="color: white"></p>
-                            </div>
-                        </div>
-
-                        <div id="grafico2" class="display-none">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor2"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas2" style="width: auto;"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura2" style="color: white"></p>
-                            </div>
-                        </div>
-
-                        <div id="grafico3" class="display-none">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor3"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas3"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura3" style="color: white"></p>
-                            </div>
-                        </div>
-
-                        <div id="grafico4" class="display-none">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor4"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas4"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura4" style="color: white"></p>
-                            </div>
-                        </div>
-                         <div id="grafico5" class="display-none">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor4"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas5"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura4" style="color: white"></p>
-                            </div>
-                        </div> --> 
+           
                     </div>
                 </div>
                 <div class="dash_graficos">
@@ -143,102 +82,10 @@
                     <div class="graficoGeral">
                         <div class="chartGeral">
                             <canvas id="myChartCanvasGeral"></canvas>
-
                         </div>
                     </div>
-
                 </div>
             </div>
-
-            <!-- ESSA É A DASH DE DOIS GRÁFICOS -->
-
-
-            <!--
-            <div class="primaryDash secundaryDash" id="dash2">
-                <div class="dash">
-                    <div class="btns-dash"> -->
-                        <!-- O gráfico é chamado de acordo com o id (fk_sensor) do banco  
-                        <button class="btn-chart btn-blue" onclick="exibirsensor(1)" id="btnsensor1">Sensor 1</button>
-                        <button class="btn-chart btn-white" onclick="exibirsensor(2)" id="btnsensor2">Sensor 2</button>
-                        <button class="btn-chart btn-white" onclick="exibirsensor(3)" id="btnsensor3">Sensor 3</button>
-                        <button class="btn-chart btn-white" onclick="exibirsensor(4)" id="btnsensor4">Sensor 4</button>
-                    </div>
-                    <div id="graficos">
-                        <div id="grafico1" class="display-block">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor1"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas1" style="width: auto;"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura1" style="color: white"></p>
-                            </div>
-                        </div>
-
-                        <div id="grafico2" class="display-none">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor2"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas2" style="width: auto;"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura2" style="color: white"></p>
-                            </div>
-                        </div>
-
-                        <div id="grafico3" class="display-none">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor3"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas3"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura3" style="color: white"></p>
-                            </div>
-                        </div>
-
-                        <div id="grafico4" class="display-none">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor4"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas4"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura4" style="color: white"></p>
-                            </div>
-                        </div>
-
-                        <div id="grafico5" class="display-none">
-                            <h3 class="tituloGraficos">
-                                <span id="titulosensor4"></span>
-                            </h3>
-                            <div class="graph">
-                                <canvas id="myChartCanvas5"></canvas>
-                            </div>
-                            <div class="label-captura">
-                                <p id="avisoCaptura4" style="color: white"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-                <div class="dash_graficos">
-                    <div class="title-graph2">
-                        <h1>Média de temperatura e Umidade de cada setor 2</h1>
-                    </div>
-                    <div class="graficoGeral">
-                        <div class="chartGeral">
-                            <canvas id="myChartCanvasGeral"></canvas>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        -->
             <div id="alerts">
 
                 <button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>
@@ -258,16 +105,19 @@
     let proximaAtualizacao;
     let atualizacaoAlertas;
     var fkVar = sessionStorage.ID_USUARIO;
-    var setor1 = select_setor.value;
-    console.log("SEEEEETOOOOOOOORRRRR 111:: "+setor1);
+
+    setTimeout(function() {
+        window.onload = dashOnload(); 
+    }, 500);
+
     function dashOnload() {
-        verSetores();
+        buscarIds();
+        exibirsensor
         obterDadosGraficoGeral();
-        buscarIds(setor1);
         obterDadosGraficos();
-        // obterDadosGrafico(5)
     }
-    window.onload = dashOnload();
+    window.onload = verSetores()
+   
 
     verificar_autenticacao();
     function verSetores(){
@@ -312,8 +162,6 @@
         }).catch(function (erro) {
             console.log(erro);
         })
-
-
 
     }
     function alterarTitulo(idsensor) {

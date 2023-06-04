@@ -160,7 +160,9 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+#graficos{
+    width: 130vh;
+}
 .graph {
     width: 135vh;
     height: 47vh;
