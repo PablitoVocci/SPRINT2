@@ -2,7 +2,6 @@ CREATE DATABASE digitalTherm;
 
 USE digitalTherm;
 
-
 -- CRIAR A TABELA (EMPRESA)
 
 CREATE TABLE empresa (
@@ -66,10 +65,10 @@ CONSTRAINT pkSetorEmp PRIMARY KEY (idSetorEmp, fkEmpresa)
 );
 
 INSERT INTO setorEmpresa VALUES
-(null, 'setor leste', 5, 1),
-(null, 'Sul', 3, 1),
-(null, 'matagal', 6, 1),
-(null, 'aka', 9, 1);
+(null, 'Setor leste', 5, 1),
+(null, 'Setor Sul', 3, 1),
+(null, 'Setor Norte', 6, 1),
+(null, 'Setor Sudeste', 9, 1);
 
 
 CREATE TABLE enderecoSetor (
@@ -100,13 +99,28 @@ CONSTRAINT fkSetorServ FOREIGN KEY (fkSetorEmp) REFERENCES setorEmpresa(idSetorE
 CONSTRAINT fkSetorEmp FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
 CONSTRAINT pkSetorSe PRIMARY KEY (idServidor, fkSetorEmp, fkEmpresa)
 ) AUTO_INCREMENT = 50;
-
+select * from servidor;
 
 INSERT INTO servidor VALUES 
 (null, '1A', 'primeiro', 1, 1),
+(null, '1A', 'segundo', 1, 1),
+(null, '1A', 'terceiro', 1, 1),
+(null, '1A', 'quarto', 1, 1),
+(null, '1A', 'Quinto', 1, 1),
+
+(null, '3A', 'primeiro', 2, 1),
 (null, '3A', 'segundo', 2, 1),
-(null, '4A', 'terceiro', 3, 1),
-(null, '2A', 'quarto', 4, 1);
+(null, '3A', 'terceiro', 2, 1),
+(null, '3A', 'quarto', 2, 1),
+
+(null, '4A', 'primeiro', 3, 1),
+(null, '4A', 'segundo', 3, 1),
+
+
+(null, '2A', 'primeiro', 4, 1),
+(null, '2A', 'segundo', 4, 1),
+(null, '2A', 'terceiro', 4, 1);
+
 
 
 CREATE TABLE tipoSensor (
@@ -144,7 +158,21 @@ INSERT INTO sensor VALUES
 (null, 1, 1, 1, 50),
 (null, 1, 1, 1, 51),
 (null, 1, 1, 1, 52),
-(null, 1, 1, 1, 53);
+(null, 1, 1, 1, 53),
+(null, 1, 1, 1, 54),
+
+(null, 1, 1, 1, 55),
+(null, 1, 1, 1, 56),
+(null, 1, 1, 1, 57),
+(null, 1, 1, 1, 58),
+
+(null, 1, 1, 1, 59),
+(null, 1, 1, 1, 60),
+
+(null, 1, 1, 1, 61),
+(null, 1, 1, 1, 62),
+(null, 1, 1, 1, 63);
+
 
 
 /*
@@ -162,16 +190,146 @@ create table medida (
     CONSTRAINT pkMedSen PRIMARY KEY (idMedida, fkSensor)
 );
 
-
+-- Sensor 1
+-- Sensor 1
 INSERT INTO medida VALUES
-(null, 21.55, 55.55, now(), 1),
-(null, 20.55, 85.55, now(), 2),
-(null, 22.55, 85.55, now(), 3),
-(null, 10.55, 55.55, now(), 4),
-(null, 32.55, 45.55, now(), 3),
-(null, 12.55, 65.55, now(), 4),
-(null, 42.55, 15.55, now(), 3),
-(null, 32.55, 85.55, now(), 2);
+(null, 17.00, 40.00, now(), 1),
+(null, 21.00, 42.00, now(), 1),
+(null, 33.00, 44.00, now(), 1),
+(null, 23.00, 54.00, now(), 1),
+(null, 12.00, 54.00, now(), 1),
+(null, 12.00, 66.00, now(), 1),
+(null, 43.00, 87.00, now(), 1);
+
+-- Sensor 2
+INSERT INTO medida VALUES
+(null, 17.00, 65.00, now(), 2),
+(null, 45.00, 42.00, now(), 2),
+(null, 25.00, 44.00, now(), 2),
+(null, 65.00, 46.00, now(), 2),
+(null, 33.00, 66.00, now(), 2),
+(null, 37.00, 33.00, now(), 2),
+(null, 22.00, 52.00, now(), 2);
+
+-- Sensor 3
+INSERT INTO medida VALUES
+(null, 55.00, 77.00, now(), 3),
+(null, 31.00, 44.00, now(), 3),
+(null, 53.00, 44.00, now(), 3),
+(null, 12.00, 46.00, now(), 3),
+(null, 21.00, 48.00, now(), 3),
+(null, 15.00, 67.00, now(), 3),
+(null, 29.00, 52.00, now(), 3);
+
+-- Sensor 4
+INSERT INTO medida VALUES
+(null, 14.00, 76.00, now(), 4),
+(null, 55.00, 54.00, now(), 4),
+(null, 32.00, 66.00, now(), 4),
+(null, 15.00, 46.00, now(), 4),
+(null, 32.00, 99.00, now(), 4),
+(null, 11.00, 50.00, now(), 4),
+(null, 33.00, 43.00, now(), 4);
+
+-- Sensor 5
+INSERT INTO medida VALUES
+(null, 12.00, 40.00, now(), 5),
+(null, 22.00, 99.00, now(), 5),
+(null, 24.00, 65.00, now(), 5),
+(null, 55.00, 45.00, now(), 5),
+(null, 31.00, 45.00, now(), 5),
+(null, 37.00, 33.00, now(), 5),
+(null, 23.00, 76.00, now(), 5);
+
+-- Sensor 6
+INSERT INTO medida VALUES
+(null, 4.00, 78.00, now(), 6),
+(null, 21.00, 65.00, now(), 6),
+(null, 25.00, 54.00, now(), 6),
+(null, 31.00, 90.00, now(), 6),
+(null, 33.00, 97.00, now(), 6),
+(null, 17.00, 43.00, now(), 6),
+(null, 39.00, 34.00, now(), 6);
+
+-- Sensor 7
+INSERT INTO medida VALUES
+(null, 17.00, 46.00, now(), 7),
+(null, 14.00, 78.00, now(), 7),
+(null, 43.00, 44.00, now(), 7),
+(null, 17.00, 65.00, now(), 7),
+(null, 12.00, 43.00, now(), 7),
+(null, 14.00, 50.00, now(), 7),
+(null, 39.00, 32.00, now(), 7);
+
+-- Sensor 8
+INSERT INTO medida VALUES
+(null, 17.00, 67.00, now(), 8),
+(null, 43.00, 54.00, now(), 8),
+(null, 25.00, 32.00, now(), 8),
+(null, 29.00, 46.00, now(), 8),
+(null, 21.00, 48.00, now(), 8),
+(null, 37.00, 50.00, now(), 8),
+(null, 39.00, 52.00, now(), 8);
+
+-- Sensor 9
+INSERT INTO medida VALUES
+(null, 17.00, 56.00, now(), 9),
+(null, 21.00, 76.00, now(), 9),
+(null, 25.00, 65.00, now(), 9),
+(null, 11.00, 33.00, now(), 9),
+(null, 33.00, 45.00, now(), 9),
+(null, 34.00, 54.00, now(), 9),
+(null, 39.00, 32.00, now(), 9);
+
+-- Sensor 10
+INSERT INTO medida VALUES
+(null, 17.00, 40.00, now(), 10),
+(null, 21.00, 42.00, now(), 10),
+(null, 43.00, 44.00, now(), 10),
+(null, 23.00, 46.00, now(), 10),
+(null, 33.00, 48.00, now(), 10),
+(null, 11.00, 50.00, now(), 10),
+(null, 39.00, 52.00, now(), 10);
+
+-- Sensor 11
+INSERT INTO medida VALUES
+(null, 17.00, 23.00, now(), 11),
+(null, 21.00, 45.00, now(), 11),
+(null, 12.00, 56.00, now(), 11),
+(null, 21.00, 23.00, now(), 11),
+(null, 33.00, 12.00, now(), 11),
+(null, 37.00, 34.00, now(), 11),
+(null, 27.00, 54.00, now(), 11);
+
+-- Sensor 12
+INSERT INTO medida VALUES
+(null, 17.00, 23.00, now(), 12),
+(null, 11.00, 56.00, now(), 12),
+(null, 34.00, 65.00, now(), 12),
+(null, 32.00, 54.00, now(), 12),
+(null, 12.00, 23.00, now(), 12),
+(null, 37.00, 56.00, now(), 12),
+(null, 39.00, 67.00, now(), 12);
+
+-- Sensor 13
+INSERT INTO medida VALUES
+(null, 17.00, 65.00, now(), 13),
+(null, 22.00, 42.00, now(), 13),
+(null, 34.00, 77.00, now(), 13),
+(null, 29.00, 34.00, now(), 13),
+(null, 32.00, 48.00, now(), 13),
+(null, 12.00, 75.00, now(), 13),
+(null, 24.00, 52.00, now(), 13);
+
+-- Sensor 14
+INSERT INTO medida VALUES
+(null, 44.00, 40.00, now(), 14),
+(null, 33.00, 54.00, now(), 14),
+(null, 33.00, 55.00, now(), 14),
+(null, 22.00, 66.00, now(), 14),
+(null, 12.00, 45.00, now(), 14),
+(null, 37.00, 32.00, now(), 14),
+(null, 19.00, 54.00, now(), 14);
 
     
 SELECT AVG(medida.temperatura) AS temperatura_media, AVG(medida.umidade) AS umidade_media, setorEmpresa.nome

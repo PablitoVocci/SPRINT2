@@ -33,7 +33,7 @@
     <div class="container">
         <div class="container-left">
             <div class="container-left-logo">
-                <img src="../assets/digitalTherm.png" alt="">
+                <img src="../assets/logo.png" style="width: 80px;" alt="">
                 <h1>DigitalTherm</h1>
             </div>
 
@@ -49,7 +49,7 @@
                     <button onclick="buscarIds()" class="btn-setor">Ver setor</button>
                 </div>
 
-                <button onclick="trocaDash()" class="buttons-left"><i class="fa fa-line-chart" aria-hidden="true"></i>Graficos</button>
+
                 
                 <div class="container-left-buttons">
                     <button class="buttons-left-func" onclick="window.location.href='../endereco.html'"><i
@@ -87,9 +87,11 @@
                 </div>
             </div>
             <div id="alerts">
-
                 <button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>
-
+                <div id="alert_red" class="div-filtros-alerts"></div>
+                <div id="alert_orange" class="div-filtros-alerts"></div>
+                <div id="alert_yellow" class="div-filtros-alerts"></div>
+                <div id="alert_green" class="div-filtros-alerts"></div>
             </div>
 
         </div>
@@ -164,9 +166,11 @@
         })
 
     }
+    var contagemSensor = 0;
     function alterarTitulo(idsensor) {
+        contagemSensor++;
         var titulosensor = document.getElementById(`titulosensor${idsensor}`)
-        titulosensor.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #3E68FF'>sensor" + idsensor + "</span>"
+        titulosensor.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #3E68FF'>sensor" + contagemSensor + "</span>"
     }
 //guigui
     var ultimoId = 0;
@@ -228,6 +232,8 @@
     // //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     // //     Para ajustar o "select", ajuste o comando sql em src/models
     function buscarIds(nomeSetor) {
+        contagemSensor = 0;
+        LimparAlertas();
         btn_sensores.innerHTML = "";
         graficos.innerHTML = "";
         var display;
@@ -285,6 +291,7 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
+
 
     function obterDadosGrafico(idsensor) {
         alterarTitulo(idsensor)
@@ -379,6 +386,8 @@
 
         setTimeout(() => atualizarGrafico(idsensor, dados, myChart), 2000);
         setTimeout(() => alertaSetor(idsensor), 5000);
+        setTimeout(() => LimparAlertas(), 25000);
+        
 
     }
  //   Gráfico de setores geral
@@ -526,13 +535,13 @@
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart,nomeSetor), 2000);
-                    setTimeout(() => alertaSetor(idsensor), 5000);
+                    setTimeout(() => alertaSetor(idsensor), 10000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                 proximaAtualizacao = setTimeout(() => atualizarGrafico(idsensor, dados, myChart,nomeSetor), 2000);
-                atualizacaoAlertas = setTimeout(() => ExibirAlertas(), 5000)
+                atualizacaoAlertas = setTimeout(() => ExibirAlertas(), 10000)
             }
         })
             .catch(function (error) {
@@ -545,22 +554,28 @@
 
     function LimparAlertas(){
 
-        alerts.innerHTML = `<button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>`
+        alerts.innerHTML = `
+                <button class="BotaoLimparAlerta" onclick="LimparAlertas()">Limpar Alertas</button>
+                <div id="alert_red" class="div-filtros-alerts"></div>
+                <div id="alert_orange" class="div-filtros-alerts"></div>
+                <div id="alert_yellow" class="div-filtros-alerts"></div>
+                <div id="alert_green" class="div-filtros-alerts"></div>
+                `
         
     }
 
     function alertaSetor(idSensor){
         fetch(`/medidas/alertaSetor/${idSensor}`
         ).then(function (resultado) {
-            console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPE")
+            
 
             if (resultado.ok) {
                 resultado.json().then(jsonAlertaS => {
-                    console.log(`FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF ${JSON.stringify(jsonAlertaS)}`);
+                    
                     var medidasTemp = jsonAlertaS[0].temperatura
                     var medidasUmi = jsonAlertaS[0].umidade
                     var setorNome =jsonAlertaS[0].NomeSetor
-                    console.log("tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt" + idSensor)
+                    
                     ExibirAlertas(medidasTemp, medidasUmi, idSensor, setorNome)
                     // setTimeout(function () {
                     //     window.location = "./dashboard/dashboard.html";
@@ -597,43 +612,93 @@
         var verde = "rgba(0, 255, 55, 0.75)"
         var azul = "rgba(0, 0, 234, 0.75)"
 
-        if (ultimaCapTemperatura < 19.6) {
+        if (ultimaCapTemperatura < 19) {
 
-            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${azul}; border: 1px solid ${azul};">
-                    <h1 id="nomeSetor">Sensor ${idsensor}</h1>
-                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+            alert_green.innerHTML += `<div class="cardAlerta" style=" background-color:blue;box-shadow:0 15px 30px -5px #000000 inset,inset 15px 15px 25px 15px ${azul},0px 68px 35px ${azul}; border: 1px solid ${azul};">
+                <h1 id="nomeSetor" class="title-alert">ALERTA BOM</h1>
+                    <h1 id="nomeSetor">Sensor: ${contagemSensor}</h1>
+                    <h1 id="nomeSetor">Setor: ${nomeSetor}</h1>
+                    <p class="infoSetor temp">
+                    Temperatura: ${ultimaCapTemperatura}°C
+                    </p>
+                    <p class="infoSetor umi">
+                    Umidade: ${ultimaCapUmidade}%.
+                    </p>
+                    <br>
+                    <button onclick="exibirSensor()" class="btn-setor">Ver Sensor</button>
                 </div>`
 
-        } else if (ultimaCapTemperatura > 19.6 && ultimaCapTemperatura < 20) {
 
-            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${verde}; border: 1px solid ${verde};">
-                    <h1 id="nomeSetor">Sensor ${nomeSetor}</h1>
-                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+        } else if (ultimaCapTemperatura > 19 && ultimaCapTemperatura < 20) {
+
+            alert_green.innerHTML += `<div class="cardAlerta" style=" background-color:green;box-shadow:0 15px 30px -5px #000000 inset,inset 15px 15px 25px 15px ${verde},0px 68px 35px ${verde}; border: 1px solid ${verde};">
+                <h1 id="nomeSetor" class="title-alert" style="background-color:green;color:white;border:3px solid light-green;">ALERTA BOM</h1>
+                    <h1 id="nomeSetor">Sensor: ${idsensor}</h1>
+                    <h1 id="nomeSetor">Setor: ${nomeSetor}</h1>
+                    <p class="infoSetor temp">
+                    Temperatura: ${ultimaCapTemperatura}°C
+                    </p>
+                    <p class="infoSetor umi">
+                    Umidade: ${ultimaCapUmidade}%.
+                    </p>
+                    <br>
+                    <button onclick="exibirsensor(${idsensor})" class="btn-setor">Ver Sensor</button>
                 </div>`
 
         } else if (ultimaCapTemperatura > 20 && ultimaCapTemperatura < 22.5) {
 
-            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${amarelo}; border: 1px solid ${amarelo};">
-                    <h1 id="nomeSetor">Sensor ${nomeSetor}</h1>
-                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+            alert_yellow.innerHTML += `<div class="cardAlerta" style=" background-color:yellow;box-shadow:0 15px 30px -5px #000000 inset,inset 15px 15px 25px 15px ${amarelo},0px 68px 35px ${amarelo}; border: 1px solid ${amarelo};">
+                <h1 id="nomeSetor" class="title-alert" style="background-color:yellow;color:black;border:3px solid light-yellow;">ALERTA ATENÇÃO</h1>
+                    <h1 id="nomeSetor">Sensor: ${idsensor}</h1>
+                    <h1 id="nomeSetor">Setor: ${nomeSetor}</h1>
+                    <p class="infoSetor temp">
+                    Temperatura: ${ultimaCapTemperatura}°C
+                    </p>
+                    <p class="infoSetor umi">
+                    Umidade: ${ultimaCapUmidade}%.
+                    </p>
+                    <br>
+                    <button onclick="exibirsensor(${idsensor})" class="btn-setor">Ver Sensor</button>
                 </div>`
+
 
         } else if (ultimaCapTemperatura > 22.5 && ultimaCapTemperatura < 26.5) {
 
-            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${laranja}; border: 1px solid ${laranja};">
-                    <h1 id="nomeSetor">Sensor ${nomeSetor}</h1>
-                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+            alert_orange.innerHTML += `<div class="cardAlerta" style=" background-color:orange;box-shadow:0 15px 30px -5px #000000 inset,inset 15px 15px 25px 15px ${laranja},0px 68px 35px ${laranja}; border: 1px solid ${laranja};">
+                <h1 id="nomeSetor" class="title-alert" style="background-color:orange;color:white;border:3px solid light-orange;">ALERTA CUIDADO</h1>
+                    <h1 id="nomeSetor">Sensor: ${idsensor}</h1>
+                    <h1 id="nomeSetor">Setor: ${nomeSetor}</h1>
+                    <p class="infoSetor temp">
+                    Temperatura: ${ultimaCapTemperatura}°C
+                    </p>
+                    <p class="infoSetor umi">
+                    Umidade: ${ultimaCapUmidade}%.
+                    </p>
+                    <br>
+                    <button onclick="exibirsensor(${idsensor})" class="btn-setor">Ver Sensor</button>
                 </div>`
 
         } else {
 
-            alerts.innerHTML += `<div class="cardAlerta" style="box-shadow:inset 0px 0px 68px 35px ${vermelho}; border: 1px solid ${vermelho};">
-                    <h1 id="nomeSetor">Sensor ${nomeSetor}</h1>
-                    <p class="infoSetor">O sensor ${idsensor} atualmente encontra-se com a temperatura de ${ultimaCapTemperatura}C, e umidade de ${ultimaCapUmidade}%.</p>
+            alert_red.innerHTML += `<div class="cardAlerta" style=" background-color:red;box-shadow:0 15px 30px -5px #000000 inset,inset 15px 15px 25px 15px ${vermelho},0px 68px 35px ${vermelho}; border: 1px solid ${vermelho};">
+                <h1 id="nomeSetor" class="title-alert" style="background-color:red;color:white;border:3px solid light-red;">ALERTA URGENTE</h1>
+                    <h1 id="nomeSetor">Sensor: ${idsensor}</h1>
+                    <h1 id="nomeSetor">Setor: ${nomeSetor}</h1>
+                    <p class="infoSetor temp">
+                    Temperatura: ${ultimaCapTemperatura}°C
+                    </p>
+                    <p class="infoSetor umi">
+                    Umidade: ${ultimaCapUmidade}%.
+                    </p>
+                    <br>
+                    <button onclick="exibirsensor(${idsensor})" class="btn-setor">Ver Sensor</button>
                 </div>`
+
         }
 
         atualizacaoAlertas = setTimeout(() => alertaSetor(idsensor), 10000);
+        
+        
     }
     function trocaDash(){
         var dash1 = document.getElementById('dash1');
